@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+</head>
+<body>
+    <div th:fragment="logo">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div style="float:left;">
+<!--                    <img th:src="@{/images/sacv2.png}" src="${ctx}/images/sacv2.png" alt="Sistema de Atención al Contribuyente" width="80" height="62" />-->
+                    <img style="margin-left: 35px;" th:src="@{/images/colas.PNG}" src="${ctx}/images/colas.PNG" alt="Ministerio de Hacienda" width="125" height="125" />
+                </div>
+                <div style="float:left;">
+                    <div id="userTool" class="r userTool">
+                        <ul>
+                            <li>
+                                <a id="idSalir" th:href="@{/logout}" >Salir</a>
+                            </li>
+                            <li>
+                                <p><span style="color: white;">Usuario:</span>&nbsp;<span id="userNIT" th:text="${user}" ></span></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

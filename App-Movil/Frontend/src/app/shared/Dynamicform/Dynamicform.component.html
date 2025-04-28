@@ -1,0 +1,144 @@
+<ion-list>
+    <form [formGroup]="formularioReactivo">
+        <ion-grid fixed="true">
+            <ion-row>
+                <!-- <div *ngFor="let field of fields;let i=index"> -->
+                @for (field of fields; track $index) {
+                <ion-col *ngIf="conditionalfields(field)" style="display: flex;flex-direction: column-reverse;"
+                    [size]="field.size">
+                    <!-- <div *ngIf="field.type === 'info'"> -->
+                    <!-- </div> -->
+                    <div *ngIf="field.type === 'search'">
+                        <ion-item lines="none">
+                            <!-- [maskito]="field.mask" [maskitoElement]="maskPredicate" -->
+                            <ion-input [formControlName]="field.formControlName" [labelPlacement]="field.labelPlacement"
+                                [label]="field.label " placeholder="">
+                                <ion-button fill="clear" size="small"
+                                    (click)="field?.searchfnc(formularioReactivo.controls[field.formControlName].value)"
+                                    slot="end" style="margin: 0">
+                                    <ion-icon name="search"></ion-icon>
+                                </ion-button>
+                            </ion-input>
+
+                        </ion-item>
+
+                    </div>
+                    <div *ngIf="field.type === 'text'">
+                        <ion-item lines="none">
+                            <ion-input fill="solid" [formControlName]="field.formControlName"
+                                [labelPlacement]="field.labelPlacement" [label]="field.label "
+                                placeholder=""></ion-input>
+                            <span *ngIf="formularioReactivo.get(field.formControlName)?.touched &&
+                                formularioReactivo.get(field.formControlName)?.errors"
+                                class="error-text sc-ion-input-ios"
+                                style="display: inline-block;color:red">{{getError(field.formControlName) }} </span>
+                            <!-- <span *ngIf="field.tag?.label!=''" class="error-text sc-ion-input-ios" [style]="field.tag?.style" >{{field.tag?.label}} </span> -->
+                        </ion-item>
+                    </div>
+                    <div *ngIf="field.type === 'select'">
+                        <ion-item lines="none">
+                            <ion-select interface="popover" [formControlName]="field.formControlName"
+                                [label]="field.label" [labelPlacement]="field.labelPlacement" placeholder="">
+                                <div *ngFor="let opt of field.options">
+                                    <ion-select-option [value]="opt.id_catalogo">{{opt.valor}}</ion-select-option>
+                                </div>
+                            </ion-select>
+                        </ion-item>
+                    </div>
+
+                    <div *ngIf="field.type === 'textarea'">
+                        <ion-item lines="none">
+                            <ion-textarea [formControlName]="field.formControlName"
+                                [labelPlacement]="field.labelPlacement" [label]="field.label "
+                                placeholder=""></ion-textarea>
+                        </ion-item>
+                    </div>
+
+                    <div *ngIf="field.type === 'date'">
+                        <ion-label position="stacked" style="font-weight: bold;" color="medium">{{field.label}}
+                        </ion-label>
+                        <ion-datetime-button datetime="date_desde" datetime="datetime">
+                            <span slot="date-target"
+                                *ngIf="formularioReactivo.get(field.formControlName)==undefined">dd/mm/YYYY</span>
+                        </ion-datetime-button>
+                        <ion-modal [keepContentsMounted]="true">
+                            <ng-template>
+                                <ion-datetime id="datetime" [showClearButton]="true"
+                                    [formControlName]="field.formControlName" doneText="Aceptar" cancelText="Cancelar"
+                                    [showDefaultButtons]="true" clearText="Limpiar"></ion-datetime>
+                            </ng-template>
+                        </ion-modal>
+                    </div>
+                    <div *ngIf="field.type === 'combo'">
+                        <ion-select [formControlName]="field.formControlName" [labelPlacement]="field.labelPlacement"
+                            [label]="field.label" placeholder="seleccione una opcion" fill="solid">
+                            <ion-select-option value="apple">Apple</ion-select-option>
+                            <ion-select-option value="banana">Banana</ion-select-option>
+                            <ion-select-option value="orange">Orange</ion-select-option>
+                        </ion-select>
+                        <!-- <ion-item lines="none">
+                            <ion-input [formControlName]="field.formControlName" [labelPlacement]="field.labelPlacement"
+                                [readonly]="true" (click)="getCombo(field)" [label]="field.label "
+                                placeholder=""></ion-input>
+                        </ion-item> -->
+                    </div>
+                    <div *ngIf="field.type === 'checkbox'">
+                        <ion-checkbox justify="start"
+                            [formControlName]="field.formControlName">{{field.label}}</ion-checkbox>
+                    </div>
+                    <div *ngIf="field.type === 'photo'" style="place-self: center;">
+                        @if(formularioReactivo.get(field.formControlName)?.value==null){
+                        <ion-item lines="none">
+                            <ion-button (click)="selectImage(field.formControlName)">
+                                <ion-icon name="camera"></ion-icon>
+                            </ion-button>
+                        </ion-item>
+                        }@else{
+                        <!-- <ion-item lines="none"> -->
+                        <!-- <div class="container" -->
+                        <!-- (click)="viewImg(formularioReactivo.get(field.formControlName)?.value)"> -->
+                        <ion-img class="imgfield"
+                            [src]="formularioReactivo.get(field.formControlName)?.value"></ion-img>
+                        <!-- </div> -->
+                        <!-- <ion-icon class="fa-download" name="trash" style="color: red;"></ion-icon> -->
+                        <!-- </ion-item> -->
+                        }
+                    </div>
+                    <div *ngIf="field.type === 'divider'" class="col-12 dividerClass">
+                        {{field.label}}
+                    </div>
+
+
+                    <!-- <app-dynamic-info *ngIf="field.fieldsInfo!=undefined"
+                        [fieldsInfo]="field.fieldsInfo"></app-dynamic-info> -->
+
+                </ion-col>
+                }
+
+                <!-- </div> -->
+
+
+            </ion-row>
+
+        </ion-grid>
+    </form>
+</ion-list>
+
+<app-pull-up [catalogo]="catalogo" [ionModal]="catalogModal"></app-pull-up>
+
+
+
+<ion-modal #modal [isOpen]="imgDetail.modal" keyboardClose="true">
+    <ng-template>
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="end">
+                    <ion-button (click)="viewImg('',2)" color="danger">Cerrar</ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+            <ion-img [src]="imgDetail.img"></ion-img>
+        </ion-content>
+    </ng-template>
+</ion-modal>

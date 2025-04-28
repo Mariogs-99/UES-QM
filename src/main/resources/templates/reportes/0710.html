@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title>Reporte de Tramites por Oficina.</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+                height: 600px;
+            }
+
+            div#ssc-footer {
+                background:
+                    /*url("../images/ph_pie-pagina.png")*/
+                    no-repeat top center #202020;
+                border-bottom: 5px solid #dfd8cc;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                border-radius: 5px 5px 0px 0px;
+                overflow: hidden;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css"
+              th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css"
+              th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css"
+              th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css"
+              th:href="@{/css/mntcservicio.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css"
+              th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.timepicker.css"
+              th:href="@{/css/jquery.timepicker.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <!-- clase sac -->
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css"
+              th:href="@{/css/siit/forms.css}" />
+        <!-- clase form -->
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui-timepicker-addon.css"
+              th:href="@{/css/jquery-ui-timepicker-addon.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/msgBox.css" th:href="@{/css/msgBox.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-multiselect.css"
+              th:href="@{/css/bootstrap-multiselect.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css"
+              th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css"
+              th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css"
+              th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css"
+              th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css"
+              th:href="@{/css/mntcservicio.css}" />
+
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" href="../js/jquery.min.js" th:href="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" href="../js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}"></script>
+        <script type="text/javascript" src="../js/moment.js" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-datetimepicker.js"
+        th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+
+        <script type="text/javascript" src="../js/jquery-ui-timepicker-addon.js"
+        th:src="@{/js/jquery-ui-timepicker-addon.js}"></script>
+        <script type="text/javascript" src="../js/jquery-ui-sliderAccess.js"
+        th:src="@{/js/jquery-ui-sliderAccess.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+        <script type="text/javascript" src="../js/jquery.timepicker.js" th:src="@{/js/jquery.timepicker.js}"></script>
+
+        <style>
+            #containe {
+                margin: 0 auto;
+                width: 450px;
+                margin-top: 0px;
+            }
+
+            .download {
+                float: right;
+                font-size: 1.5em;
+            }
+
+            .footer {
+                width: 100%;
+                text-align: center;
+                color: #999999;
+                font-size: 0.8em;
+                margin-top: 30px;
+            }
+
+            .intro {
+                font-size: 1.4em;
+            }
+
+            .differences {
+                clear: both;
+            }
+
+            span.doc {
+                color: green;
+                font-weight: bold;
+            }
+
+            a {
+                color: black;
+            }
+
+            a:visited {
+                color: gray;
+            }
+
+            .example {
+                float: left;
+            }
+
+            h2 {
+                clear: both;
+            }
+
+            .awesome .graph-header {
+                width: 370px;
+            }
+
+            .sales .graph-header {
+                width: 310px;
+            }
+
+            .sales {
+                margin-left: 20px;
+            }
+
+            /* Clase para centrar los elementos en el formulario */
+            .centered-form-row {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+
+
+            /* Clase para unir el label y el select */
+            .label-select-container {
+                display: flex;
+                align-items: center; /* Alinea el label con el select */
+            }
+
+            .label-select-container label {
+                margin-right: 10px; /* Añade un espacio entre el label y el select */
+            }
+
+            /* Opcional: mejora la separación del texto en las fechas */
+            .date-label {
+                margin-right: 10px;
+            }
+
+            .input-group {
+                width: 100%; /* Asegura que los inputs tengan el mismo tamaño */
+            }
+
+            .no-wrap-label {
+                white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+                margin-right: 10px;  /* Espacio entre el label y el select/input */
+            }
+
+            /*            li { margin-bottom: 3px; }*/
+        </style>
+        <script type="text/javascript" th:inline="javascript">
+            /*<![CDATA[*/
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+                $("#AreaAtencion").change(function () {
+                    $(this).attr("title", $(this).find("option:selected").text());
+                });
+
+                $("#ffInicio").datetimepicker({
+                    dateFormat: "dd/mm/yy",
+                    timeFormat: "",
+                    showTime: false,
+                    showHour: false,
+                    showMinute: false,
+                });
+
+                $("#ffFin").datetimepicker({
+                    dateFormat: "dd/mm/yy",
+                    timeFormat: "",
+                    showTime: false,
+                    showHour: false,
+                    showMinute: false,
+                });
+                $("#ffInicio").change(function () {
+                    verifica_meses("F");
+                });
+                $("#ffFin").change(function () {
+                    verifica_meses("F");
+                });
+                $("#mm").change(function () {
+                    verifica_meses("M");
+                });
+
+                getTime();
+
+                $("#btnFInicio").click(function () {
+                    $("#ffInicio").focus();
+                });
+
+                $("#btnFFin").click(function () {
+                    $("#ffFin").focus();
+                });
+
+                $("#btnHFin").click(function () {
+                    $("#hFin").focus();
+                });
+
+                $("button[type='reset']").click(function (event) {
+                    event.preventDefault();
+                    $(this).closest("form").get(0).reset();
+                    getTime();
+                });
+            });
+
+            function getTime() {
+                $(function () {
+                    $("#hInicio").val("07:30 am");
+                    $("#hFin").val("05:30 pm");
+                });
+            }
+            function Cargar(url) {
+                // Obtener el valor del centro de servicio seleccionado
+                var selectElement = $("#AreaAtencion");
+                var selectedOption = selectElement.find("option:selected");
+                var AreaAtencion = selectedOption.text(); // Valor del select (id o valor del option)
+
+                // Obtener los valores de las fechas
+                var fechaInicio = $("#ffInicio").val().trim();
+                var fechaFin = $("#ffFin").val().trim();
+
+                console.log(fechaInicio);
+                console.log(fechaFin);
+
+                // Validar que se haya seleccionado un centro de servicio
+                if (AreaAtencion === "0") {
+                    $.msgBox({
+                        title: "Error",
+                        content: "Seleccione Centro de Servicio",
+                        type: "error",
+                        buttons: [{value: "Aceptar"}],
+                    });
+                    return; // Detener la ejecución si no hay área seleccionada
+                }
+
+                // Validar que las fechas no estén vacías
+                if (!fechaInicio || !fechaFin) {
+                    $.msgBox({
+                        title: "Error",
+                        content: "Ingrese las fechas de inicio y fin",
+                        type: "error",
+                        buttons: [{value: "Aceptar"}],
+                    });
+                    return; // Detener la ejecución si alguna fecha está vacía
+                }
+
+                // Convertir fechas al formato yyyy-MM-dd
+                function formatDate(dateStr) {
+                    var parts = dateStr.split('/'); // Asume formato dd/MM/yyyy
+                    var formattedDate = parts[2] + '-' + parts[1] + '-' + parts[0]; // Retorna yyyy-MM-dd
+                    return formattedDate.trim(); // Elimina espacios en blanco
+                }
+
+
+                var fechaInicioFormatted = formatDate(fechaInicio);
+                var fechaFinFormatted = formatDate(fechaFin);
+
+                console.log(fechaInicioFormatted);
+                console.log(fechaFinFormatted);
+
+                // Construir la URL con todos los parámetros
+                var fullUrl = url + "?unidad=" + encodeURIComponent(AreaAtencion)
+                        + "&fechaInicio=" + encodeURIComponent(fechaInicioFormatted)
+                        + "&fechaFin=" + encodeURIComponent(fechaFinFormatted);
+
+                // Abrir el reporte en una nueva ventana
+                var ventimp = window.open(fullUrl, "", "width=700,height=600");
+                ventimp.document.close();
+            }
+
+
+
+            function limpiar() {
+                //alert("limpio");
+                $("select").prop("selectedIndex", 0);
+                $("#Generacion").attr("src", "");
+            }
+            function verifica_meses(tipo) {
+                var st = $("#ffInicio").val();
+                var st1 = $("#ffFin").val();
+                if (st == "" || st1 == "")
+                    return;
+                var pattern = /(\d{2})\/(\d{2})\/(\d{4})/;
+                var y1 = st.replace(pattern, "$3");
+                var m1 = st.replace(pattern, "$2") - 1;
+                var di1 = st.replace(pattern, "$1");
+                //alert(y+' '+m+' ''di');
+                var dt1 = new Date(y1, m1, di1);
+                var y2 = st1.replace(pattern, "$3");
+                var m2 = st1.replace(pattern, "$2") - 1;
+                var di2 = st1.replace(pattern, "$1");
+                //alert(y+' '+m+' ''di');
+                var dt2 = new Date(y2, m2, di2);
+                var dias = (dt2 - dt1) / (24 * 60 * 60 * 1000) + 1;
+                if (tipo == "F") {
+                    if (y2 == y1 && m1 == m2) {
+                        $("#mm").prop("checked", false);
+                        $("#mm").prop("disabled", true);
+                        $("#ver").prop("disabled", false);
+                    } else {
+                        $("#mm").prop("disabled", false);
+                        $("#ver").prop("checked", false);
+                        $("#ver").prop("disabled", true);
+                    }
+                } else {
+                    if (!(y2 == y1 && m1 == m2)) {
+                        if ($("#mm").is(":checked")) {
+                            $("#ver").prop("disabled", false);
+                        } else {
+                            $("#ver").prop("checked", false);
+                            $("#ver").prop("disabled", true);
+                        }
+                    }
+                }
+            }
+
+            /*]]>*/
+        </script>
+    </head>
+
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout" style="height: 500px">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu"></div>
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <form id="form0709" method="post">
+                                            <div id="fatherbox">
+                                                <div class="form">
+                                                    <!-- div for form -->
+                                                    <div style="margin: 20px">
+                                                        <!-- div for margin -->
+                                                        <div class="row">
+                                                            <div class="col-md-12" style="margin: 20px">
+                                                                <span class="titulo">Reporte de Tramites por Escritorio</span>
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <!-- Centro de Servicio en una fila sin romperse el texto -->
+                                                        <div class="row centered-form-row">
+                                                            <div class="col-md-4 label-select-container">
+                                                                <label for="nServiciosId" class="control-label no-wrap-label">
+                                                                    <font style="font-weight: bold; font-size: 11pt">Centro de Servicio</font>
+                                                                </label>
+                                                                <select id="AreaAtencion" class="form-control" data-toggle="tooltip">
+                                                                    <option value="0"></option>
+                                                                    <option th:each="type : ${monitoreoTramitePojo.UnidadesList}"
+                                                                            th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}">
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <!-- Fechas centradas en la misma fila -->
+                                                        <div class="row centered-form-row">
+                                                            <div class="col-md-4">
+                                                                <label for="ffInicio" class="control-label no-wrap-label">
+                                                                    <font style="font-weight: bold; font-size: 11pt">Desde</font>
+                                                                </label>
+                                                                <div class="input-group date" id="fiDiv">
+                                                                    <input type="text" class="form-control" required="required" id="ffInicio" />
+                                                                    <span id="btnFInicio" class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="ffFin" class="control-label no-wrap-label">
+                                                                    <font style="font-weight: bold; font-size: 11pt">Hasta</font>
+                                                                </label>
+                                                                <div class="input-group date" id="ffDiv">
+                                                                    <input type="text" class="form-control" required="required" id="ffFin" />
+                                                                    <span id="btnFFin" class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <br /><br />
+                                                        <!-- Botones en una fila -->
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <a onclick="javascript:Cargar('/colas/impresion0710/generarReporte')"
+                                                                   class="btn btn-default">
+                                                                    <span class="glyphicon glyphicon-export" title="A PDF"
+                                                                          aria-hidden="true">
+                                                                        PDF
+                                                                    </span>
+                                                                </a>
+                                                                <button type="reset" class="btn btn-default" onclick="limpiar()">
+                                                                    <span class="glyphicon glyphicon-chevron-right" title="Limpiar"
+                                                                          aria-hidden="true">
+                                                                        Limpiar
+                                                                    </span>
+                                                                </button>
+                                                                <a href="/colas/reportes/" class="btn btn-default">
+                                                                    <span class="glyphicon glyphicon-repeat" title="Regresar"
+                                                                          aria-hidden="true">
+                                                                        Regresar
+                                                                    </span>
+                                                                </a>
+                                                                <br />
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- closed div for margin -->
+                                                </div>
+                                                <!-- closed div for form -->
+                                                <br />
+                                                <iframe src="" id="Generacion" width="100%" height="70%" />
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:include="/layout/footer :: footer" />
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="0703" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="c7a61357-6c25-41c5-b998-5f0cd6a31a69">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.zoom" value="1.3636363636363635"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="324"/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
+	<parameter name="FechaI" class="java.lang.String"/>
+	<parameter name="FechaF" class="java.lang.String"/>
+	<parameter name="Icono1" class="java.lang.String"/>
+	<parameter name="Icono2" class="java.lang.String"/>
+	<parameter name="Unidad" class="java.lang.String"/>
+	<parameter name="Tramite" class="java.lang.String"/>
+	<parameter name="Servicio" class="java.lang.Integer"/>
+	<parameter name="DiaSemana" class="java.lang.Integer"/>
+	<parameter name="Ver" class="java.lang.String"/>
+	<parameter name="AreaAtencion" class="java.lang.String"/>
+	<parameter name="nunidad" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[/* Formatted on 11/10/2015 2:52:56 PM (QP5 v5.256.13226.35538) */
+  SELECT B.S_NOMBRE TRAMITE,
+         COUNT (*) TOTAL,
+         ROUND (
+              (  COUNT (*)
+               / (SELECT COUNT (*)
+                    FROM GC_TIQUETE_HIST A
+                         JOIN GC_TRAMITE B ON A.N_TRAMITE_ID = B.N_TRAMITE_ID
+                         JOIN GC_SERVICIOS G ON B.N_SERVICIOS_ID = G.N_SERVICIOS_ID
+                   WHERE     A.FH_LLEGADA BETWEEN TO_DATE (
+                                                     ' $P!{FechaI}',
+                                                     'dd/mm/yyyy HH:MI AM')
+                                              AND TO_DATE (
+                                                     '$P!{FechaF}',
+                                                     'dd/mm/yyyy HH:MI AM')
+                         AND A.C_UNIDAD_RECEP = NVL ('$P!{Unidad}', A.C_UNIDAD_RECEP)
+                         AND B.N_TRAMITE_ID IN(select regexp_substr('$P!{Tramite}','[^,]+', 1, level)+0 from dual
+connect by regexp_substr('$P!{Tramite}', '[^,]+', 1, level) is not null)
+                           AND G.N_SERVICIOS_ID=decode($P!{Servicio},0,G.N_SERVICIOS_ID,$P!{Servicio})
+                         AND TO_CHAR(trunc(A.FH_LLEGADA), 'D') =decode($P!{DiaSemana},0,TO_CHAR(trunc(A.FH_LLEGADA), 'D'),$P!{DiaSemana})
+                                             )
+                                )
+            * 100,
+            2)
+            PORCENTAJE
+    FROM GC_TIQUETE_HIST A
+         JOIN GC_TRAMITE B ON A.N_TRAMITE_ID = B.N_TRAMITE_ID
+         JOIN GC_SERVICIOS G ON B.N_SERVICIOS_ID = G.N_SERVICIOS_ID
+   WHERE     A.FH_LLEGADA BETWEEN TO_DATE (' $P!{FechaI}','dd/mm/yyyy HH:MI AM')
+                              AND TO_DATE ('$P!{FechaF}','dd/mm/yyyy HH:MI AM')
+                         AND A.C_UNIDAD_RECEP = NVL ('$P!{Unidad}', A.C_UNIDAD_RECEP)
+                         AND B.N_TRAMITE_ID IN(select regexp_substr('$P!{Tramite}','[^,]+', 1, level)+0 from dual
+connect by regexp_substr('$P!{Tramite}', '[^,]+', 1, level) is not null)
+                           AND G.N_SERVICIOS_ID=decode($P!{Servicio},0,G.N_SERVICIOS_ID,$P!{Servicio})
+                         AND TO_CHAR(trunc(A.FH_LLEGADA), 'D') =decode($P!{DiaSemana},0,TO_CHAR(trunc(A.FH_LLEGADA), 'D'),$P!{DiaSemana})
+GROUP BY G.N_ORDEN,B.N_ORDEN,B.S_NOMBRE
+ORDER BY G.N_ORDEN,B.N_ORDEN]]>
+	</queryString>
+	<field name="TRAMITE" class="java.lang.String"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<field name="PORCENTAJE" class="java.math.BigDecimal"/>
+	<variable name="TOTAL1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
+	</variable>
+	<variable name="PORCENTAJE1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{PORCENTAJE}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="554" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{Ver}.equals( "1" )]]></printWhenExpression>
+			<staticText>
+				<reportElement x="152" y="3" width="490" height="20" forecolor="#000000" uuid="3ea30624-d6df-4318-9455-99f6d397fdca"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CONTRIBUYENTES ATENDIDOS POR TRÁMITES]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="59" height="42" uuid="7e8ff445-accf-4c7a-b687-c7b466a64267"/>
+				<imageExpression><![CDATA[$P{Icono1}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="57" y="17" width="141" height="14" uuid="2f04c181-012e-4408-875a-45ae1785258c"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Ministerio de Hacienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="31" width="178" height="22" uuid="217cfe6b-a6fc-46e9-9aa0-3ba1fbe4915d"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Gobierno de El Salvador]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="152" y="58" width="490" height="21" forecolor="#000000" uuid="0bb66de5-15ff-4789-8563-75bbb1eac902"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DEL <b>"+$P{FechaI}+"</b> AL <b>"+$P{FechaF}+" </b>"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="650" y="1" width="100" height="50" uuid="4d9c3d74-24f8-4bb9-a908-6498b1f9f788"/>
+				<imageExpression><![CDATA[$P{Icono2}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="24" width="490" height="19" forecolor="#000000" uuid="96fb8f8e-972e-436f-a529-7aee2bc9faed"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nunidad}.toUpperCase( )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="152" y="42" width="490" height="18" forecolor="#000000" uuid="e870f5cc-0e55-4a46-8eec-6643744ffab5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Tramite}.indexOf(",")>=0?($P{AreaAtencion}.equals("Todos")?"Todas las Areas de Atención":$P{AreaAtencion}).toUpperCase( ):($F{TRAMITE}).toUpperCase()]]></textFieldExpression>
+			</textField>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement isPrintRepeatedValues="false" x="1" y="92" width="751" height="462" isRemoveLineWhenBlank="true" uuid="a8511532-b5c0-4e02-8eb3-68be61ed9dfd">
+						<printWhenExpression><![CDATA[$P{Ver}.equals( "1" )]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.6"/>
+						<leftPen lineWidth="0.6"/>
+						<bottomPen lineWidth="0.6"/>
+						<rightPen lineWidth="0.6"/>
+					</box>
+					<chartTitle>
+						<font size="10" isUnderline="false"/>
+						<titleExpression><![CDATA["REPORTE DE CONTRIBUYENTES ATENDIDOS POR TRÁMITES"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="8"/>
+						<subtitleExpression><![CDATA[$P{Tramite}.indexOf(",")>=0?($P{AreaAtencion}.equals("Todos")?"Todas las Areas de Atención":$P{AreaAtencion}).toUpperCase( ):($F{TRAMITE}).toUpperCase()]]></subtitleExpression>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font fontName="Arial" size="8" isBold="false"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{TRAMITE}]]></keyExpression>
+					<valueExpression><![CDATA[$F{TOTAL}]]></valueExpression>
+					<labelExpression><![CDATA[$F{PORCENTAJE}.toString()+" %"]]></labelExpression>
+				</pieDataset>
+				<piePlot isCircular="true" labelFormat="">
+					<plot>
+						<seriesColor seriesOrder="0" color="#0DAF98"/>
+						<seriesColor seriesOrder="1" color="#FC4F98"/>
+						<seriesColor seriesOrder="2" color="#9CB2EF"/>
+						<seriesColor seriesOrder="3" color="#0F5748"/>
+						<seriesColor seriesOrder="4" color="#DFFE1F"/>
+						<seriesColor seriesOrder="5" color="#0223A2"/>
+						<seriesColor seriesOrder="6" color="#68DD19"/>
+						<seriesColor seriesOrder="7" color="#4D8F8E"/>
+						<seriesColor seriesOrder="8" color="#5B3F92"/>
+						<seriesColor seriesOrder="9" color="#CD9B54"/>
+						<seriesColor seriesOrder="10" color="#3E384E"/>
+						<seriesColor seriesOrder="11" color="#F6D5DE"/>
+						<seriesColor seriesOrder="12" color="#6B1152"/>
+						<seriesColor seriesOrder="13" color="#571AEA"/>
+						<seriesColor seriesOrder="14" color="#AC314B"/>
+						<seriesColor seriesOrder="15" color="#2D6C19"/>
+						<seriesColor seriesOrder="16" color="#7B5163"/>
+						<seriesColor seriesOrder="17" color="#BD4426"/>
+						<seriesColor seriesOrder="18" color="#53B7EA"/>
+						<seriesColor seriesOrder="19" color="#C8F0AF"/>
+						<seriesColor seriesOrder="20" color="#4B6E0F"/>
+						<seriesColor seriesOrder="21" color="#5D39FA"/>
+						<seriesColor seriesOrder="22" color="#C073C0"/>
+						<seriesColor seriesOrder="23" color="#17616D"/>
+						<seriesColor seriesOrder="24" color="#6AAF1C"/>
+						<seriesColor seriesOrder="25" color="#07E696"/>
+						<seriesColor seriesOrder="26" color="#EC7464"/>
+						<seriesColor seriesOrder="27" color="#9B1470"/>
+						<seriesColor seriesOrder="28" color="#B9A903"/>
+						<seriesColor seriesOrder="29" color="#38A6B9"/>
+					</plot>
+					<itemLabel>
+						<font size="8"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="91">
+			<textField>
+				<reportElement x="153" y="58" width="490" height="21" forecolor="#000000" uuid="0327d02d-65be-489c-96db-4e5d67f7e41e"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DEL <b>"+$P{FechaI}+"</b> AL <b>"+$P{FechaF}+" </b>"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="153" y="24" width="490" height="19" forecolor="#000000" uuid="2e21085e-a851-4362-a071-fe4e0fc39e9f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nunidad}.toUpperCase( )]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="1" y="0" width="59" height="42" uuid="ebe3a6dc-1b76-4340-8162-43e20ee660f9"/>
+				<imageExpression><![CDATA[$P{Icono1}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="153" y="42" width="490" height="18" forecolor="#000000" uuid="73bf71c3-4067-46e1-9d13-b545c7a4dccf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Tramite}.indexOf(",")>=0?($P{AreaAtencion}.equals("Todos")?"Todas las Areas de Atención":$P{AreaAtencion}).toUpperCase( ):($F{TRAMITE}).toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="153" y="3" width="490" height="20" forecolor="#000000" uuid="18e984e7-473d-4eac-b154-254b019107b9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CONTRIBUYENTES ATENDIDOS POR TRÁMITES]]></text>
+			</staticText>
+			<image>
+				<reportElement x="651" y="1" width="100" height="50" uuid="fc48bd2b-36ec-4fa2-a2a9-20fdba64c138"/>
+				<imageExpression><![CDATA[$P{Icono2}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="57" y="35" width="178" height="22" uuid="a9ce25ab-5085-49bb-a5b1-da5c9e05be50"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Gobierno de El Salvador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="59" y="19" width="141" height="14" uuid="2ede8b89-5e75-4e7d-8382-75fc07eeb975"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Ministerio de Hacienda]]></text>
+			</staticText>
+			<line>
+				<reportElement x="37" y="85" width="679" height="1" forecolor="#999999" uuid="946db0ae-a0fb-46ee-b212-a518a07aeeb7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="37" y="1" width="378" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="34aaf91f-4147-40a8-a606-5f6ef6d20eee"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TRAMITES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="415" y="1" width="164" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="082231f1-167b-4f4c-a5ba-e32fff2cb81d"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="579" y="1" width="137" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="f8c8c7b3-2abe-4948-89d2-3a2b7ca54604"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[PORCENTAJE(%)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="37" y="0" width="378" height="30" uuid="df0bddfa-0eea-4fdd-bf2b-ce544823dd90"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TRAMITE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="415" y="0" width="164" height="30" uuid="1bd799c6-9a15-4c07-a616-f8d961784668"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="579" y="0" width="137" height="30" uuid="508926a8-464a-4b8e-8603-dac1dab2c4c2"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PORCENTAJE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="38" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="415" y="0" width="164" height="30" uuid="7c3dfc78-b254-4fff-a862-8cb78d5aac68"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="579" y="0" width="137" height="30" uuid="126baeb1-1a52-44f2-9bff-04e8f813982d"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PORCENTAJE1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="37" y="0" width="378" height="30" uuid="3dd6bdb3-7bcb-4255-9976-5a665a6be580"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+					<paragraph leftIndent="6"/>
+				</textElement>
+				<text><![CDATA[TOTALES]]></text>
+			</staticText>
+		</band>
+	</summary>
+	<noData>
+		<band height="139">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="100" width="750" height="30" forecolor="#666666" backcolor="#CCCCCC" uuid="f4e9edf5-e52f-4e1a-9852-545ba96e5572"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[NO HAY DATOS QUE MOSTRAR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-21" y="91" width="793" height="1" uuid="71df0dc4-4b5b-4131-a33a-171a047e8ed9"/>
+			</line>
+			<textField>
+				<reportElement x="153" y="57" width="490" height="21" forecolor="#000000" uuid="d534446e-b271-472f-a73c-2bd6e5c8edcb"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DEL <b>"+$P{FechaI}+"</b> AL <b>"+$P{FechaF}+" </b>"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="162" y="23" width="490" height="19" forecolor="#000000" uuid="ad883d75-ec8d-4fe0-a5a0-7932d90d6b43"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nunidad}.toUpperCase( )]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="1" y="-1" width="59" height="42" uuid="2095859e-ac2e-4eea-939b-75cbcb465962"/>
+				<imageExpression><![CDATA[$P{Icono1}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="153" y="41" width="490" height="18" forecolor="#000000" uuid="8c95c720-c49e-465c-998d-0fe14f154ccc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Tramite}.indexOf(",")>=0?($P{AreaAtencion}.equals("Todos")?"Todas las Areas de Atención":$P{AreaAtencion}).toUpperCase( ):($F{TRAMITE}).toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="153" y="2" width="490" height="20" forecolor="#000000" uuid="796ba2a2-f3d1-4f91-b619-437f93f72bb5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CONTRIBUYENTES ATENDIDOS POR TRÁMITES]]></text>
+			</staticText>
+			<image>
+				<reportElement x="651" y="0" width="100" height="50" uuid="c9ae76e3-8c99-44fe-88fd-eaf3ad4a6b23"/>
+				<imageExpression><![CDATA[$P{Icono2}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="60" y="35" width="178" height="22" uuid="94eff0aa-bf47-42e2-a8a0-048ecfeda536"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Gobierno de El Salvador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="21" width="141" height="14" uuid="12785a9a-8f9c-4278-8f53-9c964d1d5218"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Ministerio de Hacienda]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

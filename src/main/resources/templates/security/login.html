@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Login :: QManagement</title>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css" th:href="@{/css/template-style.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac_login.css" th:href="@{/css/sac_login.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+
+        <script type="text/javascript">
+            jQuery.noConflict();
+
+            jQuery(document).ready(function () {
+                jQuery("#inputPassword1").keypress(function (event) {
+                    if (event.which === 13) {
+                        event.preventDefault();
+                        jQuery("#forma").submit();
+                    }
+                });
+
+                // Manejar el evento de envío del formulario
+                jQuery("#forma").on("submit", function () {
+                    // Guardar en localStorage
+                    //localStorage.setItem("username", jQuery("#inputEmail1").val());
+                    //localStorage.setItem("password", jQuery("#inputPassword1").val());
+
+                    // Obtener los valores de los campos de entrada
+                    const username = jQuery("#inputEmail1").val();
+                    const password = jQuery("#inputPassword1").val();
+                    
+                    // Crear el encabezado de autorización codificado en Base64
+                    const basicAuthHeader = "Basic " + btoa(username + ":" + password);
+
+                    // Guardar el encabezado en localStorage
+                    localStorage.setItem("authHeader", basicAuthHeader);
+                });
+
+                jQuery("#userTool").css("display", "none");
+            });
+        </script>
+
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <div class="row">
+                <header><div th:include="/layout/me_logo :: logo"/></header>
+            </div>
+            <div class="row">
+                <section>
+                    <form id="forma" name='forma' action="#" th:action="@{/login}" th:object="${post}" method='POST' role="form">
+                        <div id="logmsk" style="display: block;">
+                            <div id="userbox">
+                                <h1 id="signup" style="background-color: rgb(82, 82, 82);">Bienvenid@s</h1>
+                                <img id="logo" th:src="@{/images/login-bg.png}" src="../images/login-bg.png" alt="Login" />
+                                <input type="text" id="inputEmail1" name="username" placeholder="Usuario" style="opacity: 1; background-color: rgb(255, 255, 255);" />
+                                <input type="password" id="inputPassword1" name="password" placeholder="Password" style="opacity: 1; background-color: rgb(255, 255, 255);" />
+                                <p id="alerta" class="alert alert-danger" th:if="${error}"><span th:text="${error}"></span></p> 
+                                <input type="submit" id="signupb" class="btn btn-primary" value="Ingresar" name="commit" />
+                                <input type="reset" id="reset" class="btn btn-danger" value="Borrar" name="reset" />
+                            </div>
+                        </div>
+                    </form>
+                </section>    
+            </div>
+            <div class="row">
+                <footer><div th:include="/layout/me_foot :: foot"/></footer>
+            </div>
+        </div>
+
+    </body>
+</html>

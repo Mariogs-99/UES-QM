@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.19.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prueba" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="colas-ues"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="387"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="605"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="661"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="325"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="Dataset1" uuid="c9cbbd77-6f54-4f7f-8a63-bd72b4f092d4">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="colas-ues"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="fechaInicio" class="java.lang.String"/>
+	<parameter name="fechaFin" class="java.lang.String"/>
+	<parameter name="oficina" class="java.lang.String"/>
+	<parameter name="image" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    gce.N_ESCRITORIO_ID AS EscritorioID,
+    IFNULL(gce.N_NUM_ESCRITORIO, 'No disponible') AS NombreEscritorio,
+    IFNULL(gu.C_USUARIO, 'No disponible') AS Usuario,
+    IFNULL(gct.S_NOMBRE, 'No disponible') AS Tramite,
+
+    -- Muestra solo la fecha y utiliza "No disponible" si es NULL
+    IF(gctq.FHI_PROCESO IS NULL, 'No disponible', DATE_FORMAT(gctq.FHI_PROCESO, '%Y-%m-%d')) AS Inicio_Tramite,
+    IF(gctq.FHF_PROCESO IS NULL, 'No disponible', DATE_FORMAT(gctq.FHF_PROCESO, '%Y-%m-%d')) AS Fin_Tramite,
+    
+    -- Evaluación para mostrar "No disponible" si Estudiante_NIT es NULL o está vacío
+    IF(gctq.NIT IS NULL OR gctq.NIT = '', 'No disponible', gctq.NIT) AS Estudiante_NIT,
+
+    -- Total de trámites atendidos por el usuario en el rango de fechas
+    IFNULL((SELECT COUNT(*)
+            FROM gc_tiquete gctq_sub
+            WHERE gctq_sub.C_USUARIO_ATENDIO = gu.C_USUARIO
+              AND DATE(gctq_sub.FH_LLEGADA) BETWEEN $P{fechaInicio} AND $P{fechaFin}
+              AND gctq_sub.C_UNIDAD_RECEP = tur.C_UNIDAD_RECEP
+           ), 'No disponible') AS Total_Tramites_Usuario
+
+FROM 
+    tb_unidad_recep tur
+JOIN 
+    gc_escritorio gce ON gce.C_UNIDAD_RECEP = tur.C_UNIDAD_RECEP
+LEFT JOIN 
+    gc_usuario gu ON gu.N_ESCRITORIO_ID = gce.N_ESCRITORIO_ID
+LEFT JOIN 
+    gc_tiquete gctq ON gctq.C_USUARIO_ATENDIO = gu.C_USUARIO
+                   AND DATE(gctq.FH_LLEGADA) BETWEEN $P{fechaInicio} AND $P{fechaFin}
+LEFT JOIN 
+    gc_tramite gct ON gct.N_TRAMITE_ID = gctq.N_TRAMITE_ID
+WHERE 
+    tur.D_UNIDAD_RECEP = $P{oficina}
+    AND gctq.N_TRAMITE_ID IS NOT NULL  -- Asegurarse de que solo se incluyan trámites válidos
+ORDER BY 
+    gce.N_ESCRITORIO_ID, 
+    gct.S_NOMBRE,
+    gctq.FHI_PROCESO;]]>
+	</queryString>
+	<field name="EscritorioID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="N_ESCRITORIO_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="EscritorioID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gc_escritorio"/>
+	</field>
+	<field name="NombreEscritorio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreEscritorio"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreEscritorio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gc_escritorio"/>
+	</field>
+	<field name="Usuario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Usuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="Usuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gc_usuario"/>
+	</field>
+	<field name="Tramite" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Tramite"/>
+		<property name="com.jaspersoft.studio.field.label" value="Tramite"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gc_tramite"/>
+	</field>
+	<field name="Inicio_Tramite" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Inicio_Tramite"/>
+		<property name="com.jaspersoft.studio.field.label" value="Inicio_Tramite"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gc_tiquete"/>
+	</field>
+	<field name="Fin_Tramite" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Fin_Tramite"/>
+		<property name="com.jaspersoft.studio.field.label" value="Fin_Tramite"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gc_tiquete"/>
+	</field>
+	<field name="Estudiante_NIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Estudiante_NIT"/>
+		<property name="com.jaspersoft.studio.field.label" value="Estudiante_NIT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gc_tiquete"/>
+	</field>
+	<field name="Total_Tramites_Usuario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Total_Tramites_Usuario"/>
+		<property name="com.jaspersoft.studio.field.label" value="Total_Tramites_Usuario"/>
+	</field>
+	<group name="EscritorioGrp">
+		<groupExpression><![CDATA[$F{NombreEscritorio}]]></groupExpression>
+		<groupHeader>
+			<band height="96">
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="30" uuid="36409b41-e617-42a7-a9bf-1cdd4359a18a"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Escritorio: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="80" y="0" width="160" height="30" uuid="ef908b8a-9c6b-4a25-980b-bdbb493d550d"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NombreEscritorio}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="280" y="0" width="100" height="30" uuid="3d6cb97a-b624-46cb-a48d-a38076e42cfb"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Usuario:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="344" y="0" width="160" height="30" uuid="200d8a9a-0473-4400-87db-0a2d03c02a5d"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Usuario}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="40" width="290" height="26" uuid="4d7b786c-fdec-47df-852a-9d3820506b20">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="07c21583-00ef-4474-b3f3-8c095a55ad5d"/>
+					</reportElement>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Tramite]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="40" width="129" height="26" uuid="ed61ee89-5e3d-4acb-9d58-55c2853200a6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="07c21583-00ef-4474-b3f3-8c095a55ad5d"/>
+					</reportElement>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Estudiante]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="419" y="40" width="136" height="26" uuid="5975d71d-7a58-4700-91d7-9cebbd5a3020">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="07c21583-00ef-4474-b3f3-8c095a55ad5d"/>
+					</reportElement>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50">
+				<staticText>
+					<reportElement x="0" y="-30" width="290" height="30" uuid="d42748a5-92ff-489a-9180-f4dd84c5455d"/>
+					<box>
+						<pen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="290" y="-30" width="265" height="30" uuid="cf54fa55-7b35-4af8-bffa-3dc7ca05e341"/>
+					<box>
+						<pen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Total_Tramites_Usuario}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" backcolor="#000000" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
+				<textField>
+					<reportElement x="0" y="0" width="552" height="50" forecolor="#FFFFFF" uuid="93edeb6d-c48e-41b3-9cdf-847cef69dee5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{oficina}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="SubTitle" x="0" y="50" width="553" height="20" uuid="3aa7b6e6-bde2-4e8c-b358-0b1abb991204"/>
+					<textElement textAlignment="Center">
+						<font size="16" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Reporte de Tramites Atendidos por Escritorio]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="70" width="552" height="24" forecolor="#CCCCCC" uuid="1ddc52fe-6f0f-4f2a-88af-f6e894562db6"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{fechaInicio} + " - " + $P{fechaFin}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="23" y="13" width="70" height="68" uuid="3e740a39-99e1-4354-8da2-40642338d4e0"/>
+					<imageExpression><![CDATA[$P{image}]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="401" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="-30" width="290" height="30" uuid="1e23cfd1-d4e2-4a4c-945d-ba3dd152d8d2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="07c21583-00ef-4474-b3f3-8c095a55ad5d"/>
+				</reportElement>
+				<box padding="5">
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Tramite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="-30" width="129" height="30" uuid="963a46ac-e193-4944-820b-6dd054b9802e"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Estudiante_NIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="-30" width="136" height="30" uuid="03428948-d32c-487b-8e11-a7428f29117c"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Inicio_Tramite}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="5" y="0" width="240" height="24" forecolor="#FCFAFA" uuid="1f4c113a-2ace-42b1-b076-2d999a856269"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Universidad Nacional de El Salvador]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

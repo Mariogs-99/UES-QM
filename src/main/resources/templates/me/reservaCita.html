@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+<link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+<link rel="stylesheet" type="text/css" media="all" href="../css/keyboard.css" th:href="@{/css/keyboard.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css" th:href="@{/css/template-style.css}" />
+<!--<link rel="stylesheet" type="text/css" media="all" href="../css/me_virtualKeyBoard.css" th:href="@{/css/me_virtualKeyBoard.css}" />-->
+<link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+
+<script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}" charset="utf-8" ></script>
+<script type="text/javascript" src="../js/jquery.dataTables.min.js"  th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" src="../js/dataTables.bootstrap.js"  th:src="@{/js/dataTables.bootstrap.js}"></script>
+<script type="text/javascript" src="../js/jquery.keyboard.js" th:src="@{/js/jquery.keyboard.js}"></script>
+<script type="text/javascript" src="../js/jquery.mousewheel.js" th:src="@{/js/jquery.mousewheel.js}"></script>
+<script type="text/javascript" src="../js/jquery.keyboard.extension-typing.js" th:src="@{/js/jquery.keyboard.extension-typing.js}"></script>
+<script type="text/javascript" src="../js/jquery.keyboard.extension-autocomplete.js" th:src="@{/js/jquery.keyboard.extension-autocomplete.js}"></script>
+<script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+<script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+<!--<script type="text/javascript" src="../js/me_virtualKeyBoard.js"  th:src="@{/js/me_virtualKeyBoard.js}" charset="utf-8" ></script>-->
+<script type="text/javascript" src="../js/me_reservaCita.js" th:src="@{/js/me_reservaCita.js}" charset="utf-8" ></script>
+<script type="text/javascript" src="../js/jquery.print.js"  th:src="@{/js/jquery.print.js}" charset="utf-8" ></script>
+<script type="text/javascript" src="../js/me_utils.js"  th:src="@{/js/me_utils.js}" charset="utf-8" ></script>
+
+<style>
+button.btn-default:active {
+	background-color: #FFF;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+button.btn-default:active:hover {
+	background-color: #3276B1;
+}
+/* override Bootstrap excessive button padding */
+button.ui-keyboard-button.btn {
+	padding: 1px 6px;
+}
+/* Bootswatch Darkly input is too bright */
+.ui-keyboard-input.light, .ui-keyboard-preview.light { color: #222; background: #ddd; }
+.ui-keyboard-input.dark, .ui-keyboard-preview.dark { color: #ddd; background: #222; }
+</style>
+
+</head>
+<body>
+	<div class="container-fluid">
+	    <div class="row">
+	    	<header><div th:include="/layout/me_logo :: logo"/></header>
+	    	<nav><div th:include="/layout/me_nav :: nav"></div></nav>
+	    </div>
+	    <div class="row">
+		    
+	       		<div class="col-md-11" style="width:100%;">
+	       			<section>
+		       			<form action="#">
+		       				<br/>
+		       				<div id="tableReservaCita">
+								<table id="table-javascript" class="table table-striped table-bordered hover table-condensed"></table>
+							</div>
+						</form>
+					</section> 
+	       		</div>
+	       		<div class="col-md-1"></div>
+	       		<div class="row">
+	       			<div class="">
+	       				<section>
+	       					<div class="modal fade" id="modalDetalle">
+							  <div class="modal-dialog">
+								    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									        <h4 class="modal-title">Detalle de Confirmación de Cita</h4>
+									      </div>
+									      <div class="modal-body">
+									      	<div class="table-responsive">
+									      		<table>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			Código de confirmación de cita:
+										        		</td>
+										        		<td>
+										        			<label id="lblCodigoConf"></label>
+										        		</td>
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			Área de servicio:
+										        		</td>
+										        		<td>
+										        			<label id="lblAreaServicio"></label>
+										        		</td>	
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			Trámite:
+										        		</td>
+										        		<td>
+										        			<label id="lblTramite"></label>
+										        		</td>	
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			Centro de atención:
+										        		</td>
+										        		<td>
+										        			<label id="lblCentroAtencion"></label>
+										        		</td>	
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			Fecha:
+										        		</td>
+										        		<td>
+										        			<label id="lblFecha"></label>
+										        		</td>	
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			Hora:
+										        		</td>
+										        		<td>
+										        			<label id="lblHora"></label>
+										        		</td>	
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			NIT:
+										        		</td>
+										        		<td>
+										        			<label id="lblNIT"></label>
+										        		</td>	
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			Correo:
+										        		</td>
+										        		<td>
+										        			<label id="lblCorreo"></label>
+										        		</td>	
+										        	</tr>
+										        	<tr>
+										        		<td style="text-align: right;">
+										        			teléfono:
+										        		</td>
+										        		<td>
+										        			<label id="lblTelefono"></label>
+										        		</td>	
+										        	</tr>
+									        	</table>
+									      	</div>
+									      </div>
+									      <div class="modal-footer">
+                                                                                        <input type="hidden" id="nit" value="" />
+                                                                                        <input type="hidden" id="idReservaCita" value="" />
+										        <input type="hidden" id="idTramite" value="" />
+										        <input type="hidden" id="idTiquete" value="" />
+<!--										        <input type="button" id="idTrigger" onclick="loadDataTable();" style="display:none;" />-->
+										       <button id="btnLoadTiquete" type="button" class="btn btn-primary" data-dismiss="modal">Imprimir tiquete</button>
+									      </div>
+								    </div><!-- /.modal-content -->
+							  </div><!-- /.modal-dialog -->
+						</div><!-- /.modal -->
+                                                
+                                                
+                                                <button id="btnShowTiquete" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalparaImprimir' ></button>
+                                                <div class="modal fade" id="modalparaImprimir">
+                                                   <div class="modal-dialog">
+                                                       <div class="modal-content">
+                                                           <div class="modal-header">
+                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                             <h4 class="modal-title">Imprimir Tiquete</h4>
+                                                           </div>
+                                                           <div class="modal-body">
+                                                                <div id="marcoTiquete">
+
+                                                                </div>
+                                                           </div>
+
+                                                           <div class="modal-footer">
+                                                               <button id="btnPrint" type="button" class="btn btn-primary" data-dismiss="modal" >Imprimir tiquete</button>
+                                                           </div>
+                                                       </div><!-- /.modal-content -->
+                                                   </div><!-- /.modal-dialog -->
+                                               </div>      
+                                                
+	       				</section>
+	       			
+	       			</div>
+	       		</div>
+	     </div>
+	     <div class="row">
+	       <footer><div th:include="/layout/me_foot :: foot"/></footer>
+	    </div>
+	</div>
+	
+	
+	<script>
+		
+	</script>
+	
+</body>
+</html>

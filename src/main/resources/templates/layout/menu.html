@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Menu</title>                                
+
+    </head>
+    <body >
+        <div class='container'>
+
+            <div th:fragment="menu" style="background-color: #222222;">
+
+                <style>
+
+
+                    /* Dropdown Navigation Menu */
+                    /* Some stylesheet reset 
+                    nav_, nav_ ul {
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                            line-height: 1;
+                            max-width: 100%;
+                    }*/
+
+                    /* The main container class */
+                    #nav_ {
+                        /*display: block;
+                        min-height: 34px;
+                        max-width: 100%;*/
+                        border-radius: 3px;
+                        border: 1px solid transparent;
+                        /*background: #332F30;
+                        background: -webkit-linear-gradient(bottom, #272829, #6D6D6D);
+                        background: -moz-linear-gradient(bottom, #206ba4, #4c88b6);
+                        background: -o-linear-gradient(bottom, #206ba4, #4c88b6);
+                        background: -ms-linear-gradient(bottom, #e1e1e1, #4c88b6);*/
+                        margin-bottom: 20px;
+                        box-shadow: inset 0 0px 0 #aaaaaa;
+                    }
+
+                    .nav_ > li {
+                        display: block;
+                        position: relative;
+                        float: left;
+                        margin: 0;
+                        padding: 0 1px 0 0;
+                    }
+
+                    /* The main navigation links */
+                    #nav_ >li > a {
+                        /* Layout */
+                        display: block;
+                        padding: 11px 45px;
+
+                        /* Typography */
+                        font-family: Helvetica, Arial, sans-serif;
+                        font-size: 14px;
+                        font-weight: bold;
+                        text-decoration: none;
+                        color: #ffffff; /* #9a9a9a; */
+
+
+                        /* Effects */
+                        -webkit-transition: all .3s;
+                        -moz-transition: all .3s;
+                        -ms-transition: all .3s;
+                        -o-transition: all .3s;
+                        transition: all .3s;
+                    }
+
+                    /* The hover state of the navigation links */
+                    #nav_ > li > a:hover, #nav>li:hover>a {
+                        background: #4c88b6;
+                        color: #ffffff;
+                    }
+
+                    .nav_ > li:first-child>a {
+                        border-top-left-radius: 3px;
+                        border-bottom-left-radius: 3px;
+                    }
+
+                    .nav_ > .dropdown>a {
+                        padding-right: 26px;
+                    }
+
+                    /* The arrow indicating a dropdown menu */
+                    #nav_ > span::after {
+                        /*content: "";
+                        position: absolute;
+                        top: 14px;
+                        right: 11px;
+                        width: 4px;
+                        height: 4px;
+                        border-bottom: 1px solid #09385c;
+                        border-right: 1px solid #09385c;*/
+                        -webkit-transform: rotate(45deg);
+                        -ms-transform: rotate(45deg);
+                        -moz-transform: rotate(45deg);
+                        -o-transform: rotate(45deg);
+                    }
+
+                    /* Changing the color of the arrow on hover */
+                    .nav_ > .dropdown>a:hover::after, .nav_ > .dropdown:hover>a::after {
+                        border-color: #09385c;
+                    }
+
+                    .nav_ ul {
+                        position: relative;
+                        position: absolute;
+                        left: -9999px;
+                        display: block;
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+                    }
+
+                    /* Level 1 submenus */
+                    .nav_ > li > ul {
+                        padding-top: 0px;
+                        z-index: 99;
+                        border-top: 1px solid #206ba4;
+                        top: 34px;
+                    }
+
+                    /* Making the level 1 submenu to appear on hover */
+                    .nav_ > li:hover > ul {
+                        left: -1px;
+                    }
+
+                    /* Level 2+ submenus */
+                    .nav_ ul ul {
+                        left: -9999px;
+                        top: 0px;
+                        z-index: 999;
+                    }
+
+                    /* Making the level 2+ submenu to appear on hover */
+                    .nav_ ul > li:hover>ul {
+                        left: 122px;
+                        top: -1px;
+                    }
+
+                    /* The submenu link containers */
+                    .nav_ ul li {
+                        position: relative;
+                        display: block;
+                        border-left: 1px solid #206ba4;
+                        border-right: 1px solid #206ba4;
+
+                        /* Creating the slide effect. The list elements which contain the links have 0 height. On hover, they will expand */
+                        height: 0px;
+                        -webkit-transition: height .3s;
+                        -moz-transition: height .3s;
+                        -o-transition: height .3s;
+                        -ms-transition: height .3s;
+                    }
+
+                    /* Expanding the list elements which contain the links */
+                    .nav_ li:hover>ul>li {
+                        height: auto;  /* OVides Default 25px */
+                    }
+
+                    .nav_ ul li:hover>ul>li /*:first-child*/ {
+                        height: auto; /* OVides Default 26px */
+                    }
+                    #nav>ul>li{
+                        padding-bottom: 5px ;
+                        margin-bottom:2px solid #222222 ;
+                    }
+                    /* The links of the submenus */
+                    .nav_ ul li a {
+                        /* Layout */
+                        display: block;
+                        width: auto; /* OVides Default 90px*/
+                        padding: 6px 10px 6px 20px;
+                        border-bottom: 1px solid #09385c;
+
+                        /* Typography */
+                        font-size: 12px;
+                        color: #ffffff;
+                        font-family: Helvetica, Arial, sans-serif;
+                        text-decoration: none;
+
+                        /* Background and effects */
+                        background: #4c88b6;
+                        -webkit-transition: background .3s;
+                        -moz-transition: background .3s;
+                        -ms-transition: background .3s;
+                        -o-transition: background .3s;
+                        transition: background .3s;
+                    }
+
+                    /* The hover state of the links */
+                    .nav_ ul li>a:hover, .nav_ ul li:hover > a {
+                        background: #79a6c8;
+                        color: #ffffff;
+                    }
+
+                    .nav_ ul ul > li:first-child>a {
+                        border-top: 1px solid #09385c;
+                    }
+
+                    .nav_ ul > li:last-child > a {
+                        border-bottom: 1px solid #09385c;
+                    }
+
+
+                    /* The arrow indicating a level 2+ submenu */
+                    .nav_ ul > .dropdown > a::after {
+                        content: "";
+                        position: absolute;
+                        top: 10px;
+                        right: 8px;
+                        width: 4px;
+                        height: 4px;
+                        border-bottom: 1px solid #206ba4;
+                        border-right: 1px solid #206ba4;
+                        -webkit-transform: rotate(-45deg);
+                        -ms-transform: rotate(-45deg);
+                        -moz-transform: rotate(-45deg);
+                        -o-transform: rotate(-45deg);
+                    }
+
+                    .nav_ ul > .dropdown:hover>a::after, .nav_ ul > .dropdown > a:hover::after {
+                        border-color: #206ba4;
+                    }
+
+                </style>
+                <nav class="navbar navbar-inverse" id="nav_" >
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+                                <span>Navegaci&oacute;n</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>   
+                            <a th:href="@{/}" class="navbar-brand">Inicio</a>
+                        </div>
+                        <div class="navbar-collapse collapse" id="menu">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a th:href="@{/me/home}" id="mesa">Mesa de Entrada</a>
+                                </li>
+                                <li sec:authorize="hasAnyRole('ROLE_GC_R4','ROLE_GC_R5','ROLE_GC_R6')">
+                                    <a th:href="@{/operacion/home}">Operación</a>
+                                </li>
+                                <!-- Los operadores no deben ver la opcion de llamado -->
+                                <li sec:authorize="!hasAnyRole('ROLE_GC_R4','ROLE_GC_R5','ROLE_GC_R6')">
+                                    <a th:href="@{/llamado/home}">Llamado</a>
+                                </li>
+
+                                <li sec:authorize="hasAnyRole('ROLE_GC_R3','ROLE_GC_R1')">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Administración<span class="caret"></span><!--role="button" aria-haspoppup="true" aria-expanded="false"--></a>
+                                    <ul class="dropdown-menu ">
+                                        <li><a th:href="@{/unidad/}">Centros Servicios</a></li>
+                                        <li><a th:href="@{/zona/}">Zonas</a></li>
+                                        <li><a th:href="@{/escritorio/}">Escritorios</a></li>
+                                        <li sec:authorize="hasAnyRole('ROLE_GC_R1')"><a th:href="@{/servicio/}">Secciones</a></li>
+                                        <li sec:authorize="hasAnyRole('ROLE_GC_R1')"><a th:href="@{/tramite/}">Tramites</a></li>
+                                        <!--    <li sec:authorize="hasAnyRole('ROLE_GC_R1')"><a th:href="@{/jerarquia/}">Jerarquías</a></li> -->
+                                        <li>
+                                            <a href="#" tabindex="0" class="dropdown-toggle" data-toggle="dropdown"  >Configuración<!--role="button" aria-haspopup="true" aria-expanded="false"-->
+                                                <span class="caret"></span></a>
+                                            <ul class="dropdown-menu"> 
+                                                <li><a th:href="@{/ctramite/}" tabindex="0">Tramite</a></li>
+                                                <!--    <li><a th:href="@{/creasignacion/}" tabindex="0">Reasignación</a></li>  -->
+                                                <!--    <li><a th:href="@{/conftiquete/}" tabindex="0">Tiquete</a></li> -->
+                                                <!--    <li><a th:href="@{/cllamado/}" tabindex="0">Llamado</a></li> -->
+                                                <!--    <li><a th:href="@{/jerarquiasec/}" tabindex="0">Sección</a></li> -->
+                                                <li><a th:href="@{/admin/}" tabindex="0">Usuarios</a></li>
+                                            </ul> 
+                                            <!--    <li sec:authorize="hasAnyRole('ROLE_GC_R1')"><a tabindex="0" th:href="@{/prioridad/}">Prioridades</a></li>  -->
+                                            <!--  A.Nolasco opciones obsoletas retiradas del menu
+                                                 
+                                                 <li><a th:href="@{/alerta/}" tabindex="0">Alerta</a></li>
+                                                 <li sec:authorize="hasAnyRole('ROLE_GC_R1')"><a tabindex="0" th:href="@{/adminpreguntas/}">Evaluación</a></li>
+                                                 <li><a th:href="@{/tequipo/}" tabindex="0">Tipos de Equipos</a></li>
+                                                 <li><a th:href="@{/equipo/}" tabindex="0">Equipos</a></li>
+                                            -->
+                                            <li sec:authorize="hasAnyRole('ROLE_GC_R1')"><a tabindex="0" th:href="@{/usuario/}">Seguridad Usuario</a></li>
+                                            <li><a th:href="@{/multimedia/}" tabindex="0">Multimedia</a></li>
+                                            <li><a th:href="@{/crepro/}" tabindex="0">Reproducción</a></li>    
+                                        </li>   x
+                                    </ul>
+                                </li>
+                                <li class="dropdown" sec:authorize="hasAnyRole('ROLE_GC_R3','ROLE_GC_R1')">
+                                    <a th:href="@{/monitoreo/}" class="dropdown-toggle" data-toggle="dropdown" 
+                                       role="button" aria-haspup="true" aria-expanded="false">Monitoreo<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a th:href="@{/cdservicio/}">Centros de Servicios</a></li>
+                                        <!--    <li><a th:href="@{/seccionm/}">Secciones</a></li>
+                                            <li><a th:href="@{/monitoreoT/}" >Tramites</a></li>
+                                            <li><a th:href="@{/usuariom/}" >Usuarios</a></li>
+                                            <li><a th:href="@{/alrts/}">Alertas</a></li> 
+                                            <li><a th:href="@{/monitoreo/tiquetesEnEspera/}">Tiquetes En Espera</a></li>-->
+                                    </ul>
+                                </li> 
+                                <li sec:authorize="hasAnyRole('ROLE_GC_R3','ROLE_GC_R1','ROLE_GC_R2')">
+                                    <a th:href="@{/reportes/}">Reportes</a>
+                                </li>
+                                <li>
+                                    <a id="logoutLink" th:href="@{/logout}">Salir</a>
+                                </li>
+
+                            </ul>    
+                        </div>
+
+                    </div>
+                </nav>
+
+            </div>        
+        </div>
+        <li>
+            <a id="logoutLink" th:href="@{/logout}">Logout</a>
+        </li>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const logoutLink = document.getElementById('logoutLink');
+
+                logoutLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Remove the 'authHeader' from localStorage
+                    localStorage.removeItem('authHeader');
+
+                    // Log the removal for debugging purposes
+                    console.log('authHeader removed from localStorage');
+
+                    // Get the logout URL
+                    const logoutUrl = this.getAttribute('href');
+
+                    // Redirect to the logout URL
+                    window.location.href = logoutUrl;
+                });
+            });
+        </script>
+    </body>
+</html>
+

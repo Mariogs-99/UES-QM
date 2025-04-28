@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+</head>
+<body>
+    <div th:fragment="foot">
+        
+        <script>
+            jQuery(function(){
+                jQuery.ajax({ 
+                    url: window.location.protocol + "//" + window.location.host+"/colas/me/getYear",
+                    type: 'POST', 
+                    dataType: 'json', 
+                    data: {},
+                    contentType: 'application/json;charset=utf-8',
+                    mimeType: 'application/json',
+                    success: function(data) {              
+                        jQuery("#txtYear").html(data);
+                    },
+                    error:function(data,status,er) { 
+                        //alert("error: "+data+" status: "+status+" er:"+er);
+                    }
+                });
+            });
+        </script>
+        
+        <center>
+            <p style="font-size: 11px;">Global Solutions Latinoam&eacute;rica<br /><span id="txtYear"></span></p>
+        </center>    
+    </div>
+</body>
+</html>

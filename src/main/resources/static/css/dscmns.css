@@ -1,0 +1,21 @@
+/*  Utilitarios  */
+
+div.lft{float:left}
+div.rgt{float:right}
+.w10{width:10%}
+.w20{width:20%}
+.w30{width:30%}
+.w35{width:35%}
+.w40{width:40%}
+.w45{width:45%}
+.w50{width:50%}
+.w60{width:60%}
+.w70{width:70%}
+.w75{width:75%}
+.w80{width:80%}
+.w85{width:85%}
+.w90{width:90%}
+h2.rs{background: #f0f0f0  url("../images/h2tbls.png") no-repeat 5px 5px; padding: 7px 25px; font-weight: 500; margin:0; font-size: 1.5em; text-align: left;}
+h1.rs{background: url("../images/rsh1.png") no-repeat 0px 18px; padding:12px 23px; font-size: 1.6em; color: #004E7F; font-weight: 500; margin:0px;}
+h1.rsm{ padding:12px 23px; font-size: 1.6em; color: #000000; font-weight: 500; margin:0px; text-align:left;}
+div.clr{clear:both; font-size: 0;}

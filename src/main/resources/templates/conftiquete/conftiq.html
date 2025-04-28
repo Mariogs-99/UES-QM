@@ -1,0 +1,210 @@
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Admon Tiquetes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />        
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js"
+        th:src="@{/js/dropdownmenu.js}"></script>
+         
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+                height:900px ;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;}
+            @media (min-width:767px){
+                #editab {
+                    display: block-inline;
+                }
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/conftiq.css" th:href="@{/css/conftiq.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+	<link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css" th:href="@{/css/template-style.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/build.css" th:href="@{/css/build.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+  
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery-ui.min.js" th:src="@{/js/jquery-ui.min.js}"></script>
+        <script type="text/javascript" src="../js/conftiquete.js" th:src="@{/js/conftiquete.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+        
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+<script type="text/javascript">
+           $(document).ajaxSend(function(event, request, settings) {
+                $('#loading-indicator').show();
+            });
+
+            $(document).ajaxComplete(function(event, request, settings) {
+                $('#loading-indicator').hide();
+            });
+            
+</script>
+        
+        
+</head>
+<body onload="load()">
+ <div id="ssc-layout-ext" class="form" >
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header" ></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+
+                    <div id="ssc-body-render">
+
+                        <div id="ssc-layout-ext">
+                            <div id="container" >
+                                <a id="anclaTop"></a>
+
+
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <form class="form-inline">      
+                                        <div class="form ">
+<table id="tabmar" align="center" style="padding-left:15px ;" > 
+    <tr><td > Unidad de Servicio
+<div class="form-group"><div class="col-sm-12"><select id="cunidadRecepId" class="form-control " style="">
+               <option th:each="type : ${unidadesList}" th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}"></option>
+            </select> </div> </div>           
+<!--            <div id="titulocs" style="font-size:24px">TITULO</div>-->
+            </td></tr> 
+    <tr><td>Versión <div class="form-group">
+                <select id="fmversion" class="form-control "></select></div>
+                <div class="form-group">
+                    <div class="checkbox-inline">
+                        <input type="checkbox" id="bactivo"/>Activo
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select id="fmplantillas" class="form-control">
+                        <option value="0" selected="selected">Seleccione una Plantilla...</option>
+                    </select>
+                </div>               
+        </td>
+    </tr>
+    
+          <tr>
+                <td>
+                    <button value="Visualizar" class="btn btn-default" onclick="visualizar()" title="Visualizar">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    <span style="padding-left: 5px;">Ver</span>
+                    </button>
+                
+                    <button value="Guardar" class="btn btn-default" sec:authorize="hasAnyRole('ROLE_GC_R1','ROLE_GC_R2')" onclick="Guardar()" title="Guardar">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <span style="padding-left: 5px;">Guardar</span>
+                    </button>
+                    <div class="form-group"><div class="checkbox-inline"><input type="checkbox" id="nversion"/>Nueva Versión</div></div>
+                </td>
+            </tr>
+            <!--<table align="right" style="">
+            
+        </table>-->
+            
+
+    
+<tr class="border_bottom">
+<td>
+Elementos
+</td>
+<td>
+    <div class="form-group"><span class="col-sm-9">Previsualización del Tiquete</span>
+    <div  id="cargando" class="col-sm-2">
+               <img class="text-center" src="../images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+    </div>
+</div>
+</td>
+</tr>
+<tr>
+
+<td>
+<div class="marco" style="overflow-y:auto;height:400px;width: 300px;">
+<table id="tabElement" >
+<tbody>
+<tr><td class="eletd">Centro Servicio</td><td class="eletd">[0]</td></tr>
+<tr><td class="eletd">Nombre servicio</td><td class="eletd">[1]</td></tr>
+<tr><td class="eletd">Trámite</td><td class="eletd">[2]</td></tr>
+<tr><td class="eletd">Fila Especial</td><td class="eletd">[3]</td></tr>
+<tr><td class="eletd">Reserva de Cita</td><td class="eletd">[4]</td></tr>
+<tr><td class="eletd">NIT</td><td class="eletd">[5]</td></tr>
+<tr><td class="eletd">N&uacute;mero de Tiquete</td><td class="eletd">[6]</td></tr>
+<tr><td class="eletd">Tiempo de Espera</td><td class="eletd">[7]</td></tr>
+<tr><td class="eletd">Usuario</td><td class="eletd">[8]</td></tr>
+<tr><td class="eletd">Hora</td><td class="eletd">[9]</td></tr>
+<tr><td class="eletd">Fecha</td><td class="eletd">[10]</td></tr>
+<tr><td class="eletd">Tiquete Id</td><td class="eletd">[11]</td></tr>
+<tr><td class="eletd">Imagen</td><td class="eletd">[12]</td></tr>
+<td colspan="2">
+    <input type='file' onchange="readURL(this);" /> <img id="imagen" style="width:65;height:45" src="#" /><br/><input type="button" onclick="borarimg()" value="Borrar Imagen" />
+</td> 
+</tbody>
+</table>
+</div>
+</td>
+<td>
+<div class="marco" style="overflow-y:auto;height:400px;width:300px;">
+<table id="editab" align="center" >
+<tbody>
+</tbody>
+</table>
+</div>
+</td>    
+</tr>
+</table>
+ <input type="hidden" id="oculto" />
+    <input type="hidden" id="sihayesc" />
+    <input type="hidden" id="refrow" />
+    <input type="hidden" id="valrow" />
+    <input type="hidden" id="idrow" />
+    <input type="hidden" id="idunidad" />
+    <input type="hidden" id="lineasrow" />
+    </div>
+                              </form>      
+                              
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer" />
+
+            </div>
+                </div>
+     <br/><br/>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+
+        <title>Secciones</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mosecciones.css" th:href="@{/css/mosecciones.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+<!--        <link rel="stylesheet" type="text/css" media="all" href="../css/operacion-style.css" th:href="@{/css/operacion-style.css}" />-->
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+        
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/grafmon.js" th:src="@{/js/grafmon.js}"></script>
+        <script type="text/javascript" src="../js/graII.js" th:src="@{/js/graII.js}"></script>
+        <script type="text/javascript" src="../js/secmo.js" th:src="@{/js/secmo.js}"></script>
+        <script type="text/javascript" src="../js/secmo.js" th:src="@{/js/jquery-1.11.0.js}"></script>
+        <script type="text/javascript" src="../js/secmo.js" th:src="@{/js/highcharts.js}"></script>
+        <script type="text/javascript" src="../js/secmo.js" th:src="@{/js/data.js}"></script>
+        
+        <script type="text/javascript">
+            $(document).ajaxSend(function(event, request, settings) {
+                $('#loading-indicator').show();
+                $('#reffrescar').hide();
+            });
+            $(document).ajaxComplete(function(event, request, settings) {
+                $('#loading-indicator').hide();
+                $('#reffrescar').show();
+            });            
+        </script>
+        <style>
+            div.graf{
+                margin: auto;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout" style="height:500px;">
+                <div th:include="/layout/header :: header" ></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="noBrowser-hide">
+                                        <!--titulo de secciones--> 
+                                        
+                                        <form id="formSecciones" class="form-horizontal" th:action="@{/seccionm/}" th:object="${monitoreoSeccionPojo}" method="post">
+                                            <div >
+                                                <span ><label class="titulo text-center" th:text="${unidadRecep}" >Centro de Servicio</label></span>
+                                            </div><br/>
+                                            <div class="row">
+                                            </div>
+                                            <div class="form-group" id="divCS">
+                                                <label for="seccion" class="col-sm-3 control-label"></label>
+                                                <div class="col-sm-5">
+                                                    <select id="seccion" name="seccion" onchange="llenar();" class="form-control">
+                                                        <option th:each="type : ${seccionesList}" th:value="${type.nServiciosId}" th:text="${type.sNombre}"></option>
+                                                    </select>
+                                                </div>
+                                                <a id="reffrescar" title="Refrescar" onclick="llenar();" class="btn btn-default btn-sm titulo_n">
+                                                    <i class="fa fa-refresh"></i><span></span>
+                                                </a>
+                                                <div class="row" id="cargando">
+                                                    <img class="text-center" src="../images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="ui-widget-header" colspan="7" id="ctittle">Seccion</div>
+                                        <div id="general">
+                                            <div id="tramites" style="word-wrap: break-word; display: inline-block;">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading"><h3 class="panel-title text-center">TRAMITES</h3></div>
+                                                    <div class="list-group" id="trams">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="grafica1">
+                                                <div id="graf3" style="min-width: 210px; height: 100%; margin: 0 auto" data-highcharts-chart="0"></div>
+                                                <table id="datatable" style="display: none; width:100% ;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th id="seccionG3"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tramitesG3">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
+                                            <div id="grafica2">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading"><h3 class="panel-title text-center">TIEMPOS DE ESPERA</h3></div>
+                                                    <table class="table" style="height: 260px">
+                                                      <tbody>
+                                                        <tr id="maxim"></tr>
+                                                        <tr id="minim"></tr>
+                                                        <tr id="promm"></tr>
+                                                        <tr id="modda"></tr>
+                                                        <tr id="tespera"></tr>
+                                                        <tr id="tprocesados"></tr>
+                                                        <tr id="tusers"></tr>
+                                                      </tbody>
+                                                    </table>
+                                                </div>
+                                                <h3 class="text-center" style="padding-top:15px; font-size:15px">Tiempos de espera</h3>
+                                                <hr style="border: 0; border-top: 1px solid #102E88; border-bottom: 1px solid #333; height:0;"/>
+                                                <div id="infotime" style="font-size:14px; margin-left:20px;"></div>
+                                            </div>
+                                            
+                                            <div id="tiempo">
+                                                <div class="graf">
+                                                    <div id="graf2" style="min-width: 210px; height: 100%; margin: 0 auto;" data-highcharts-chart="0"></div>
+                                                    <table id="datatableLine" style="display:none">
+                                                        <thead>
+                                                            <tr id="headgra2"></tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr id="horatra"></tr>
+                                                            <tr id="min45"></tr>
+                                                            <tr id="min30"></tr>
+                                                            <tr id="min15"></tr>
+                                                            <tr id="esperandoTra"></tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="usuario">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center">USUARIOS  <span class="badge"><a th:href="@{/admin/}">»</a></span></h3>
+                                                    </div>
+                                                    <ul class="list-group" id="usersDetalles"></ul>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:include="/layout/alertas :: alertas"></div>
+            <div th:include="/layout/message :: message"></div>
+        </div>
+        
+    </body>
+</html>

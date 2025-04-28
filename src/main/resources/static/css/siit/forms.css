@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+input[type=text],
+input[type=password],
+input[type=number],
+select,
+textarea{
+    border:1px solid #cccccc;
+    color:#777777; 
+    padding:5px;
+    font-size:1.2em; 
+    background:#efefef;
+    margin-bottom:5px;
+    border-radius:.3em; 
+    moz-border-radius:.3em;
+}
+
+input[type=text]:focus, textarea:focus, input[type=number]:focus, select:focus{
+    border:1px solid #0066ff; 
+    color:#000000;
+    box-shadow: 0px 0px 6px #666;
+    -moz-box-shadow: 0px 0px 6px #666;
+}
+
+.wt240{width:240px}
+.wt460{width:460px}
+
+fieldset label{display:block; color:#666; margin-bottom:5px; font-size:1.2em;}
+fieldset span{color:#666; margin-bottom:5px; font-size:1.2em;}
+fieldset p{	
+    color:#aa8800; 
+    background-color:#ffe680;
+    font-size:1.2em;
+    margin:10px; 
+    padding:10px; 
+    box-shadow: 0px 0px 6px #666; 
+    -moz-box-shadow: 0px 0px 6px #666;
+}
+
+#login input[type=text].login,
+#login input[type=password].login{font-size:1.6em;}				
+
+div.form{
+    box-shadow: 0px 0px 5px #666; 
+    -moz-box-shadow: 0px 0px 5px #666;
+    margin: 10px;
+    
+}
+
+div#login.form{
+    box-shadow: 0px 5px 10px #666; 
+    -moz-box-shadow: 0px 5px 10px #666;
+}
+
+input.l255, textarea.l1000, 
+textarea.l1000-small{width:90%; }
+input.l25{width:150px; border-radius:.2em; moz-border-radius:.2em;}
+textarea.l1000{min-height:200px}
+textarea.l1000-small{min-height:100px}
+/* es necesario este eda cliente */
+.elementoculto *{
+    display: none;
+}

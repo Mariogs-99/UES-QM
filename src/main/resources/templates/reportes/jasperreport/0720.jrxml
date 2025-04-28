@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="0720" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b3c5cb04-9d4d-4b2d-94d1-d45b17ad74b9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.zoom" value="1.2078825000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="49"/>
+	<parameter name="FechaI" class="java.lang.String"/>
+	<parameter name="FechaF" class="java.lang.String"/>
+	<parameter name="Icono1" class="java.lang.String"/>
+	<parameter name="Icono2" class="java.lang.String"/>
+	<parameter name="nunidad" class="java.lang.String"/>
+	<parameter name="Unidad" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT A.C_USUARIO USUARIO, COUNT(B.N_EVENTO_ID) PAUSAS, COUNT(C.N_EVENTO_ID) RECESOS, COUNT(D.N_EVENTO_ID) PERMISOS,
+ COUNT(B.N_EVENTO_ID)+COUNT(C.N_EVENTO_ID)+COUNT(D.N_EVENTO_ID) TOTAL
+  FROM GC_USER_LOG A LEFT JOIN GC_EVENTOS B
+  ON A.N_EVENTO_ID = B.N_EVENTO_ID AND B.N_EVENTO_ID=1
+  LEFT JOIN GC_EVENTOS C
+  ON A.N_EVENTO_ID = C.N_EVENTO_ID AND C.N_EVENTO_ID=2
+  LEFT JOIN GC_EVENTOS D
+  ON A.N_EVENTO_ID = D.N_EVENTO_ID AND D.N_EVENTO_ID=3
+  where A.FHI_EVENTO between to_date('$P!{FechaI}','dd/mm/yyyy HH:mi AM') and to_date('$P!{FechaF}','dd/mm/yyyy HH:mi AM')
+  AND A.C_UNIDAD_RECEP=NVL('$P!{Unidad}',A.C_UNIDAD_RECEP)
+  --AND G.N_SERVICIOS_ID=NVL(29,G.N_SERVICIOS_ID)
+  GROUP BY A.C_USUARIO]]>
+	</queryString>
+	<field name="USUARIO" class="java.lang.String"/>
+	<field name="PAUSAS" class="java.math.BigDecimal"/>
+	<field name="RECESOS" class="java.math.BigDecimal"/>
+	<field name="PERMISOS" class="java.math.BigDecimal"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="92">
+			<staticText>
+				<reportElement mode="Transparent" x="214" y="2" width="363" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="59b0db95-9082-4adf-bdd6-7f32cec12bc4"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CANTIDADES DE PAUSAS, RECESOS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="647" y="0" width="100" height="50" uuid="bcbd2a14-de19-49b3-91d0-1b15beb06ece"/>
+				<imageExpression><![CDATA[$P{Icono2}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="214" y="21" width="363" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f08903cb-deb2-47af-b54c-0e00b848af41"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Y ALMUERZOS POR USUARIO]]></text>
+			</staticText>
+			<elementGroup>
+				<image>
+					<reportElement x="1" y="0" width="164" height="82" uuid="b9bb38de-3b23-4c97-b6c4-0b979c83f1cd"/>
+					<imageExpression><![CDATA[$P{Icono1}]]></imageExpression>
+				</image>
+			</elementGroup>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="180" y="41" width="427" height="21" forecolor="#333333" backcolor="#FFFFFF" uuid="54a7a11a-324a-4f73-8d1e-aceba4b7a6cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="html">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nunidad}.trim().toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="178" y="62" width="450" height="20" forecolor="#333333" uuid="c2079d25-e2e5-43fe-b70c-bcaa7fe12075"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DEL <b> "+$P{FechaI}.substring(0, 10)+"</b> AL <b> "+$P{FechaF}.substring(0, 10)+"</b>"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="81" y="82" width="597" height="1" uuid="15dc5689-8ce2-468e-b748-76c3aecf8b35"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="81" y="0" width="154" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="deaf5b9c-0896-4b7e-b203-0e93ced1c381"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="235" y="0" width="122" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="0400fedc-a71b-47c3-8cbc-3f146663e561"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAUSAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="357" y="0" width="101" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="eb53996e-c9c7-4b90-93c2-aae0c76e923e"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECESOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="458" y="0" width="108" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="0250e8c1-50e0-44d6-a9b3-90fa7d2e6d32"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALMUERZOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="566" y="0" width="112" height="30" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="fc8ca2d9-d8ef-4a6e-8e38-5e438630c1b0"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="81" y="0" width="154" height="30" uuid="f4c8d866-46c8-4617-b730-39b4f3edca79"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{USUARIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="235" y="0" width="122" height="30" uuid="2ffc6e5d-735c-4054-8267-fc3a2742ab66"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAUSAS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="357" y="0" width="101" height="30" uuid="454e1d81-b1c0-4acb-95d8-af181c3fc81f"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECESOS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="458" y="0" width="108" height="30" uuid="b29a1785-d1bf-4989-bcd4-2a86ea00f7d3"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PERMISOS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="566" y="0" width="112" height="30" uuid="bc80d8c9-afb4-4fe4-94c7-1fd6bf3b7ad0"/>
+				<box>
+					<topPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.2" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band height="123">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="88" width="750" height="30" forecolor="#666666" backcolor="#CCCCCC" uuid="0be9b12d-2fd3-4cf8-b10a-55f93a3ec6be"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[NO HAY DATOS QUE MOSTRAR]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="201" y="43" width="427" height="21" forecolor="#333333" backcolor="#FFFFFF" uuid="b8195f90-6f72-40c4-9269-4b5fa40d8671"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="html">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nunidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="64" width="450" height="20" forecolor="#333333" uuid="67827e0e-651d-4365-987f-fb367d63ff99"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DEL <b> "+$P{FechaI}.substring(0, 10)+"</b> AL <b> "+$P{FechaF}.substring(0, 10)+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="235" y="23" width="363" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a30b3a55-49f8-4b84-985c-68f4bc3957cb"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Y ALMUERZOS POR USUARIO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="649" y="2" width="100" height="50" uuid="d29e768b-fab2-4fd9-86e0-0d1dde1a4c63"/>
+				<imageExpression><![CDATA[$P{Icono2}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="3" y="2" width="150" height="82" uuid="ddc5ff35-ce66-422a-bc4c-d5957cb13d1c"/>
+				<imageExpression><![CDATA[$P{Icono1}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="235" y="4" width="363" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="c6b9fb21-1174-471b-8767-d40f7dafba39"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CANTIDADES DE PAUSAS, RECESOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="84" width="789" height="1" uuid="69ca9906-8a02-433c-83e5-3ee3a0d4476d"/>
+			</line>
+		</band>
+	</noData>
+</jasperReport>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+
+        <title>Reporte General de Usuarios</title>
+
+       	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+       	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+                height:600px;
+             }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+            }
+            
+        </style>
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.timepicker.css" th:href="@{/css/jquery.timepicker.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" /><!-- clase sac -->
+		<link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" /><!-- clase form -->
+                
+                <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui-timepicker-addon.css" th:href="@{/css/jquery-ui-timepicker-addon.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/msgBox.css" th:href="@{/css/msgBox.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-multiselect.css" th:href="@{/css/bootstrap-multiselect.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+                             
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" href="../js/jquery.min.js" th:href="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" href="../js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}"></script>
+        <script type="text/javascript" src="../js/moment.js" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-datetimepicker.js" th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+        
+        <script type="text/javascript" src="../js/jquery-ui-timepicker-addon.js" th:src="@{/js/jquery-ui-timepicker-addon.js}"></script>
+<script type="text/javascript" src="../js/jquery-ui-sliderAccess.js" th:src="@{/js/jquery-ui-sliderAccess.js}"></script>
+<script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+<script type="text/javascript" src="../js/jquery.timepicker.js" th:src="@{/js/jquery.timepicker.js}"></script>  
+        <script type="text/javascript" src="../js/wds.js"  th:src="@{/js/wds.js}"></script> 
+
+        <style>
+
+            #containe {
+                margin: 0 auto;
+                width: 450px;
+                margin-top:0px;
+
+            }
+            .download {
+                float: right;
+                font-size: 1.5em;
+            }
+            .footer {
+                width: 100%;
+                text-align: center;
+                color: #999999;
+                font-size: 0.8em;
+                margin-top: 30px;
+            }
+
+            .intro { font-size: 1.4em; }
+            .differences { clear: both; }
+
+            span.doc { color: green; font-weight: bold; }
+            a { color: black; }
+            a:visited { color: gray; }
+            .example { float: left; }
+            h2 { clear: both; }
+
+            .awesome .graph-header { width: 370px; }
+            .sales   .graph-header { width: 310px; }
+
+            .sales { margin-left: 20px; }
+/*            li { margin-bottom: 3px; }*/
+        </style>
+        <script type="text/javascript"  th:inline="javascript">
+            /*<![CDATA[*/
+            $(document).ready(function() {
+                
+                $('[data-toggle="tooltip"]').tooltip();
+                $("#AreaAtencion").change(function(){
+                    $(this).attr("title",$(this).find("option:selected").text());
+                });
+                $("#Tecnico").change(function(){
+                    $(this).attr("title",$(this).find("option:selected").text());
+                });
+                $("#cunidadRecepId").change(function(){
+                    $(this).attr("title",$(this).find("option:selected").text());
+                });
+                                
+                $("#ffInicio").datetimepicker({
+                        dateFormat: 'dd/mm/yy',
+                        timeFormat: '',
+                        showTime: false,
+                        showHour: false,
+                        showMinute: false
+                });
+                
+                $("#ffFin").datetimepicker({
+                        dateFormat: 'dd/mm/yy',
+                        timeFormat: '',
+                        showTime: false,
+                        showHour: false,
+                        showMinute: false
+                });
+                
+                $('#hInicio').timepicker({
+                    'timeFormat': 'h:i A',
+                    'minTime': '07:30 am',
+                    'maxTime': '02:30 pm',
+                    'showDuration': false
+                });
+                
+                $('#hInicio').blur(function(){
+                    var h = $('#hInicio').val();
+                    h = h.substr(0,2);
+                    h = parseInt(h)+1;
+                    h = h<=9?("0"+h):h;
+                    m = $('#hInicio').val();
+                    var s = m.split(":");
+                    var time = h+":"+s[1];
+                    $('#hFin').timepicker('remove');
+                    $('#hFin').timepicker({
+                        'timeFormat': 'h:i A',
+                        'minTime': time,
+                        'maxTime': '03:30 pm',
+                        'showDuration': false
+                    });
+                });
+                
+                getTime();
+                
+                $("#btnFInicio").click(function(){
+                   $('#ffInicio').focus();
+                });
+                
+                $("#btnFFin").click(function(){
+                    $('#ffFin').focus();
+                });
+                
+                $("#btnHInicio").click(function(){
+                   $('#hInicio').focus();
+                });
+                
+                $("#btnHFin").click(function(){
+                    $('#hFin').focus();
+                });
+                
+                $("#AreaAtencion").change(function(){
+                    var div = "usuarioo";
+                    var AreaAtencion=$("#AreaAtencion option:selected").val();
+                    var params = 'unidad='+AreaAtencion;
+                    var requestMapping = /*[[@{/0719/getUsuarios}]]*/;
+                    var url = requestMapping + "?" + params;
+                    var func = 'FunctionNameHere';
+                    doLoad(null, url, div, func);
+                });
+                
+                $("button[type='reset']").click(function(event){
+                    event.preventDefault();
+                    $(this).closest('form').get(0).reset();
+                    getTime();
+                });
+                
+            });
+            
+            function getTime(){
+                $(function(){
+                    $("#hInicio").val('07:30 am');
+                    $("#hFin").val('03:30 pm');
+                });
+            }
+            
+            function Cargar(url)
+            {
+               // var CentroServicio=$("#area").val();
+		var FechaDesde=$("#ffInicio").val();
+                var FechaHasta=$("#ffFin").val();
+                var horaDesde=$("#hInicio").val()===''?'07:30 am':$("#hInicio").val();
+                var horaHasta=$("#hFin").val()===''?'03:30 pm':$("#hFin").val();
+                var DiaSemana=$("#cunidadRecepId").val();
+                var Tecnico=$("#Tecnico").val();
+                var AreaAtencion=$("#AreaAtencion option:selected").val();
+                var nunidad = $("#AreaAtencion option:selected").text();
+                var Ver=$("#ver").is(':checked')==true?"1":"0";
+                var Validar = true;
+                var Mensaje = "";
+                        
+                if(AreaAtencion==='0'){
+                    $.msgBox({
+                        title: "Error",
+                        content: "Seleccione Centro de Servicio",
+                        type: "error",
+                        buttons: [{ value: "Aceptar" }]
+                    });
+                    Validar = false;
+
+                }else if (FechaDesde == "" || FechaHasta == ""){
+                    $.msgBox({
+                        title: "Error",
+                        content: "Las fechas tienen que estar llenas para la generacion del reporte",
+                        type: "error",
+                        buttons: [{ value: "Aceptar" }]
+                    });
+                    Validar = false;
+                }
+                
+                if (Validar){
+                    //$('#Generacion').attr('src', url+"?FechaI="+FechaDesde+"&FechaF="+FechaHasta+"&Unidad="+AreaAtencion+"&DiaSemana="+DiaSemana+"&Tecnico="+Tecnico+"&Ver="+Ver+"&nunidad="+nunidad);
+                    //$('#Generacion').attr('src', url+"?FechaI="+FechaDesde+" "+horaDesde+"&FechaF="+FechaHasta+" "+horaHasta+"&Unidad="+AreaAtencion+"&DiaSemana="+DiaSemana+"&Tecnico="+Tecnico+"&Ver="+Ver+"&nunidad="+nunidad);
+                    
+                    var ventimp=window.open(url+"?FechaI="+FechaDesde+"&FechaF="+FechaHasta+"&Unidad="+AreaAtencion+"&DiaSemana="+DiaSemana+"&Tecnico="+Tecnico+"&Ver="+Ver+"&nunidad="+nunidad, "", "width=700, height=600");
+                    ventimp.document.close();
+                }
+            }
+            function limpiar() {
+        		//alert("limpio");
+                        $("select").prop('selectedIndex', 0);
+        		$('#Generacion').attr("src", "");
+        	}
+            
+            
+            /*]]>*/
+        </script>
+            
+    </head>
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout" style="height:500px;">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="welcomeContainer noBrowser-hide" >		
+                                    	<form id="form0719" method="post">					
+                                        <div id="fatherbox">
+                                        <div class="form">
+												<!-- div for form -->
+												<div style="margin: 20px;">
+													<!-- div for margin -->
+													<div class="row">
+														<div class="col-md-12" style="margin: 20px;">
+															<span class="titulo">Reporte General de Usuarios</span>
+														</div>
+													</div>
+                                            <br />
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="nServiciosId" class="col-sm-10 control-label"><font style="font-weight: bold; font-size: 11pt;">Centro de Servicio</font></label>
+                                                </div>
+                                          <!-- <div class="col-md-4">
+                                                    <label for="nServiciosId" class="col-sm-10 control-label">Area de Atención</label>
+                                                </div> -->      
+                                                <div class="col-md-4">
+                                                    <label for="nServiciosId" class="col-sm-10 control-label"><font style="font-weight: bold; font-size: 11pt;">Usuario</font></label>
+                                                </div>
+                                                 <div class="col-md-4">
+                                                    <label for="nServiciosId" class="col-sm-10 control-label"><font style="font-weight: bold; font-size: 11pt;">Dia de la Semana</font></label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-4"> 
+                                                    <form id="formuser" class="form-horizontal" th:action="@{/admin/}" th:object="${monitoreoTramitePojo}" method="post">
+                                                        <select id="AreaAtencion" th:field="*{cunidadRecepId}" class="form-control" data-toggle="tooltip">
+                                                            <option value="0"></option>
+                                                            <option th:each="type : ${monitoreoTramitePojo.UnidadesList}" th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}"></option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+                                      <!-- <div class="col-md-4">
+                                                        <form id="formuser" class="form-horizontal" th:action="@{/admin/}" th:object="${serviciopojo}" method="post">
+                                                         <select id="area" th:field="*{nServiciosId}" name="cbseccion" class="form-control" data-toggle="tooltip">
+                                                            <option value="0">Seleccione Área de Atención</option>
+                                                             <option th:each="type : ${serviciopojo.gcServiciosList}" th:value="${type.nServiciosId}" th:text="${type.sNombre}"></option>
+                                                         </select>	
+                                                        </form>
+                                                </div> -->       
+                                                <div id="usuarioo"> 
+                                                <div class="col-md-4"> 
+                                                    <form id="formuser" class="form-horizontal" th:action="@{/admin/}" th:object="${usuariopojo}" method="post">
+                                                        <select id="Tecnico" th:field="*{cUsuario}" class="form-control" data-toggle="tooltip">
+                                                            <option value="0">Todos</option>
+                                                            <option th:each="type : ${usuariopojo.usuarioList}" th:value="${type.cUsuario}" th:text="${type.cUsuario}"></option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-4"> 
+                                                    <select id="cunidadRecepId"  class="form-control" data-toggle="tooltip">
+                                                        <option value="0"> Todos</option>
+                                                        <option value="2"> Lunes</option>
+                                                        <option value="3"> Martes</option>
+                                                        <option value="4"> Miercoles</option>
+                                                        <option value="5"> Jueves</option>
+                                                        <option value="6"> Viernes</option>
+                                                        <option value="7"> Sabado</option>
+                                                        <option value="1"> Domingo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="ffInicio" class="col-sm-1 control-label"><font style="font-weight: bold; font-size: 11pt;">Desde</font></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="ffFin" class="col-sm-1 control-label"><font style="font-weight: bold; font-size: 11pt;">Hasta</font></label>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="col-xs-10" style="margin-left:-14px;">
+                                                        <div class="input-group date" id="fiDiv">
+                                                            <input  type="text" class="form-control" required="required" id="ffInicio"/>
+                                                            <span id="btnFInicio" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"> 
+                                                    <div class="col-xs-10" style="margin-left:-14px;">
+                                                        <div class="input-group date" id="ffDiv">
+                                                            <input  type="text" class="form-control" required="required" id="ffFin"/>
+                                                            <span id="btnFFin" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">  
+                                                   	
+                                               	</div> 
+                                            </div>
+                                                                                         <br />
+                                             <div class="row">
+                                               	<div class="col-md-4" style="margin-left:14px;">
+                                                    <label for="hInicio" class="control-label"><font style="font-weight: bold; font-size: 11pt;">Hora inicial</font></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="hFin" class="control-label"><font style="font-weight: bold; font-size: 11pt;">Hora final</font></label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="col-xs-10" style="margin-left:-14px;">
+                                                        <div class="input-group date">
+                                                            <input  type="text" class="form-control" required="required" id="hInicio"/>
+                                                            <span id="btnHInicio" class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"> 
+                                                    <div class="col-xs-10" style="margin-left:-14px;">
+                                                        <div class="input-group date">
+                                                            <input  type="text" class="form-control" required="required" id="hFin"/>
+                                                            <span id="btnHFin" class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4"> 
+                                                    <label class="checkbox-inline" ><input type = "checkbox" id = "ver" value = "1" /><font style="font-weight: bold; font-size: 11pt;">Gráfico</font></label>				 
+                                                </div>
+                                            </div>
+                                            <br /><br />
+                                            <div class="row">
+                                            	
+                                                <div class="col-md-12 text-center"> 
+                                                    <a onclick="javascript:Cargar('../impresion0719/html')" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-file" aria-hidden="true">
+                                                            Generar
+                                                        </span>
+                                                    </a>
+                                                    <a onclick="javascript:Cargar('../impresion0719/pdf')" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-export" title="A PDF" aria-hidden="true">
+                                                            A PDF
+                                                        </span>
+                                                    </a>
+                                                    <button type="reset" class="btn btn-default"
+																onclick="limpiar()">
+																<span class="glyphicon glyphicon-chevron-right"
+																	title="Limpiar" aria-hidden="true"> Limpiar </span>
+															</button>
+															<a href="/colas/reportes/" class="btn btn-default"> <span
+																class="glyphicon glyphicon-repeat" title="Regresar"
+																aria-hidden="true"> Regresar </span>
+															</a> <br /> <br />
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <br />
+                                            <iframe src="" id="Generacion" width="100%" height="70%" />  
+                                        </div>      
+                                        </form>                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:include="/layout/footer :: footer" />
+            </div>
+        </div>
+    </body>
+</html>

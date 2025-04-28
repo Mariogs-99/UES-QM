@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js"
+        th:src="@{/js/dropdownmenu.js}"></script>
+        
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+            }
+                    div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+  
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+        <script th:inline="javascript" type="text/javascript">
+            jQuery(document).ready(function() {
+                jQuery("form#formCtramite").submit(function(event) {
+                    
+                    var selected = $("input[type='radio'][name='generala']:checked");
+                    $("#general").val(selected.val());
+                    if(selected.val()==="1"){
+                        if($("#nTramiteId").val() === "0"){
+                            $('#helpnTramiteId').text("Debe Seleccionar un Trámite");
+                            $("#divnTramiteId").addClass("has-error");
+                            event.preventDefault();
+                        }else{
+                            $("#divnTramiteId").removeClass("has-error");
+                            $('#helpnTramiteId').text("");
+                        }
+                    }else{
+                        $("#divnTramiteId").removeClass("has-error");
+                        $('#helpnTramiteId').text("");
+                    }
+                    
+                    if(jQuery("#nComportamiento").val() === "0"){
+                        jQuery('#helpnComportamiento').text("Debe seleccionar un Comportamiento");
+                        $("#divncomportamientoId").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divncomportamientoId").removeClass("has-error");
+                        jQuery('#helpnComportamiento').text("");
+                    }
+                    
+                    if(jQuery("#nComportamiento").val() === "3"){
+                        if(jQuery("#nPeso").val() === "0" || 0 >= parseInt(jQuery("#nPeso").val()) ){
+                            jQuery('#helpnPeso').text("Peso debe ser mayor que 0");
+                            $("#divnPeso").addClass("has-error");
+                            event.preventDefault();
+                        }else{
+                            $("#divnPeso").removeClass("has-error");
+                            jQuery('#helpnPeso').text("");
+                        }
+                    }
+                });
+                /*<![CDATA[*/
+                    var tramite = /*[[${ntramite}]]*/ '';
+                    var comportamiento = /*[[${comportamiento}]]*/ '';
+                    if(tramite!==null) $("#nTramiteId").val(tramite);
+                    if(tramite!==null) $("#nComportamiento").val(comportamiento);
+                    var unidad = /*[[${unidadesSelect}]]*/'';
+                    if(unidad !==null){ 
+                        $("#unidadRecep").val(unidad);
+                        $('#unidadRecep').prop('disabled', 'disabled');
+                    }
+                /*]]>*/
+               porPeso();
+               if($("#nEquipoId").val().length!==0){
+                   $('#general1').prop('disabled', 'disabled');
+                   $('#nTramiteId').prop('disabled', 'disabled');
+               }
+            });
+            
+            function cambioRadio(){
+                var selectedVal = "";
+                var selected = $("input[type='radio'][name='generala']:checked");
+                if (selected.length > 0) {
+                    selectedVal = selected.val();
+                    if(selectedVal==="0"){
+                        $('#nTramiteId').prop('disabled', 'disabled');
+                        $('#general').val('0');
+                        
+                    }else{
+                        $('#nTramiteId').prop('disabled', false);
+                        $('#general').val('1');
+                    }
+                }
+            }
+            function porPeso(){
+                var selected = $("#nComportamiento").val();
+                if (selected === "3") {
+                    $('#nPeso').prop('disabled', false);
+                }else{
+                    $('#nPeso').val(0);
+                    $('#nPeso').prop('disabled', 'disabled');
+                }
+            }
+            
+        </script>
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form">
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <form id="formCtramite" class="form-horizontal" th:action="@{/creasignacion/}" th:object="${gcreasignacion}" method="POST">
+                                            <input id="nEquipoId" type="hidden" th:field="*{GcConfTramite.nConfTraId}" />
+                                            <input id="general" type="hidden" th:field="*{general}" />
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <span class="titulo" th:text="*{GcConfTramite.nConfTraId == null}? 'Ingreso de Nueva Configuración Reasignación' : 'Edicion de Configuración de Reasignación'">Ingreso de Nueva Configuración Reasignación</span>
+                                                </div>
+                                                <div class="col-sm-4 right">
+                                                    <button type="submit" title="Guardar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Guardar</span>
+                                                    </button>
+                                                    <a th:href="@{/creasignacion/}" title="Regresar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Regresar</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <br/>
+                                                <br/>
+                                            </div>
+                                           <div class="form-group text-center">
+                                               <div class="col-sm-3"></div>
+                                                <div class="col-sm-2">
+                                                    <label class="col-sm-3 control-label">General</label>
+                                                    <input type="radio" name="generala" id="general1" value="0" onchange="cambioRadio();"/>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="col-sm-8 control-label">Por Tramite</label>
+                                                    <input type="radio" name="generala" autofocus="true" id="general2" value="1" onchange="cambioRadio();" checked="checked"/>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <hr/>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divcUnidadRecep">
+                                                <label for="unidadRecep" class="col-sm-2 control-label">Centro de Servicio</label>
+                                                <div class="col-sm-5">
+                                                  <select id="unidadRecep" autofocus="true" th:field="*{unidadRecep}" class="form-control">
+                                                      <option th:each="type : ${gcUnidadesList}" th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}"></option>
+                                                  </select>
+                                                    <span id="helpcUnidadRecep" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                            <div class="form-group" id="divnTramiteId">
+                                                <label for="nTramiteId" class="col-sm-2 control-label">Trámite</label>
+                                                <div class="col-sm-5">
+                                                  <select id="nTramiteId" th:field="*{GcConfTramite.nTramiteId}" class="form-control">
+                                                      <option value="0">Seleccione un Tramite...</option>
+                                                      <option th:each="type : ${gcreasignacion.tramitesList}" th:value="${type.nTramiteId}" th:text="${type.sNombre}"></option>
+                                                  </select>
+                                                    <span id="helpnTramiteId" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                            <div class="form-group" id="divncomportamientoId">
+                                                <label for="nComportamiento" class="col-sm-2 control-label">Tiquete reasginado sera puesto en la cola </label>
+                                                <div class="col-sm-5">
+                                                    <select id="nComportamiento" th:field="*{GcConfTramite.nComportamiento}" onchange="porPeso();" class="form-control">
+                                                      <option value="0">Seleccione...</option>
+                                                      <option value="4">Al Final</option>
+                                                      <option value="1">Al Inicio</option>
+                                                      <option value="2">Enmedio</option>
+                                                      <option value="3">Por Peso</option>
+                                                  </select>
+                                                    <span id="helpnComportamiento" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                            <div class="form-group" id="divnPeso">
+                                                <label for="nPeso" class="col-sm-2 control-label">Peso</label>
+                                                <div class="col-sm-5">
+                                                    <input id="nPeso" type="number" th:field="*{GcConfTramite.nPeso}" class="form-control" placeholder="Peso"/>
+                                                  <span id="helpnPeso" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+<link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+<link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css" th:href="@{/css/template-style.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+
+<script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js" th:src="@{/js/jquery-ui.min.js}"></script>
+<script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+<script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}" charset="utf-8" ></script>
+<script type="text/javascript" src="../js/jquery.dataTables.min.js"  th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" src="../js/dataTables.bootstrap.js"  th:src="@{/js/dataTables.bootstrap.js}"></script>
+<script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+<script type="text/javascript" src="../js/me_escalamientoTiquete.js" th:src="@{/js/me_escalamientoTiquete.js}" charset="utf-8" ></script>
+<script type="text/javascript" src="../js/jquery.print.js"  th:src="@{/js/jquery.print.js}" charset="utf-8" ></script>
+<script type="text/javascript" src="../js/me_utils.js"  th:src="@{/js/me_utils.js}" charset="utf-8" ></script>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <header><div th:include="/layout/me_logo :: logo"/></header>
+            <nav><div th:include="/layout/me_nav :: nav"></div></nav>
+        </div>
+        <div class="row" style="text-align:center;">
+            <div class="col-md-12">
+                    <section>
+                        <center>
+                            <br />
+                            <br />
+                            <div class="bs-secciones">
+                                <div class="panel panel-info" style="width: 775px;">
+                                    <div class="panel-heading" style="font-size: 16px;">Escalamiento de tiquete</div>
+                                    <div class="panel-body">
+                                        <div class="panel-group" id="accordion" style="width: 600px;">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                    </section> 
+            </div>
+         </div>
+
+        <button id="btnShowTiquete" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalparaImprimir' ></button>
+        <div class="modal fade" id="modalparaImprimir">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                     <h4 class="modal-title">Impresión de Tiquete</h4>
+                   </div>
+                   <div class="modal-body">
+                        <div id="marcoTiquete">
+
+                        </div>
+                   </div>
+
+                   <div class="modal-footer">
+                       <button id="btnPrint" type="button" class="btn btn-primary" data-dismiss="modal" >Imprimir tiquete</button>
+                   </div>
+               </div><!-- /.modal-content -->
+           </div><!-- /.modal-dialog -->
+        </div>    
+        
+        <input id="txtSeccion" type="hidden" value="" />
+        <input id="txtTramite" type="hidden" value="" />
+        <button id="btnJerarquia" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalJerarquia' ></button>
+        <div class="modal fade" id="modalJerarquia">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                     <h4 class="modal-title">Escalamiento de Tiquete</h4>
+                   </div>
+                   <div class="modal-body">
+                       
+                        <div id="tableTramites">
+                           
+                        </div>
+                       <label>Nivel</label>
+                        <div id="divCbNivel">
+
+                        </div>
+                   </div>
+
+                   <div class="modal-footer">
+                       <button id="btnEscalar" type="button" class="btn btn-primary" >Escalar e imprimir</button>
+                   </div>
+               </div><!-- /.modal-content -->
+           </div><!-- /.modal-dialog -->
+       </div>
+
+        <div class="row">
+            <footer><div th:include="/layout/me_foot :: foot"/></footer>  
+        </div>
+    </div>
+</body>
+</html>

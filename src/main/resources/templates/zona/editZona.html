@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js"
+        th:src="@{/js/dropdownmenu.js}"></script>
+        
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+            }
+                    div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+  
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+
+        <script th:inline="javascript" type="text/javascript">
+            jQuery(document).ready(function() {
+                jQuery("form#formZona").submit(function(event) {
+                    if(jQuery("#snombre").val() === "" || jQuery("#sNombre").val() === null){
+                        jQuery('#helpBlockNombre').text("Debe ingresar nombre de la Zona");
+                        $("#divNombre").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divNombre").removeClass("has-error");
+                        jQuery('#helpBlockNombre').text("");
+                    }
+                    
+                    if($("#nSillasEspera").val().length ===0 ){
+                        jQuery('#helpBlockSilla').text("Debe Ingresar cantidad de Sillas");
+                        $("#divNS").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        if(1 > parseInt($("#nSillasEspera").val()) ){
+                            jQuery('#helpBlockSilla').text("Debe ser mayor que 0");
+                            $("#divNS").addClass("has-error");
+                            event.preventDefault();
+                        }else{
+                            $("#divNS").removeClass("has-error");
+                            jQuery('#helpBlockSilla').text("");
+                        } 
+                    }
+                    
+                     if(jQuery("#bActiva").val() === "2"){
+                        jQuery('#helpBlockEstado').text("Debe Seleccionar un estado");
+                        $("#divEstado").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divEstado").removeClass("has-error");
+                        jQuery('#helpBlockEstado').text("");
+                    }
+                    
+                    if(jQuery("#cunidadRecep").val() === "0"){
+                        jQuery('#helpBlockCS').text("Debe Seleccionar un centro de servicio");
+                        $("#divCS").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divCS").removeClass("has-error");
+                        jQuery('#helpBlockCS').text("");
+                    }
+                    
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                <div class="form">
+                                    <div class="welcomeContainer noBrowser-hide"> 
+                                        <form class="form-horizontal" id="formZona" th:action="@{/zona/guardar}" th:object="${zonapojo}" method="POST">
+                                            <input id="nZonaId" type="hidden" th:field="*{nZonaId}" />
+                                            <div class="form-group">
+                                                    <div class="col-sm-8">
+                                                        <span class="titulo">Edición de Zona</span>
+                                                    </div>
+                                                    <div class="col-sm-4 right">
+                                                        <button type="submit" title="Guardar" class="btn btn-default">
+                                                          <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                                          <span style="padding-left: 5px;">Guardar</span>
+                                                      </button>
+                                                        <a th:href="@{/zona/}" title="Regresar" class="btn btn-default">
+                                                          <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                                          <span style="padding-left: 5px;">Regresar</span>
+                                                        </a>
+                                                    </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divNombre">
+                                                <label for="snombre" class="col-sm-2 control-label">Nombre de la Zona</label>
+                                                <div class="col-sm-5">
+                                                    <input id="snombre" readonly="true" type="text" maxlength="1" style="text-transform:uppercase" th:field="*{snombre}" class="form-control width_30" />
+                                                  <span id="helpBlockNombre" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divNS">
+                                                <label for="nSillasEspera" autofocus="true" class="col-sm-2 control-label">Cantidad de Sillas de Espera</label>
+                                                <div class="col-sm-5">
+                                                    <input id="nSillasEspera" type="number" th:field="*{nSillasEspera}" class="form-control width_40" placeholder="Cantidad..."/>
+                                                    <span id="helpBlockSilla" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divEstado">
+                                                <label for="bActiva" class="col-sm-2 control-label">Activo SI/NO</label>
+                                                <div class="col-sm-5">
+                                                  <select id="bActiva" th:field="*{bActiva}" class="form-control">
+                                                      <option selected="selected" value="2">Seleccione un Estado...</option>
+                                                      <option value="1">SI</option>
+                                                      <option value="0">NO</option>
+                                                  </select>
+                                                    <span id="helpBlockEstado" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                            <div class="form-group" id="divCS">
+                                                <label for="cunidadRecep" class="col-sm-2 control-label">Centros de Servicios</label>
+                                                <div class="col-sm-5">
+                                                    <select id="cunidadRecep" disabled="disabled" th:field="*{cunidadRecep}" class="form-control" >
+                                                      <option value="0">Seleccione un Centro de Servicio...</option>
+                                                      <option th:each="type : ${zonapojo.unidadesList}" th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}"></option>
+                                                  </select>
+                                                    <span id="helpBlockCS" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                             <div class="form-group">
+                                                <label for="dZona" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                                                <div class="col-sm-5">
+                                                  <input id="dZona" type="text" th:field="*{dZona}" class="form-control" placeholder="Descripci&oacute;n" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

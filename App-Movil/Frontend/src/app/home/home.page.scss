@@ -1,0 +1,167 @@
+/* General styles for the content */
+.dashrow {
+  background: #bcbec3
+;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%; /* Ajusta la altura del contenedor principal */
+  overflow: auto; /* Oculta el desbordamiento para el contenedor principal */
+}
+
+/* Header section styling */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.logoimg {
+  width: 80px; /* Ajusta el tamaño del logo */
+  margin-right: 10px; /* Espacio entre el logo y el texto */
+}
+
+.header-text {
+  color: white;
+}
+
+.university-title {
+  font-size: 60px;
+  font-weight: bolder;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  text-align: center;
+}
+
+.system-title {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+/* Style for header content */
+.header-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+  padding: 10px;
+  width: 100%;
+  background: #bcbec3
+;
+  color: white;
+  position: relative;
+}
+
+.back-button {
+  margin-right: 10px; /* Adjust space between button and title */
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: bolder;
+  font-family: 'MontserratBold', sans-serif;
+  color: white;
+  margin: 0;
+}
+
+/* Styles for the main content */
+/* Ajustes para main-content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Asegura que el contenido esté alineado al inicio */
+  align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 10px; /* Quita cualquier padding adicional */
+  margin: 0; /* Quita cualquier margin adicional */
+}
+
+/* Ajustes para containermain */
+.containermain {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinea el contenido al inicio */
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  height: auto; /* Ajusta la altura al contenido */
+  max-height: 100%; /* Evita que sea más alto que el contenedor padre */
+  box-sizing: border-box;
+  background-color: #bcbec3
+;
+}
+
+
+/* Styles for individual items */
+.imgdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.iconhome {
+  width: 100px;
+}
+
+.imgdiv strong {
+  font-size: 16px;
+  color: #000;
+  margin-top: 10px;
+}
+
+
+
+/* Style for the button position */
+ion-buttons {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.citas-item {
+  color: white;
+  margin-top: 20px; /* Adds space above the item */
+}
+
+
+/* Estilo personalizado para el header del ion-modal */
+ion-header {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --background: #f8f8f8;
+}
+
+/* Estilo personalizado para el ion-toolbar */
+ion-toolbar {
+  --min-height: 70px;
+}
+
+/* Estilo personalizado para el ion-title */
+ion-title {
+  font-size: 1.5rem;
+}
+
+/* Estilo personalizado para el botón de cerrar */
+ion-buttons[slot="start"] {
+  margin-right: 0;
+}
+
+ion-button {
+  font-size: 1rem;
+  --padding-start: 10px;
+  --padding-end: 10px;
+}

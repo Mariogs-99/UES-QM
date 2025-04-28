@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/keyboard.css" th:href="@{/css/keyboard.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css" th:href="@{/css/template-style.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/me_virtualKeyBoard.css" th:href="@{/css/me_virtualKeyBoard.css}" />
+
+<script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+<script type="text/javascript" src="../js/jquery.keyboard.js" th:src="@{/js/jquery.keyboard.js}"></script>
+<script type="text/javascript" src="../js/jquery.mousewheel.js" th:src="@{/js/jquery.mousewheel.js}"></script>
+<script type="text/javascript" src="../js/jquery.keyboard.extension-typing.js" th:src="@{/js/jquery.keyboard.extension-typing.js}"></script>
+<script type="text/javascript" src="../js/jquery.keyboard.extension-autocomplete.js" th:src="@{/js/jquery.keyboard.extension-autocomplete.js}"></script>
+
+<script type="text/javascript" src="../js/me_utils.js"  th:src="@{/js/me_utils.js}" charset="utf-8" ></script>
+<script type="text/javascript" src="../js/me_virtualKeyBoard.js"  th:src="@{/js/me_virtualKeyBoard.js}" charset="utf-8" ></script>
+
+</head>
+<body>
+
+	<div class="container-fluid">
+	    <div class="row">
+	    	<header><div th:include="/layout/me_logo :: logo"/></header>
+	    	<nav><div th:include="/layout/me_nav :: nav"></div></nav>
+	    </div>
+	    <div class="row" style="text-align:center;">
+		    
+	       		<div class="col-md-12">
+	       			<section>
+	       			
+					<div id="wrap">
+				    <h2>Donation Form</h2>
+				    <h3>Demo thanks to Casey Zumwalt of <a href="http://simplefocus.com/">SimpleFocus</a></h3>
+				    <br />
+				    <form action="#">
+				        <div class="fieldset-standard">
+				            <fieldset>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="first-name">First Name</label>
+				                    <input type="text" class="keyboard-normal" id="first-name" name="first-name" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="last-name">Last Name</label>
+				                    <input type="text" class="keyboard-normal" id="last-name" name="last-name" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="address">Address</label>
+				                    <input type="text" class="keyboard-normal" id="address" name="address" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="city">City</label>
+				                    <input type="text" class="keyboard-normal" id="city" name="city" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="state">State</label>
+				                    <input type="text" class="keyboard-states" id="state" name="state" value="" maxlength="2" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="zip-code">Zip Code</label>
+				                    <input type="text" class="keyboard-zip" id="zip-code" name="zip-code" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="phone">Phone Number</label>
+				                    <input type="text" id="phone" class="keyboard-num keyboard-phone" name="phone" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="tithe">Tithe <small>(USD)</small></label>
+				                    <input type="text" id="tithe" class="keyboard-normal" name="tithe" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="missions">Missions <small>(USD)</small></label>
+				                    <input type="text" id="missions" class="keyboard-normal" name="missions" value="" />
+				                </div>
+				
+				                <div class="fieldset-grouping">
+				                    <label for="building">Building <small>(USD)</small></label>
+				                    <input type="text" id="building" class="keyboard-normal" name="building" value="" />
+				                </div>
+				
+				                <div class="submit-grouping">
+				                    <input type="submit" value="Pay Now" />
+				                </div>
+				
+				            </fieldset>
+				        </div>
+				    </form>
+				</div>
+	       				
+					</section> 
+	       		</div>
+	     </div>
+	     <div class="row">
+	       <!-- <footer><div th:include="/layout/me_foot :: foot"/></footer>  -->
+	    </div>
+	</div>
+
+</body>
+</html>

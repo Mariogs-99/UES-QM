@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/llamado.css" th:href="@{/css/llamado.css}" />
+
+
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+        <script type="text/javascript" src="../js/llamado.js" th:src="@{/js/llamado.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/maria.js" th:src="@{/js/maria.js}" charset="utf-8"></script>
+        <script th:inline="javascript" type="text/javascript">
+            var varLlamando = "false";
+            var pIterador = 0;
+            var llamados = [];
+                    var varCentro = /*[[*{centro}]]*/;
+                    var varMensaje = /*[[*{mensaje}]]*/;
+            var promediosList = [];
+            var iterar = 0;
+            var iterador = 0;
+            // Variables Globales para la reproduccion de videos
+            var videoList = [];
+            var currentVideoIndex = 0;
+
+        </script>
+    </head>
+    <body id="mainBody" onload="leerContenido()">
+        <div class="main_body">
+            <div>
+                <div >
+                    <div class="relox video2 span2 tile col-md-5" style="height: 425px;padding-left: 1px;padding-right: 1px;">
+                        <div style="width:100%;height: 100%;display: table">
+                            <div id="hora" style="display: table-cell;text-align: center;vertical-align: middle;">
+                                <div id="ti">11:30:45</div>
+                                <div id="fe">20 may 2016</div>
+                            </div>		    
+                        </div>
+                    </div>
+                    <div id="videodivId" class="video2 span2 tile col-md-7" style="height: 425px;padding-left: 1px;padding-right: 1px;" ondblclick="dblck()">
+                        <!-- 			Espacio para video  -->
+                        <video id="videoLlamado" style="width:100%;height: 100%" onended="playNextVideo()" poster="/colas/images/MINERBA.jpg" autoplay="true" muted="true"></video>
+                        <!-- 			<video id="videoLlamado" style="width:100%;height: 600px" poster="/colas/images/loading.jpg" controls="" autoplay="" name="media"><source src="http://localhost:8001/tv.ogg" type="application/ogg"/></video> -->
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div style="background-color:red;color:white;font-weight: bold;text-align:center">
+                    <div class="rotlla col-md-4" style="background-color:#aa0000;height:30%">Servicio</div>
+                    <div class="rotlla col-md-4" style="background-color:#aa0000;height:30%">Escritorio</div>
+                    <div class="rotlla col-md-4" style="background-color:#aa0000;height:30%">Turno</div>
+
+                </div>
+                <div class="row" style="background-color:white;color: Black;text-align:center">
+                    <div id="servicioF" class="text-tv col-md-4">
+
+                    </div>
+                    <div id="escritorioF" class="rotdat col-md-4">
+
+                    </div>
+                    <div id="numeroF" class="rotdat col-md-4">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div id="maria" style="visibility: hidden">
+                <audio id="elaudio" controls="true" onended="fino()" >
+                    no soporta audio
+                </audio>
+                <input type="text" id="num" value="1"/>
+                <input type="text" id="leti" value="A"/>
+                <input type="text" id="nuti" value="2"/>
+                <input type="text" id="lees" value="B"/>
+                <input type="text" id="nues" value="2"/>  
+                <select id="selcon"></select> 
+                <input type="text" id="selnum"/>  
+                <input type="text" id="tiporepro" value="VI"/> 
+            </div>
+        </div>
+
+    </body>
+</html>

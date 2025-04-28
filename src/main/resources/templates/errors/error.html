@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Ministerio de Hacienda :: Direccion General de Impuestos
+	Internos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="text/javascript" src="../js/jquery.min.js"
+	th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../js/jquery.ui.js"
+	th:src="@{/js/jquery.ui.js}"></script>
+<style>
+div#ssc-body-render {
+	width: 940px;
+}
+</style>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/security-main.css" th:href="@{/css/messages.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/security-main.css" th:href="@{/css/list.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+
+<script type="text/javascript" src="../js/terceros.js"
+	th:src="@{/js/terceros.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/    
+var jsContext = /*[[@{/}]]*/ '/det/';    
+/*]]>*/
+</script>
+</head>
+<body>
+	<div id="ssc-layout-ext">
+		<div id="ssc-layout">
+			<div id="ssc-header">
+				<div id="ssc-elsalvador">
+					<p>
+						<span class="MH">Ministerio de Hacienda</span><br /> <span
+							class="esa">Gobierno de El Salvador</span>
+					</p>
+				</div>
+				<div id="ssc-mh">
+					<img th:src="@{/images/logoMh.png}" src="${ctx}/images/logoMh.png"
+						alt="Ministerio de Hacienda" />
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div id="ssc-content"></div>
+			<div id="ssc-body">
+
+				<div id="ssc-body-render">
+
+					<div id="ssc-layout-ext">
+						<div id="container">
+							<a id="anclaTop"></a>
+
+
+							<div class="mainPanel">
+								<div class="row resume">
+									<div class="l">	
+										<div class="l">
+											<a th:href="@{/}" class="amenu blue">Inicio</a>
+										</div>									
+										<div class="l">
+											<a th:href="@{/security/logout}" class="amenu blue">Salir
+												&#187;</a>
+										</div>
+										<div class="clr"></div>
+									</div>
+									<div class="clr"></div>
+								</div>
+
+								<div th:if="${det_exception_code == null}" class="welcomeContainer noBrowser-hide">
+								
+									<h1>Hacienda, tenemos un problema :(</h1>
+										<br/>
+										<div class="row cream">
+											<p>
+												Lastimosamente algo ha ido mal :( Espera unos minutos y prueba de nuevo.<br/>
+												Si el problema persiste ponte en contacto con las oficinas del Ministerio de Hacienda.							
+											</p>
+											<p>
+												Toma una captura de pantalla a esta ventana &oacute; copia y envia la siguiente informaci&oacute;n,
+												de esta forma sera mas f&aacute;cil para el tecnico encargado encontrar la soluci&oacute;n.
+											</p>
+											
+											<b>NIT</b>
+											<p sec:authentication="principal.nit">NIT</p>
+											<b>URL</b>
+											<p th:text="${url}">URL</p>
+											<b>Direcci&oacute;n IP</b>
+											<p th:text="${ip}">IP</p>
+											<b>Error</b>						
+											<p th:text="${exception}">Error</p>											
+											<br/><br/><br/><br/>
+										</div>
+				
+								</div>
+								
+								<div th:if="${det_exception_code != null and det_exception_code == 13000}" class="welcomeContainer noBrowser-hide">
+									<center><h1 style="color:red;"><b th:text="${message}"></b></h1></center>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+			<div id="ssc-footer">
+
+
+
+				<div class="clr"></div>
+				<div class="drchsrsrvds">
+					<p>
+						Ministerio de Hacienda<br/> 2015 <br/>
+						<span th:text="${appName}">det-1.0.0</span>
+					</p>										
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

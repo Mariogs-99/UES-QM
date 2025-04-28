@@ -1,0 +1,7 @@
+{
+  "name": "ticketues",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

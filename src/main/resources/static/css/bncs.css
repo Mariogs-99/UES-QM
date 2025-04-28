@@ -1,0 +1,34 @@
+div#bncslyt{width:90%; margin:0 auto; font-size: 10px; font-family: Tahoma, Arial, Helvetica;}
+div#bncslyt p{font-size:1.2em;}
+div#bncslyt div{margin:0; padding:0;}
+
+div#bncslyt div#bncscntnr{width:95%; margin:20px auto;}
+div#bncslyt div#bncs_ctrls{width:90%; margin:0 auto; text-align: center;}
+
+div#bncslyt div.bncs{width:225px; height: 100px; float: left; margin: 10px; background:#f7f7f7;  cursor:pointer;}
+div#bncslyt div.bncs:hover{background:#00426F;cursor:pointer}
+div#bncslyt div.bncs:hover p, div#bncslyt div.bncs-active p{color:#ffffff;}
+div#bncslyt div.bncs-active{width:225px; height: 100px; float: left; margin: 10px; background:#00426F;cursor:pointer;}
+
+
+div#bncslyt div.bncs div.icnbnc{width:218px; margin:2px auto; height: 56px;}
+div#bncslyt div.bncs p{font-size: 1.1em; text-align: center; text-transform: capitalize;}
+div#bncslyt input.btna_grnd{display:inline; margin:0; width:310px; height: 65px; cursor: pointer; border:none; color:#ffffff; font-size: 1.4em; background-repeat: no-repeat; background-image: url("../images/botonesWeb.png"); background-color: transparent;}
+div#bncslyt input.btnazl_grnd_over{background-position: -260px -123px;}
+div#bncslyt input.btnazl_grnd{background-position: -260px -185px;}
+div.clr{clear:both;}
+div#errr p{padding:10px; text-align: center; font-size: 1.2em; color: red;}
+div#errr{border:1px dotted red; display:none;}
+
+div#bncslccnd span.bncSpn{font-weight: bolder; font-size: 1.6m}
+
+div#bncslyt div#icnbnc24{background: url("../images/bancos/b_hipotecario.png") #ffffff top center no-repeat;}
+div#bncslyt div#icnbnc19{background: url("../images/bancos/b_citi.png") #ffffff top center no-repeat;}
+div#bncslyt div#icnbnc18{background: url("../images/bancos/b_agricola.png") #ffffff top center no-repeat;}
+div#bncslyt div#icnbnc21{background: url("../images/bancos/b_davivienda.png") #ffffff top center no-repeat;}
+div#bncslyt div#icnbnc29{background: url("../images/bancos/b_promerica.png") #ffffff top center no-repeat;} 
+div#bncslyt div#icnbnc22{background: url("../images/bancos/b_scotiabank.png") #ffffff top center no-repeat;} 
+div#bncslyt div#icnbnc23{background: url("../images/bancos/b_credomatic.png") #ffffff top center no-repeat;}
+div#bncslyt div#icnbnc30{background: url("../images/bancos/b_cyt.png") #ffffff top center no-repeat;} 
+div#bncslyt div#icnbnc31{background: url("../images/bancos/BancoIndustrial.jpg") #ffffff top center no-repeat;}
+div#bncslyt div#icnbnc0000{background: url("../images/bancos/nctp.jpg") #ffffff top center no-repeat;}

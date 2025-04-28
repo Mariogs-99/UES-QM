@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" 
+              th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" 
+              th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" 
+              th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" 
+              th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" 
+              th:href="@{/css/mntcservicio.css}" />
+                <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        
+        <script type="text/javascript" src="../js/jquery.min.js"  th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.dataTables.min.js"  th:src="@{/js/jquery.dataTables.min.js}"></script>
+        <script type="text/javascript" src="../js/dataTables.bootstrap.js"  th:src="@{/js/dataTables.bootstrap.js}"></script>
+        <script th:inline="javascript" type="text/javascript">
+        function eliminar(){
+            var eltipo=BootstrapDialog.TYPE_DANGER;
+                    BootstrapDialog.show({
+                        type: eltipo,
+                        title: "Eliminación de Registro",
+                        message: '¿Esta seguro de eliminar el registro?',                    
+                        buttons: [{
+                                label: 'SI',
+                                cssClass: 'btn-primary',
+                                action: function(dialog) {  
+                                    $("#formm").submit();
+                                    dialog.close();
+                                },
+                        },{
+                            label: 'NO',
+                            cssClass: 'btn-default',
+                            action: function(dialog) {                    
+                                dialog.close();
+                            }
+                        }]
+                    });
+        }
+        </script>
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form">
+                                    <div class="welcomeContainer">
+                                        <form class="form-horizontal" id="formm" th:action="@{'/cllamado/'+${gcconfllamado.nConfllamadoId}+'/delete'}" th:object="${gcconfllamado}" method="POST">
+                                            <div class="row">
+                                                    <div class="col-md-7">
+                                                        <span class="titulo">Configuración de llamado - Ver Registro</span>
+                                                    </div>
+                                                    <div class="col-md-5 right">
+                                                        <a th:href="@{'/cllamado/'+${gcconfllamado.nConfllamadoId}+'/editCllamado'}" sec:authorize="hasAnyRole('ROLE_GC_R1','ROLE_GC_R2')" title="Editar" class="btn btn-default btn-sm titulo_n">
+                                                            <i class="fa fa-pencil-square-o"></i><span style="padding-left: 5px;">Editar</span>
+                                                        </a>
+                                                        <a th:href="@{/cllamado/}" title="Regresar" class="btn btn-default btn-sm titulo_n">
+                                                            <i class="fa fa-undo"></i><span style="padding-left: 5px;">Regresar</span>
+                                                        </a>
+                                                        <button type="button" onclick="eliminar();" title="Eliminar" sec:authorize="hasAnyRole('ROLE_GC_R1','ROLE_GC_R2')" class="btn btn-default btn-sm">
+                                                            <i class="fa fa-times-circle titulo_n"></i><span style="padding-left: 5px;">Eliminar</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            
+                                                <br />
+                                                <div class="panel-group">
+                                                    <div class="panel panel-default panel-margin-left">
+                                                        <div class="panel-heading titulo_13"><label>Centro de Servicio</label></div>
+                                                        <div class="panel-body"><h3><b><span th:text="${gcconfllamado.cUnidadRecep.dunidadRecep}"></span></b></h3></div>
+                                                    </div>
+                                                    
+                                                    <div class="panel panel-default panel-margin-left">
+                                                        <div class="panel-heading titulo_13"><label>Número máximo de llamados</label></div>
+                                                        <div class="panel-body"><h3><b><span th:text="${gcconfllamado.nNumLlamadas}"></span></b></h3></div>
+                                                    </div>
+                                                    
+                                                    <div class="panel panel-default panel-margin-left">
+                                                        <div class="panel-heading titulo_13"><label>Intervalo entre cada llamado</label></div>
+                                                        <div class="panel-body"><h3><b><span th:text="|${gcconfllamado.nIntervaloLlamada} s|"></span></b></h3></div>
+                                                    </div>
+                                                    
+                                                    <div class="panel panel-default panel-margin-left">
+                                                        <div class="panel-heading titulo_13"><label>Mensaje</label></div>
+                                                        <div class="panel-body"><h3><b><span th:text="${gcconfllamado.sMensaje}"></span></b></h3></div>
+                                                    </div>
+                                                    
+                                                    <div class="panel panel-default panel-margin-left">
+                                                        <div class="panel-heading titulo_13"><label>Descripción</label></div>
+                                                        <div class="panel-body"><h3><b><span th:text="${gcconfllamado.sDescripcion}"></span></b></h3></div>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

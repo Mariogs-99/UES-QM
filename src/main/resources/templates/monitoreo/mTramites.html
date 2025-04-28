@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Secciones</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+                    height: 800px;
+             }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+        </style>        
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/tramistyle.css" th:href="@{/css/tramistyle.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+       
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" href="../js/jquery.gvChart-0.1.min.js" th:href="@{/js/jquery.gvChart-0.1.min.js}"></script>
+        <script type="text/javascript" href="../js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/grafmon.js" th:src="@{/js/grafmon.js}"></script>
+        <script type="text/javascript" src="../js/graII.js" th:src="@{/js/graII.js}"></script>
+        <script type="text/javascript" src="../js/tmonit.js" th:src="@{/js/tmonit.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+        <script type="text/javascript" src="../js/highcharts.js" th:src="@{/js/highcharts.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+        <script type="text/javascript">
+            $(document).ajaxSend(function(event, request, settings) {
+                $('#loading-indicator').show();
+                $('#reffrescar').hide();
+            });
+            $(document).ajaxComplete(function(event, request, settings) {
+                $('#loading-indicator').hide();
+                $('#reffrescar').show();
+            });
+            function cambioC2() {
+                $("#tramites").trigger("change");
+            }
+            
+        </script>
+        <style>		
+            div.graf{
+                margin: auto;
+                text-align: left;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout" style="height:500px;">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu"></div>
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <div>
+                                            <span ><label class="titulo text-center" th:text="${unidadRecep}" >Centro de Servicio</label></span>
+                                        </div><br/>
+                                        <form id="formSecciones" class="form-horizontal" th:action="@{/monitoreoT/}" th:object="${monitoreoTramitePojo}" method="post">
+                                            <div class="form-group" id="divCSi">
+                                                <label for="tramites" class="col-sm-3 control-label"></label>
+                                                <div class="col-sm-5">
+                                                    <select id="tramites" name="cbseccion"  class="form-control">
+                                                        <option th:each="type : ${gcTramiteList}" th:value="${type.nTramiteId}" th:text="${type.sNombre}"></option>
+                                                    </select>
+                                                </div>
+                                                <a id="reffrescar" title="Refrescar" onclick="cambioC2();" class="btn btn-default btn-sm titulo_n">
+                                                    <i class="fa fa-refresh"></i><span></span>
+                                                </a>                                                	
+                                                <div  id="cargando" class="col-sm-0">
+                                                    <img class="text-center" src="../images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="ui-widget-header" colspan="7" id="ctittle">Tramite</div>
+                                        <div id="container2">
+                                            <div id="graficabox">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>USUARIOS  </b><span class="badge"><a th:href="@{/admin/}">»</a></span></h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div id="usuario2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="datosbox">
+                                                <div class="panel panel-primary" style="margin-bottom: 2px; height: 130px;">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>Detalle de Tramite  </b></h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="dat">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tiempobox">
+                                                <div class="panel panel-primary" style="margin-bottom: 2px;">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>Tiempos M&aacute;ximos</b></h3>
+                                                    </div>
+                                                    <div class="panel-body" id="bodymaximo">
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-primary" style="margin-bottom: 2px;">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>Tiempos Promedios</b></h3>
+                                                    </div>
+                                                    <div class="panel-body" id="bodypromedios">
+                                                        <div id="timeinfo" style="margin-left:20px; font-size:12px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-primary" style="margin-bottom: 2px;">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>Tiempos M&iacute;nimos</b></h3>
+                                                    </div>
+                                                    <div class="panel-body" id="bodyminimos">
+                                                        <div id="timeinfo" style="margin-left:20px; font-size:12px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-primary" style="margin-bottom: 2px;">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>Tiempos Moda</b></h3>
+                                                    </div>
+                                                    <div class="panel-body" id="bodymoda">
+                                                        <div id="timeinfo" style="margin-left:20px; font-size:12px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="usuariosbox">
+                                                <div class="panel panel-primary" style="margin-bottom: 0px;">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>Contribuyentes Esperando</b></h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div id="grafTr">
+
+                                                        </div>
+<!--                                                        <div class="form-group">
+                                                            <span class="col-sm-5">Tiempo de Actualización(Segundos)</span>
+                                                            <div class="col-sm-5">
+                                                                <input id="refresco" type="text" value="60" style="width:30px"/> 
+                                                                <button id="cambioRe" type="submit"  class="btn btn-default">
+                                                                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>                    
+                                                                </button>
+                                                            </div>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="/layout/alertas :: alertas"></div>
+        <div th:include="/layout/message :: message"></div>
+    </body>
+</html>

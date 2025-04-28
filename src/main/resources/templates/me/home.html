@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html background-color  ="#00def6">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Mesa de entrada</title>
+        <!-- bootstrap -->
+        <!-- bootstrap -->
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/keyboard.css" th:href="@{/css/keyboard.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css" th:href="@{/css/template-style.css}" />
+        <!--<link rel="stylesheet" type="text/css" media="all" href="../css/me_virtualKeyBoard.css" th:href="@{/css/me_virtualKeyBoard.css}" />-->
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.css" th:href="@{/css/font-awesome.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/build.css" th:href="@{/css/build.css}" /> 
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/jquery.keyboard.js" th:src="@{/js/jquery.keyboard.js}"></script>
+        <script type="text/javascript" src="../js/jquery.mousewheel.js" th:src="@{/js/jquery.mousewheel.js}"></script>
+        <script type="text/javascript" src="../js/jquery.keyboard.extension-typing.js" th:src="@{/js/jquery.keyboard.extension-typing.js}"></script>
+        <script type="text/javascript" src="../js/jquery.keyboard.extension-autocomplete.js" th:src="@{/js/jquery.keyboard.extension-autocomplete.js}"></script>
+        <script type="text/javascript" src="../js/jquery.keyboard.extension-navigation.js" th:src="@{/js/jquery.keyboard.extension-navigation.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+        <script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+        <script type="text/javascript" src="../js/jquery.jqprint-0.3.js" th:src="@{/js/jquery.jqprint-0.3.js}"></script>
+        <script type="text/javascript" src="../js/jquery.print.js"  th:src="@{/js/jquery.print.js}" charset="utf-8" ></script>
+        <script type="text/javascript" src="../js/me_opciones.js" th:src="@{/js/me_opciones.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/me_utils.js"  th:src="@{/js/me_utils.js}" charset="utf-8" ></script>
+        <!--   <script type="text/javascript" src="../js/me_inputMask.js"  th:src="@{/js/me_inputMask.js}" charset="utf-8" ></script>
+        -->
+        <script type="text/javascript" src="../js/me_virtualKeyBoard.js"  th:src="@{/js/me_virtualKeyBoard.js}" charset="utf-8" ></script>
+        <script type="text/javascript" src="../js/html2escpos.js" ></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script type="text/javascript" src="../js/websocket-printer.js" th:src="@{/js/websocket-printer.js}"></script>
+        <script language="jscript">
+            function goFullscreen() {
+                // Must be called as a result of user interaction to work
+                mf = document.documentElement;
+                try {
+                    if (mf.requestFullscreen) {
+                        mf.requestFullscreen().then(() => {
+                            console.log("fullscreen");
+                        }, () => {
+                            console.warn("no fullscreen");
+                        });
+                    } else if (mf.webkitRequestFullscreen) {
+                        mf.webkitRequestFullscreen();
+                    } else if (mf.mozRequestFullscren) {
+                        mf.mozRequestFullscren();
+                    } else if (mf.msFullscreen) {
+                        mf.msFullscreen();
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+
+            }
+            function fullscreenChanged() {
+                if (document.webkitFullscreenElement == null) {
+                    mf = document.documentElement;
+                    //mf.style.display="none";
+                } else if (document.mozRequestFullscren == null) {
+                    mf = document.documentElement;
+                }
+            }
+            //document.onwebkitfullscreenchange = fullscreenChanged;
+            document.documentElement.onclick = goFullscreen;
+            //document.onkeydown = goFullscreen;
+        </script>
+
+    </head>
+
+    <body>
+        <header id="header" style="position:sticky; top:0 ">
+            <div class="flag">
+                <div class="container">
+
+                    <div class="wrap-center">
+
+                        <div class="navbar-brand">
+                            <a href="">
+                                <img src="/colas/images/ues-logo.png" alt="Logo QM" class="logo" width="150" height="150" style="margin-left: 150px;"/>                            </a>
+                        </div>
+                        <div id="header_front">    
+                            <br></br>					 
+                            <h1>Universidad de El Salvador</h1>
+                            <h4 style="padding-left:300px;">"HACIA LA LIBERTAD POR LA CULTURA"</h4>
+                            <h4 style="padding-left:300px;" th:text="${dunidad}"/>
+                            <br></br>
+                        </div>
+                    </div>                                           
+                </div>
+            </div>
+        </header>
+        <!-- elemento trasparente para agregar el html del ticket -->
+        <div id="Ticket"  style="opacity: 0">
+            <param id="htmlData" value=""/>
+        </div>
+
+        <div class="container"  style="justify-content: center;">
+            <div class="row">
+                <div style="justify-content: center">
+                    <div id="loader" style="display: none;">
+                        <div id="loader_1" class="loader"></div>
+                        <div id="loader_2" class="loader"></div>
+                        <div id="loader_3" class="loader"></div>
+                        <div id="loader_4" class="loader"></div>
+                        <div id="loader_5" class="loader"></div>
+                        <div id="loader_6" class="loader"></div>
+                        <div id="loader_7" class="loader"></div>
+                        <div id="loader_8" class="loader"></div>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="col-xs-4 col-sm-12">
+                <section class="" >
+                    <form action="#" id="form">
+                        <div class=" col-xs-4 col-md-12" id="table-tramite">
+                            <!-- Alcides Nolasco : aqui se inserta el contenido dinamico -->
+                            <div id="content" style="justify-content: center; max-width: 800px;" ></div>
+                        </div>    
+                        <input type="hidden" id="idTramite" value="" />
+                        <div class="modal fade" id="modalPrioridadSinNit">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h5 class="modal-title">Prioridad</h5>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        <table>
+                                            <tr>
+
+                                                <td style="text-align: right;display: none;">
+                                                    Prioridad:
+                                                </td>
+                                                <td>
+                                                    <div class="form-group" style="display: none;">
+                                                        <select id="prioridadOne" name="prioridadOne" class="selectpicker" data-style="btn-primary" style="display: none;"></select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;display: none;">
+                                                    Tiempo de holgura:
+                                                </td>
+                                                <td style="text-align: right;display: none;">
+                                                    <input  id="tholguraOne" type="checkbox" data-toggle="toggle" data-on="Activo" data-off="Inactivo" />
+                                                </td>	
+                                            </tr>
+                                        </table>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --> 
+                                        <button id="btnPrintOne" type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" >Generar tiquete</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
+                        <div class="modal fade" id="modalPrioridadConNit">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h5 class="modal-title">Validación de Carnet</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- INICIO SECCION NUEVO TECLADO -->
+                                        <div class="form-group" style="max-width: 300px; margin: 5px auto;">
+                                            <label for="carnetInput">Ingrese su Carnet:</label>
+                                            <input type="text" id="carnet" class="form-control" placeholder="Ingrese el número de carnet" />
+                                        </div>
+
+                                        <div id="mensaje" style="max-width: 300px; margin: 5px auto;"></div>
+                                        <div id="omitirNIT-div" class="checkbox checkbox-primary" style="max-width: 300px; margin: 5px auto;">
+                                            <input id="omitirNIT" class="styled" type="checkbox" />
+                                            <label for="omitirNIT">
+                                                Omitir Carnet
+                                            </label>
+                                        </div>
+
+                                        <!-- Botón para validar el carnet -->
+                                        <div style="max-width: 300px; margin: 5px auto;">
+                                            <button class="btn btn-success btn-block" id="ValidarCarnet">OK</button>
+                                        </div>
+
+                                        <!-- FIN SECCION NUEVO TECLADO -->
+
+                                        <table>
+
+                                            <tr class="informationBar" style="display: none;">
+                                                <td colspan="3">
+                                                    <div class="separator" style="margin-left:-25px; width: 513px; font-size: 12px; padding-left: 10px;">Información del Alumno</div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="separator" style="margin-left:-25px; width: 513px; font-size: 12px; padding-left: 10px;"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right; display: none;">
+                                                    Prioridad:
+                                                </td>
+                                                <td style="display: none;">
+                                                    <div class="form-group">
+                                                        <select id="prioridadTwo" name="prioridadTwo" class="selectpicker" data-style="btn-primary" style="display: none;"></select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;display: none;">
+                                                    Tiempo de holgura:
+                                                </td>
+                                                <td style="display: none;">
+                                                    <input id="tholguraTwo" type="checkbox" data-toggle="toggle" data-on="Activo" data-off="Inactivo" />
+                                                </td>
+                                            </tr>
+
+                                        </table>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --> 
+                                        <button id="btnPrintTwo" type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" >Generar tiquete</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
+                        <button id="btnShowTiquete" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalparaImprimir' ></button>
+                        <div class="modal fade" id="modalparaImprimir">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title">Imprimir</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="marcoTiquete">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button id="btnPrint" type="button" class="btn btn-danger" data-dismiss="modal" >Imprimir tiquete</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+
+
+                        <div class="modal fade" id="modalparaCita">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4 id="headerCita" class="modal-title"  style="color:#A9A9A9" >Ingrese su codigo de Cita y validelo con tecla OK</h4>
+                                        <div id="output" class="form-control num-keyboard"></div>
+                                        <div class="num-keyboard">
+                                            <div class="row">
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="1">1</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="2">2</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="3">3</button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="4">4</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="5">5</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="6">6</button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="7">7</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="8">8</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="9">9</button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 p-1 ">
+                                                    <button class="btn btn-secondary btn-block num-key" id="backspace">X</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1">
+                                                    <button class="btn btn-danger btn-block num-key" data-value="0">0</button>
+                                                </div>
+                                                <div class="col-xs-4 p-1 ">
+                                                    <button class="btn btn-success btn-block num-key" id="enter">OK</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer ">
+                                        <button id="btnShowCita" type="button" class="btn btn-danger" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalparaCita' >Cerrar</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+
+
+
+                    </form>	
+                </section>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <footer><div th:include="/layout/me_foot :: foot"/></footer>  -->
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+                // Inicializar el estado del mensaje y el input
+                $("#mensaje").text("Ingrese su codigo numero de carnet y validelo con tecla OK");
+                $("#carnet").val(''); // Asegurarte que esté vacío
+                $("#btnPrintTwo").prop("disabled", true); // Deshabilitar el botón inicialmente
+                $("#carnet").attr("autocomplete", "off"); // Deshabilitar sugerencias en el input
+
+                $('#tholguraOne').bootstrapToggle();
+                $('#tholguraTwo').bootstrapToggle();
+                $("table tr td .toggle").css("width", "100px");
+                $("#prioridadOne").css("width", "225px");
+                $("#modalPrioridadConNit .modal-dialog").css("width", "515px");
+                $("#btnPrintTwo").prop("class", "btn btn-danger disabled");
+
+                /* Alcides Nolasco
+                 * inicializar funciones del teclado de citas 
+                 * @type window.$|$
+                 * cuando el modal de cita se cierra se debe hacer visible el menu principal
+                 */
+                $("#modalparaCita").on('hide.bs.modal', function () {
+                    $("#headerCita").text("Ingrese su codigo de Cita y validelo con tecla OK");
+                    $('#content').find(".panel.panel-i").show();
+                });
+
+                $("#modalPrioridadConNit").on('hide.bs.modal', function () {
+                    $("#mensaje").text("Ingrese su codigo numero de carnet y validelo con tecla OK");
+                    $('#carnet').text('');
+                });
+                var output = $('#output');
+                var carnet = $('#carnet');
+
+                $('.num-key').click(function (event) {
+                    event.preventDefault();
+                    var value = $(this).data('value');
+                    if (value !== undefined) {
+                        output.text(output.text() + value);
+                    }
+                });
+
+                $('.num-key-2').click(function (event) {
+                    event.preventDefault()
+                    if ($("#mensaje").text().length > 0)
+                        $("#mensaje").text('');
+                    var value = $(this).data('value');
+                    if (value !== undefined) {
+                        carnet.text(carnet.text() + value);
+                    }
+                });
+                $('#backspace').click(function () {
+                    var current = output.text();
+                    output.text(current.substring(0, current.length - 1));
+                });
+
+                $('#backspace-2').click(function () {
+                    var current = carnet.text();
+                    carnet.text(current.substring(0, current.length - 1));
+                });
+
+
+
+                $('#enter').click(function () {
+                    confirmaCita(output.text());
+                    output.text('');
+                });
+
+                $("#ValidarCarnet").click(function (event) {
+                    event.preventDefault();
+
+                    // Obtener el encabezado Authorization ya codificado del localStorage
+                    const authHeader = localStorage.getItem("authHeader");
+
+                    // Verificar si el valor existe en localStorage
+                    if (!authHeader) {
+                        alert("Authorization header not found in localStorage.");
+                        return;
+                    }
+
+                    // Construir la URL de manera dinámica
+                    var apiUrl = window.location.protocol + "//" + window.location.host + "/colas/proxy/carnet?carnet=" + $("#carnet").val();
+
+                    $.ajax({
+                        url: apiUrl, // Usar la URL construida
+                        type: 'GET',
+                        dataType: 'json',
+                        headers: {
+                            "Authorization": authHeader // Agregar el encabezado codificado aquí
+                        },
+                        success: function (response) {
+                            if (response.error) {
+                                $("#carnet").val('');
+                                $("#btnPrintTwo").prop("disabled", true); // Mantener el botón deshabilitado
+                                $("#btnPrintTwo").prop("class", "btn btn-danger disabled");
+                                $("#mensaje").text('¡Carnet incorrecto!');
+                            } else {
+                                $("#btnPrintTwo").prop("disabled", false);
+                                $("#btnPrintTwo").prop("class", "btn btn-danger");
+                                $("#mensaje").text('¡Carnet correcto! Puede proceder a generar su tiquete.');
+                            }
+
+                        },
+                        error: function (data, status, er) {
+                            alert("Carnet incorrecto. Por favor, inténtelo de nuevo.");
+                        }
+
+                    });
+                });
+
+            });
+
+            /*
+             //Validar carnet con datos quemados
+             $("#ValidarCarnet").click(function () {
+             
+             var json = {"nit": $("#carnet").text()};
+             
+             $.ajax({
+             url: window.location.protocol + "//" + window.location.host + "/colas/me/validarID",
+             type: 'POST',
+             dataType: 'json',
+             data: JSON.stringify(json),
+             contentType: 'application/json',
+             mimeType: 'application/json',
+             success: function (data) {
+             
+             if (isEmptyObject(data)) {
+             $("#carnet").text('');
+             $("#btnPrintTwo").prop("class", "btn btn-danger disabled");
+             $("#mensaje").text('Numero de carnet no es valido');
+             } else {
+             
+             $("#mensaje").text(data.SNombres);
+             
+             $("#btnPrintTwo").prop("class", "btn btn-danger");
+             
+             }
+             
+             },
+             error: function (data, status, er) {
+             alert("error: " + data + " status: " + status + " er:" + er);
+             }
+             });
+             
+             });
+             */
+
+        </script>
+
+    </body>
+
+</html>

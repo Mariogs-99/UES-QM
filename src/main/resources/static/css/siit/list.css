@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+
+
+table.list{
+	background-color:#efefef;
+	border:1px solid #cccccc;
+	min-width:80%;
+	margin: 10px auto;
+	border-collapse:collapse; 
+	border-spacing: 0;
+}
+
+table.listr{
+	background-color:#efefef;
+	border:1px solid #cccccc;
+	min-width:80%;
+	margin: 10px auto;
+	border-collapse:collapse; 
+	border-spacing: 0;
+}
+
+
+table.list2{
+    background-color:#efefef;
+    border:1px solid #cccccc;
+    border-collapse:collapse; 
+    margin: 10px auto;
+    overflow:auto; width: 450px;height: 175px;        
+	border-spacing: 0;
+}
+
+table.list3{
+    margin: 10px auto;
+    background-color:#efefef;
+    border:1px solid #cccccc;
+	border-spacing: 0;    
+}
+
+
+table.list th, table-list td{
+	padding:5px;
+}
+
+table.listr th, table-listr td{
+	padding:5px;
+}
+
+
+
+table.list thead{
+/* 	background:url(../images/top-shadow-repeat.png) bottom center no-repeat; */
+	
+}
+
+
+table.list thead th{
+	padding:10px 5px 10px 0px;
+	color:#999999;
+}
+
+table.list thead th.order a{text-decoration: underline; cursor:pointer;}
+
+table.list tbody tr td{
+	padding:10px 12px 6px 12px;
+	border-bottom:1px solid #ebebeb;
+	font-size:1em;
+}
+
+table.listr tbody tr td{
+	padding:10px 12px 6px 12px;
+	border-bottom:1px solid #ebebeb;
+	font-size:1em;
+}
+
+table.list tbody tr:hover td{
+	background: #ffe680;
+}
+
+table.listr tbody tr:hover td{
+	background: #ffe680;
+}
+
+table.list tbody tr:first-child{background:url(../../images/siit/top-shadow-repeat.png) repeat-x;}
+
+table.list tfoot{background:#dedede; color:#313131;}
+table.list tfoot td{padding:5px;}
+div.editRow{position:relative; float:right; right:0px; top:0px; margin-right:0px; }/*display:inline;*/
+div.editRow a.editRow{top:0; position:absolute;}
+
+div.divPaginator{position:relative; overflow:hidden; width:80%; height:32px; margin:0 auto; background:url(../../images/siit/dial.png) no-repeat top center; border:1px solid #cccccc; padding-top:10px;}
+div.divPaginator div.paginator{position:absolute;}
+div.divPaginator div.paginator div.li{float:left;margin-left:5px;}
+div.divPaginator div.paginator div.li a{display:block; padding:5px; color:#666; background-color:#cccccc; cursor:pointer;border-radius:.2em; moz-border-radius:.2em; text-decoration:none;border-left:1px solid #bbbbbb; border-bottom:1px solid #bbbbbb;}
+div.divPaginator div.paginator div.li a:hover, div.divPaginator div.paginator div.li a.active{display:block; padding:5px;color:#ffffff; background-color:#0071BC;}
+
+.pen16{ background-position:-32px -346px;}
+.glass16{ background-position:-32px -86px;}
+
+table.list tbody tr.selected,table.list tbody tr.selected:hover,
+table.list tbody tr.selected:first-child{ background-color: #00A2A8; color: #ffffff; }

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- <meta name="_csrf" value="dummy" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" value="dummy" th:content="${_csrf.headerName}"/>  -->
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+                background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+                border-bottom: 5px solid #DFD8CC;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                border-radius: 5px 5px 0px 0px;
+                overflow: hidden;
+            }
+
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <!--        <link rel="stylesheet" type="text/css" media="all" href="../css/operacion-style.css" th:href="@{/css/operacion-style.css}" />-->
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/msgBox.css" th:href="@{/css/msgBox.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#btnOne").click(function () {
+                    $(".modal-title").html("Atención de Trámites");
+                    $("#tableReportesOne").css("display", "block");
+                    $("#tableReportesTwo").css("display", "none");
+                    $("input:radio").attr("checked", false);
+                    $("#btnReportes").trigger("click");
+                });
+
+                $("#btnTwo").click(function () {
+                    $(".modal-title").html("Reportes de Usuarios");
+                    $("#tableReportesTwo").css("display", "block");
+                    $("#tableReportesOne").css("display", "none");
+                    $("input:radio").attr("checked", false);
+                    $("#btnReportes").trigger("click");
+                });
+
+
+                $("#tableReportesOne tbody tr").click(function () {
+                    $(this).find("td input:radio[name=report]").prop("checked", true);
+                });
+
+                $("#tableReportesTwo tbody tr").click(function () {
+                    $(this).find("td input:radio[name=report]").prop("checked", true);
+                });
+
+                $("#btnMostrarReporte").click(function () {
+                    var r = false;
+                    if ($("#tableReportesOne").is(":visible")) {
+                        $("#tableReportesOne table tbody tr").each(function (index) {
+                            if ($(this).find("td input:radio[name=report]").is(":checked")) {
+                                r = true;
+                                var url = $(this).find("td a").attr('href');
+                                $(location).attr('href', url);
+                            }
+                        });
+                    } else {
+                        $("#tableReportesTwo table tbody tr").each(function (index) {
+                            if ($(this).find("td input:radio[name=report]").is(":checked")) {
+                                r = true;
+                                var url = $(this).find("td a").attr('href');
+                                $(location).attr('href', url);
+                            }
+                        });
+                    }
+
+                    if (r === false) {
+                        $.msgBox({
+                            title: "Error",
+                            content: "Debe seleccionar un reporte",
+                            type: "error",
+                            buttons: [{value: "Aceptar"}],
+                            opacity: 0.9
+                        });
+                    }
+
+
+                });
+            });
+        </script>    
+
+        <style>
+            div#ssc-layout-ext div.mainPanel div.welcomeContainer div.cream{/*background: url("../images/report.png") no-repeat 2% 25% scroll;*/ padding-left:100px; background-size: 200px 180px; font-size:1.2em; }
+            div#ssc-layout-ext div.mainPanel div.welcomeContainer div.cream img{display: inline; margin:auto;}/* position: relative; right:600px; top:100px; padding-right: 100px;}*/
+            div#ssc-layout-ext div.mainPanel div.welcomeContainer div.cream p{padding:10px;}
+            #tableReportesOne tr{
+                cursor: pointer
+            }
+            #tableReportesTwo tr{
+                cursor: pointer
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header" />
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" />
+                                    <div class="welcomeContainer noBrowser-hide">
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <span class="titulo">Reportes y Estadísitca</span>
+                                                    <br /><br /><br />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h3 id="turno" th:text="${turno}"/>
+                                        <!-- 								<input type="button" id="test" value="Test" /> -->
+                                        <!-- 								<span id="tes" th:text="${tes}"/> -->
+                                        <div align="center" class="row cream ">
+                                            <img th:src="@{/images/report.png}" src="${ctx}/images/report.png" class="img-responsive"  style=" width: 200px; height: 180px;"/> 
+                                            <br/><br/>
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-11">
+                                                <div class="dashboardPages">
+                                                    <!--                                                    <div class="unitPage" style="margin-left:100px;">
+                                                                                                            <div class="unitPage-i" >
+                                                                                                                                                                            <a th:href="@{/reportes/contribuyente}">Atención de Trámites</a>
+                                                                                                                <a id="btnOne" href="#">Atención de Trámites</a>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="unitPage" style="margin-left:25px;">
+                                                                                                            <div class="unitPage-i" >
+                                                                                                                                                                            <a th:href="@{/reportes/usuario}">Reportes de Usuarios</a>
+                                                                                                                <a id="btnTwo" href="#">Reportes de Usuarios</a>
+                                                                                                            </div>
+                                                                                                        </div>-->
+
+                                                    <div class="panel panel-primary"> 
+                                                        <div class="panel-heading"> 
+                                                            <h3 class="panel-title">Atención de Trámites</h3> 
+                                                        </div>
+                                                        <div class="list-group">
+                                                            <!--                                                         <button type="button" onclick="location.href='/colas/0703/'" class="list-group-item">Contribuyentes Atendidos por Trámites</button>
+                                                                                                                        <button type="button" onclick="location.href='/colas/0704/'" class="list-group-item">Atencion a Fila Especial</button>
+                                                                                                                        <button type="button" onclick="location.href='/colas/0705/'" class="list-group-item">Confirmacion de Citas</button>
+                                                                                                                        <button type="button" onclick="location.href='/colas/0706/'" class="list-group-item">Tiquetes Emitidos</button>
+                                                                                                                        <button type="button" onclick="location.href='/colas/0707/'" class="list-group-item">Tiquetes Reasignados</button>-->
+                                                            <button type="button" onclick="location.href = '/colas/0709/'" class="list-group-item">Tramites por Oficina </button>
+                                                            <button type="button" onclick="location.href='/colas/0710/'" class="list-group-item">Tramites por Escritorio </button>
+                                                            <button type="button" onclick="location.href='/colas/0708/'" class="list-group-item">Tramites Escalados</button>
+
+                                                        </div>
+                                                    </div>
+                                                    <!--<<div class="panel panel-primary"> 
+                                                        <div class="panel-heading"> 
+                                                            <h3 class="panel-title">Reportes de Usuarios</h3> 
+                                                        </div>
+                                                        <div class="list-group">
+                                                            <button type="button" onclick="location.href = '/colas/0717/'" class="list-group-item">Índice de Trámites Atendidos por Usuario</button>
+                                                            <button type="button" onclick="location.href = '/colas/0718/'" class="list-group-item">Actividades Diarias del Usuario</button>
+                                                            <button type="button" onclick="location.href = '/colas/0720/'" class="list-group-item">Pausas, Recesos y Almuerzos por Usuario</button>
+                                                        </div>
+                                                    </div>-->
+
+                                                </div>
+                                                <br/>
+                                            </div>
+                                            <button id="btnReportes" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalReportes' ></button>                                    
+                                            <div class="modal fade" id="modalReportes">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="text-align:left; font-weight:bold; font-size:18px;" >
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                            <h4 class="modal-title"></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <div style="display: none; height:375px;" id="tableReportesOne" class="table-responsive">
+                                                                <table id="tbReporteOne" class="table table-striped table-bordered table-hover table-condensed" data-selectable-rows="true">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th></th>
+                                                                            <th>Reporte</th>
+                                                                        </tr>    
+                                                                    </thead>  
+                                                                    <tbody>
+                                                                        <!--                                   <tr>
+                                                                                                               <td><input id="r1" type="radio" name="report" value="1" /></td>
+                                                                                                               <td><a style="display: none;" th:href="@{/0701/}"></a>Afluencia de Contribuyentes por Hora</td>
+                                                                                                           </tr>    
+                                                                                                           <tr>
+                                                                                                               <td><input id="r2" type="radio" name="report" value="2" /></td>
+                                                                                                               <td><a style="display: none;" th:href="@{/0702/}"></a>Tiempos de Espera de Atención</td>
+                                                                                                           </tr> -->
+                                                                        <tr>
+                                                                            <td><input id="r3" type="radio" name="report" value="3" /></td>
+                                                                            <td><a style="display: none;" th:href="@{/0703/}"></a>Contribuyentes Atendidos por Trámites</td>
+                                                                        </tr> 
+                                                                        <!--                                                                        <tr>
+                                                                                                                                                    <td><input id="r4" type="radio" name="report" value="4" /></td>
+                                                                                                                                                    <td><a style="display: none;" th:href="@{/0704/}"></a>Atencion a Fila Especial</td>
+                                                                                                                                                </tr> 
+                                                                                                                                                <tr>
+                                                                                                                                                    <td><input id="r5" type="radio" name="report" value="5" /></td>
+                                                                                                                                                    <td><a style="display: none;" th:href="@{/0705/}"></a>Confirmacion de Citas</td>
+                                                                                                                                                </tr> 
+                                                                                                                                                <tr>
+                                                                                                                                                    <td><input id="r6" type="radio" name="report" value="6" /></td>
+                                                                                                                                                    <td><a style="display: none;" th:href="@{/0706/}"></a>Tiquetes Emitidos</td>
+                                                                                                                                                </tr> 
+                                                                                                                                                <tr>
+                                                                                                                                                    <td><input id="r7" type="radio" name="report" value="7" /></td>
+                                                                                                                                                    <td><a style="display: none;" th:href="@{/0707/}"></a>Tiquetes Reasignados</td>
+                                                                                                                                                </tr> -->
+                                                                        <tr>
+                                                                            <td><input id="r8" type="radio" name="report" value="8" /></td>
+                                                                            <td><a style="display: none;" th:href="@{/0708/}"></a>Evaluación del Servicio</td>
+                                                                        </tr> 
+                                                                        <!--                                                                        <tr>
+                                                                                                                                                    <td><input id="r9" type="radio" name="report" value="9" /></td>
+                                                                                                                                                    <td><a style="display: none;" th:href="@{/0709/}"></a>Consolidado de Afluencia de Contribuyentes</td>
+                                                                                                                                                </tr> -->
+                                                                        <tr>
+                                                                            <td><input id="r10" type="radio" name="report" value="10" /></td>
+                                                                            <td><a style="display: none;" th:href="@{/0710/}"></a>Tiquetes Atendidos y no Atendidos</td>
+                                                                        </tr> 
+                                                                        <!--                                                                                                           <tr>
+                                                                                                                                                                                       <td><input id="r11" type="radio" name="report" value="11" /></td>
+                                                                                                                                                                                       <td><a style="display: none;" th:href="@{/0711/}"></a>Comparativo de Trámites por Centro de Servicios</td>
+                                                                                                                                                                                   </tr> 
+                                                                                                                                                                                   <tr>
+                                                                                                                                                                                       <td><input id="r12" type="radio" name="report" value="12" /></td>
+                                                                                                                                                                                       <td><a style="display: none;" th:href="@{/0712/}"></a>Comparativo de Tiempo de Trámites por Centros de Servicios</td>
+                                                                                                                                                                                   </tr> 
+                                                                                                                                                                                   <tr>
+                                                                                                                                                                                       <td><input id="r13" type="radio" name="report" value="13" /></td>
+                                                                                                                                                                                       <td><a style="display: none;" th:href="@{/0713/}"></a>Comparativo de Tiquetes Emitidos, Atendidos y no Atendidos</td>
+                                                                                                                                                                                   </tr> 
+                                                                                                                                                                                   <tr>
+                                                                                                                                                                                       <td><input id="r14" type="radio" name="report" value="14" /></td>
+                                                                                                                                                                                       <td><a style="display: none;" th:href="@{/0714/}"></a>Comparativo de Afluencia por Centro Atención</td>
+                                                                                                                                                                                   </tr> -->
+                                                                    </tbody>
+                                                                </table>    
+                                                            </div>
+
+                                                            <div style="display: none; max-height:375px;" id="tableReportesTwo" class="table-responsive">
+                                                                <table id="tbReporteTwo" class="table table-striped table-bordered table-hover table-condensed" data-selectable-rows="true">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th></th>
+                                                                            <th>Reporte</th>
+                                                                        </tr>    
+                                                                    </thead>  
+                                                                    <tbody>
+                                                                        <!--                                   <tr>
+                                                                                                               <td><input id="r15" type="radio" name="report" value="15" /></td>
+                                                                                                               <td><a style="display: none;" th:href="@{/0715/}"></a>Tiempos de Atención por Usuario</td>
+                                                                                                           </tr>   
+                                                                                                            <tr>
+                                                                                                               <td><input id="r16" type="radio" name="report" value="16" /></td>
+                                                                                                               <td><a style="display: none;" th:href="@{/0716/}"></a>Tiquetes Atendidos por Usuario</td>
+                                                                                                           </tr> -->
+                                                                        <tr>
+                                                                            <td><input id="r17" type="radio" name="report" value="17" /></td>
+                                                                            <td><a style="display: none;" th:href="@{/0717/}"></a>Índice de Trámites Atendidos por Usuario</td>
+                                                                        </tr> 
+                                                                        <!-- <tr>
+                                                                             <td><input id="r18" type="radio" name="report" value="18" /></td>
+                                                                             <td><a style="display: none;" th:href="@{/0718/}"></a>Actividades Diarias del Usuario</td>
+                                                                         </tr> 
+                                                                                                            <tr>
+                                                                                                                <td><input id="r19" type="radio" name="report" value="19" /></td>
+                                                                                                                <td><a style="display: none;" th:href="@{/0719/}"></a>Reporte General de Usuarios</td>
+                                                                                                            </tr> -->
+                                                                        <tr>
+                                                                            <td><input id="r20" type="radio" name="report" value="20" /></td>
+                                                                            <td><a style="display: none;" th:href="@{/0720/}"></a>Pausas, Recesos y Almuerzos por Usuario</td>
+                                                                        </tr> 
+                                                                    </tbody>
+                                                                </table>   
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                            <button id="btnMostrarReporte" type="button" class="btn btn-primary" >Mostrar Reporte</button>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 				<div class="clr"></div> -->
+                </div>
+
+                <!-- 			<div class="clr"></div> -->
+                <div th:include="/layout/footer :: footer" />
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,156 @@
+<div id="container" class="containermain2 ">
+  <ion-card class="card-container">
+
+    <div *ngIf="ctrlhome.tramites.length==0">
+      <ion-card *ngFor="let serv of ctrlhome.servicios;let i=index">
+        <ion-item (click)="filtertramite(serv)" button="true">{{serv.DServicios}}</ion-item>
+      </ion-card>
+      <ion-item *ngIf="ctrlhome.carnet==null" color="none" lines="none" (click)="ctrlhome.view='cards'" button="true"
+        detail="true">
+        <ion-label class="labelback">
+          ¿Si tienes carnet?, pues haz tus citas con tu carnet!
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="ctrlhome.carnet!=null" color="none" lines="none" (click)="ctrlhome.view='cards'" button="true"
+        detail="true">
+        <ion-label class="labelback">
+          ¿Si tienes carnet?, pues haz tus citas con tu carnet!
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <ion-card *ngFor="let tra of ctrlhome.tramites;let i=index">
+      <ion-item (click)="admCita(tra)" button="true">{{tra.SNombre}} </ion-item>
+    </ion-card>
+
+  </ion-card>
+
+</div>
+
+<ion-modal [isOpen]="ctrlhome.modalform" (onDidDismiss)="onDismissChange($event)">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Haz tu cita</ion-title>
+        <ion-buttons slot="end">
+          <ion-button class="text-red" (click)="closeModal()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-card class="cardcita">
+        <form [formGroup]="citaForm">
+          <div class="dividerClass">
+            Datos de la cita
+          </div>
+          <ion-item lines="none">
+            <ion-label position="stacked" style="font-weight: bold;" color="medium">Fecha y hora</ion-label>
+            <ion-datetime-button datetime="datetime">
+              <span slot="date-target" *ngIf="citaForm.get('fhReservacion')==undefined">dd/mm/YYYY</span>
+            </ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime" [showClearButton]="true" doneText="Aceptar" cancelText="Cancelar"
+                  [showDefaultButtons]="true" clearText="Limpiar" formControlName="fhReservacion" [min]="min"
+                  [isDateEnabled]="isenableday"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input formControlName="cunidadRecep_txt" labelPlacement="stacked" label="Sucursal" placeholder=""
+              [errorText]="getError('cunidadRecep')" (click)="getCombo('cunidadRecep')"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input formControlName="nTramiteId_txt" labelPlacement="stacked" label="Tramite" placeholder=""
+              [errorText]="getError('nTramiteId')" (click)="getCombo('nTramiteId')"></ion-input>
+          </ion-item>
+
+          <div class="dividerClass">
+            Datos Personales
+          </div>
+
+          <ion-item lines="none">
+            <ion-input formControlName="SObservaciones" labelPlacement="stacked" label="Nombre Completo" placeholder=""
+              [errorText]="getError('SObservaciones')"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input formControlName="nit" (ionInput)="saveCarnet($event)" labelPlacement="stacked" label="Carnet"
+              placeholder="" max="6" [errorText]="getError('nit')"></ion-input>
+          </ion-item>
+
+          <ion-button class="custom-button" (click)="submitCita()" expand="block">Agendar Cita</ion-button>
+          </form>
+      </ion-card>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #confirmationModal class="custom-confirmation-modal" trigger="open-modal" [isOpen]="messagemodal" (willDismiss)="onConfirmationDismiss()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Confirmación de Cita</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-item>
+        <ion-label>
+          <h2>¡Cita Agendada Exitosamente!</h2><br>
+          <strong>Fecha:</strong> {{this.citaForm.value.fhReservacion}}<br>
+          <strong>Oficina:</strong> {{this.citaForm.value.cunidadRecep_txt}}<br><br>
+          
+          <p>Conserve este número de cita y preséntese en la oficina indicada para generar su ticket.</p>
+          
+          <h3 style="color:red">Número de Cita: {{citaForm.value.NReservaCitaId}}</h3><br>
+          
+          <p><strong>Nota:</strong> La cita es válida únicamente entre 10 minutos antes y 10 minutos después de la hora programada. Asegúrese de llegar dentro de este período.</p>
+        </ion-label>
+      </ion-item>
+      <ion-button expand="block" class="custom-accept-button" (click)="closeAllModals()">Aceptar</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+
+<ion-modal #modal [isOpen]="catalogModal" [initialBreakpoint]="1" [breakpoints]="[0.15, 0.5, 1]"
+  [backdropDismiss]="true" [backdropBreakpoint]="0.5" keyboardClose="true">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button (click)="catalogModal=false;" color="danger">Cerrar</ion-button>
+        </ion-buttons>
+        <ion-item>
+
+          <ion-label position="stacked" style="font-weight: bold;text-align: center;font-size: 1.3em;"
+            color="medium">Catalogos</ion-label>
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-list>
+
+        <ion-item-divider sticky lines="none">
+          <ion-searchbar autofocus (ionInput)="filtercats($event)" #SBAR></ion-searchbar>
+        </ion-item-divider>
+
+
+        <div *ngIf="OPTCAT=='cunidadRecep'">
+          <ion-item button="true" detail="true" *ngFor="let uni of cat_temps" style="font-size:15px;padding-top: 15px;"
+            (click)="setCombo(uni)"> {{uni.dunidadRecep}}</ion-item>
+        </div>
+        <div *ngIf="OPTCAT=='nTramiteId'">
+          <ion-item button="true" detail="true" *ngFor="let uni of cat_temps" style="font-size:15px;padding-top: 15px;"
+            (click)="setCombo(uni)"> {{uni.DTramite}}</ion-item>
+        </div>
+
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+<!-- <app-pull-up [catalogo]="catalogo" (newItemEvent)="getCombo($event)"></app-pull-up> -->

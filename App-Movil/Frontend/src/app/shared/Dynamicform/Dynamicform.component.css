@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.dividerClass{
+  text-align-last: center;
+    font-size: large;
+    border-bottom-style: groove;
+}
+
+.imgfield{
+  width: 100px;
+}
+
+.container { position: relative; }
+.container ion-img { display: block; }
+.container .fa-download { position: absolute; bottom:0; left:0; }

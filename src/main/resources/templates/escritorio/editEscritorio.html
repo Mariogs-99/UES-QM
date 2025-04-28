@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js"
+        th:src="@{/js/dropdownmenu.js}"></script>
+        
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+            }
+                    div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+  
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+        <script th:inline="javascript" type="text/javascript">
+            /*<![CDATA[*/
+            jQuery(document).ready(function() {
+                jQuery("form#formEscritorio").submit(function(event) {
+                    
+                    if( 1 > $("#cIdentificador").val().length){
+                        $('#helpcIdentificador').text("Debe ingresar letra identificador");
+                        $("#divcIdentificador").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divNombre").removeClass("has-error");
+                        $('#helpBlockNombre').text("");
+                    }
+                    
+                    if( 1 > $("#nNumEscritorio").val().length ){
+                        $('#helpnNumEscritorio').text("Debe Ingresar cantidad de Sillas");
+                        $("#divnNumEscritorio").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        if(1 > parseInt($("#nNumEscritorio").val()) ){
+                            $('#helpnNumEscritorio').text("Debe ser mayor que 0");
+                            $("#divnNumEscritorio").addClass("has-error");
+                            event.preventDefault();
+                        }else{
+                            $("#divnNumEscritorio").removeClass("has-error");
+                            $('#helpnNumEscritorio').text("");
+                        } 
+                    }
+                    
+                     if($("#bActiva").val() === "0"){
+                        $('#helpBlockEstado').text("Debe Seleccionar un estado");
+                        $("#divEstado").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divEstado").removeClass("has-error");
+                        $('#helpBlockEstado').text("");
+                    }
+                    
+                    if($("#cunidadRecepId").val() === "0"){
+                        $('#helpBlockCS').text("Debe Seleccionar un Centro de servicio");
+                        $("#divcunidadRecepId").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divcunidadRecepId").removeClass("has-error");
+                        $('#helpcunidadRecepId').text("");
+                    }
+                    
+                    if($("#cZonaId").val() === "0"){
+                        $('#helpcZonaId').text("Debe Seleccionar una Zona");
+                        $("#divcZonaId").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divcZonaId").removeClass("has-error");
+                        $('#helpcZonaId').text("");
+                    }
+                });
+                
+                var AdminConfig = function(responseTxt, statusTxt, xhr) {
+                };
+
+                $("#cunidadRecepId").change(function(){
+                    var unidad = document.getElementById("cunidadRecepId").value;
+                    console.log("Unidad: " + unidad);
+                    var div = "divZona";
+                    var params = 'cunidadRecepId='+unidad;
+                    var requestMapping = /*[[@{/escritorio/getzonas}]]*/;
+                    var url = requestMapping + "?" + params;
+                    var func = 'AdminConfig';
+                    doLoad(null, url, div, func);
+                });
+                });
+            /*]]>*/
+            
+                function zona(sel){
+                    $('#cIdentificador').val(sel.options[sel.selectedIndex].text); 
+                }
+        </script>
+
+        
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form">
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <form id="formEscritorio" class="form-horizontal" th:action="@{/escritorio/guardar}" th:object="${escritoriopojo}" method="POST">
+                                            <input id="nEscritorioId" type="hidden" th:field="*{nEscritorioId}" />
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <span class="titulo">Edición de Escritorio</span>
+                                                </div>
+                                                <div class="col-sm-4 right">
+                                                    <button type="submit" title="Guardar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Guardar</span>
+                                                    </button>
+                                                    <a th:href="@{/escritorio/}" title="Regresar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Regresar</span>
+                                                    </a>
+                                                </div>
+                                            </div> 
+                                            
+                                            
+                                            <div class="form-group" id="divcIdentificador">
+                                                <label for="cIdentificador" class="col-sm-2 control-label">Identificador</label>
+                                                <div class="col-sm-5">
+                                                    <input id="cIdentificador" readonly="true" type="text" th:field="*{cIdentificador}" class="form-control width_40" placeholder="cIdentificador..." />
+                                                  <span id="helpcIdentificador" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divnNumEscritorio">
+                                                <label for="nNumEscritorio" class="col-sm-2 control-label">Numero de escritorio</label>
+                                                <div class="col-sm-5">
+                                                    <input id="nNumEscritorio" autofocus="true" type="number" th:field="*{nNumEscritorio}" class="form-control width_40" placeholder="Numero escritorio..."/>
+                                                    <span id="helpnNumEscritorio" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divEstado">
+                                                <label for="bActiva" class="col-sm-2 control-label">Activo SI/NO</label>
+                                                <div class="col-sm-5">
+                                                  <select id="bActiva" th:field="*{bActiva}" class="form-control">
+                                                      <option value="0" selected="selected">Seleccione un estado...</option>
+                                                      <option value="1">SI</option>
+                                                      <option value="2">NO</option>
+                                                  </select>
+                                                    <span id="helpBlockEstado" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                            <div class="form-group" id="divcunidadRecepId">
+                                                <label for="cunidadRecepId" class="col-sm-2 control-label">Centros de Servicios</label>
+                                                <div class="col-sm-5">
+                                                    <select id="cunidadRecepId" disabled="disabled" th:field="*{cunidadRecepId}" class="form-control">
+                                                      <option value="0">Seleccione un Centro de Servicio...</option>
+                                                      <option th:each="type : ${escritoriopojo.unidadesList}" th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}"></option>
+                                                  </select>
+                                                    <span id="helpcunidadRecepId" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            <input type="hidden" th:field="*{cunidadRecepId}"></input>
+                                            <div id="divZona">
+                                                <div class="form-group" id="divcZonaId">
+                                                    <label for="cZonaId" class="col-sm-2 control-label">Zona</label>
+                                                    <div class="col-sm-5">
+                                                      <select id="cZonaId" onchange="zona(this);" th:field="*{cZonaId}" class="form-control">
+                                                          <option value="0">Seleccione una Zona...</option>
+                                                          <option th:each="type : ${escritoriopojo.zonaList}" th:value="${type.nZonaId}" th:text="${type.sNombre}"></option>
+                                                      </select>
+                                                        <span id="helpcZonaId" class="help-block has-error"></span>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                                
+                                             <div class="form-group">
+                                                <label for="dEscritorio" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                                                <div class="col-sm-5">
+                                                  <input id="dEscritorio" type="text" th:field="*{dEscritorio}" class="form-control" placeholder="Descripci&oacute;n" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+
+    </body>
+</html>

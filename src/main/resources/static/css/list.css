@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+
+
+
+div#ssc-layout-ext table.list{
+	border-collapse:collapse; 
+	border-spacing: 0;
+	width:100%;
+	background-color:#fefefe;
+	font-size:10px;
+}
+
+
+#dialogRS-loading{z-index:10000;}
+
+
+div#ssc-layout-ext table.list thead.border{
+	border-bottom:2px solid #004E7F;
+	
+}
+
+div#ssc-layout-ext table.rowline tbody td{
+	border-bottom:1px solid #cccccc;
+}
+
+div#ssc-layout-ext table.list thead th{
+	padding:10px;
+	color:#004E7F;
+	background-color:#fefefe;
+}
+
+div#ssc-layout-ext table.list thead th.order a{text-decoration: underline; cursor:pointer;}
+/* div#ssc-layout-ext div.mainPanel td.numeric p{text-align:right; padding:3px; font-weight: 400;} */
+div#ssc-layout-ext table.list tbody tr td, div#ssc-layout-ext table.list tfoot td{
+	padding:2px;
+	
+}
+div#ssc-layout-ext table.list tbody tr td{border-bottom:1px dotted #cccccc;}
+
+div#ssc-layout-ext div.mainPanel table.list th{font-weight:500}
+
+div#ssc-layout-ext div.mainPanel table.list tbody tr td.numeric, div#ssc-layout-ext div.mainPanel table.list tfoot td.numeric{
+	text-align:right;
+	width:80px;
+}
+div#ssc-layout-ext div.mainPanel table.list td.numeric p{text-align: right; width:100%; font-size:1em; padding:0px; font-weight: 400}
+div#ssc-layout-ext table.list input.cf11{font-size:1.1em;}
+div#ssc-layout-ext table.list tbody tr:hover td{background-color:#FCF8D9;}
+div#ssc-layout-ext table.list tfoot{background:#efefef; color:#004E7F;}
+div#ssc-layout-ext table.list tfoot td.label{background:#ffffff; color:#004E7F; }
+div#ssc-layout-ext table.list tfoot td.subtotals{ border-top:2px solid #cccccc;}
+
+div#ssc-layout-ext div.editRow{position:relative; float:right; right:0px; top:0px; margin-right:0px; display:inline; }
+div#ssc-layout-ext div.editRow a.editRow{top:0; position:absolute;}
+
+
+div#ssc-layout-ext table.list col.subtotals, div#ssc-layout-ext table.list colgroup.subtotals{border-left:1px solid #29ABE2; width:80px; text-align: right;}
+div#ssc-layout-ext table.list colgroup.actions{width:20px;}
+div#ssc-layout-ext table.list td.action{width:20px; padding:0;}
+div#ssc-layout-ext col.no-mini{display:block; background:#eaaaaa}
+div#ssc-layout-ext .tablepanel{background-color:#ffffff; position:relative;}
+
+
+div#ssc-layout-ext h3.absolute{padding:8px 30px 10px; background-image:url("../images/bgh3.png"); background-position:top right; position:absolute; z-index:8000}
+div#ssc-layout-ext h3.absolute:before{width:15px; height:15px; background-image:url("../images/bullets.png"); background-position:-10px -15px;}
+
+div#ssc-layout-ext h3.Nabsolute{padding:8px 30px 10px; background-image:url("../images/bgh3.png"); background-position:top left; background-repeat:no-repeat;}
+div#ssc-layout-ext h3.Nabsolute:before{width:15px; height:15px; background-image:url("../images/bullets.png"); }
+
+div#ssc-layout-ext .rowTable{background-color:#efefef; padding:0 0 10px 10px;}
+
+div#ssc-layout-ext div.cell{width:200px;}
+div#ssc-layout-ext div.cell-short{width:120px;}
+div#ssc-layout-ext div.wideCell{width:335px;}
+div#ssc-layout-ext div.wideCell p{padding:5px 5px 5px 15px;}
+div#ssc-layout-ext div#addingIncomesNR div.row:hover div.wideCell{border-bottom:dotted 1px #cccccc; background-image:url("../images/mh_flecha-negro-5.png"); background-position: top right; background-repeat: no-repeat;}
+
+div#ssc-layout-ext td.labelT{text-align: right; background: #ffffff;}
+
+
+
+div#ssc-layout-ext div.mainPanel table.list tbody td input.cf11, div#ssc-layout-ext div.mainPanel table.list tbody td p.cf11{padding:3px 0px; text-align:right; background:transparent}
+div#ssc-layout-ext table.list tfoot td.label{text-align: right;}
+div#ssc-layout-ext table.resumeT{margin:10px 0px; border:1px solid #cccccc;}
+
+
+div#ssc-layout-ext div.mainPanel table.list tbody td p, div#ssc-layout-ext div.mainPanel table.list tbody td{font-size:1em;}
+div#ssc-layout-ext table.list div.operator{width:25px;}
+div#ssc-layout-ext table.list td.listUL{background:url(../images/top-shadow.png) top center no-repeat;}

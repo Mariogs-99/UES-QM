@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- <meta name="_csrf" value="dummy" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" value="dummy" th:content="${_csrf.headerName}"/>  -->
+        <title>UNIVERSIDAD DE EL SALVADOR </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+                background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+                border-bottom: 5px solid #DFD8CC;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                border-radius: 5px 5px 0px 0px;
+                overflow: hidden;
+            }
+
+            @media (min-width: 879px){
+
+            }     
+            #reasignacion_div {
+                display: none;
+                box-shadow: none !important;
+                visibility: hidden;
+                pointer-events: none;
+                z-index: -1;
+                pointer-events: none !importanist;
+                cursor: default !important;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <!--<link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />-->
+        <link rel="stylesheet" type="text/css" media="all" href="../css/operacion-style.css" th:href="@{/css/operacion-style.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome_1.css" th:href="@{/css/font-awesome_1.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+        <script  type="text/javascript" src="../../static/js/websocket-printer.js"></script>
+        <script type="text/javascript" src="../js/jquery.min.js"
+        th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"
+        th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/jquery.confirm.js"
+        th:src="@{/js/jquery.confirm.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js"
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/terceros.js"
+        th:src="@{/js/terceros.js}"></script>
+        <script type="text/javascript" src="../js/jquery.k.min.js"
+        th:src="@{/js/jquery.k.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js"
+        th:src="@{/js/jquery.msgBox.js}"></script>
+        <script type="text/javascript" src="../js/operacion.js"
+        th:src="@{/js/operacion.js}" charset="utf-8"></script>
+
+
+        <script th:inline="javascript" type="text/javascript">
+            var varBotones = /*[[*{botones}]]*/;
+                    var varTimer1 = /*[[*{timer1}]]*/;
+                    var varTimer2 = /*[[*{timer2}]]*/;
+                    var varNllamados = /*[[*{nllamados}]]*/;
+                    var varEnPausa = /*[[*{enPausa}]]*/;
+                    var usrConfigurado = /*[[*{usrConfigurado}]]*/;
+                    var varEscritorio = /*[[*{escritorio}]]*/;
+            var varGcTiqueteId = 0;
+            var varGcTiqueteIdReasig = 0;
+            var varTramite;
+            var today = new Date(2024, 11, 1);
+            var t;
+            var timeout;
+            var nTramiteId;
+            var nTramiteIdEsc;
+            var preguntas;
+            var respuestas;
+            var pIterador = 0;
+            var enEvaluacion = 0;
+            var varSCorrelativo;
+            var varTimetoStop;
+            var nEventoId;
+
+        </script>
+
+        <style>
+            /*div#ssc-footer {
+                background: url("../images/ph_pie-pagina.png") no-repeat top center #004D81;
+                border-bottom: 5px solid #DFD8CC;
+                position: fixed;
+                bottom: 0;
+                width: 960px;
+            }*/
+            #operaciones{
+                border: 1px solid #585858;
+                border-radius: 5px 5px 5px 5px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout" >
+                <div th:include="/layout/header :: header" />
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" />
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <p id="turno" class="font" th:text="${turno}" />
+                                        <!-- 								<input type="button" id="test" value="Test" /> -->
+                                        <!-- 								<span id="tes" th:text="${tes}"/> -->
+                                        <div align="center" class="row cream" id="operaciones">
+
+                                            <br /> <br />
+
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <div class="col-md-11">
+
+
+                                                    <div class="dashboardPages">
+                                                        <div class="unitPage">
+                                                            <div id="llamar_siguiente_div" class="unitPage-i">
+                                                                <input id="llamando" type="hidden" value="0" /> <a
+                                                                    id="llamar_siguiente" 
+                                                                    title="Llamar siguiente cliente en cola">Llamar
+                                                                    Siguiente<br/><i class="fa fa-arrow-circle-o-right fa-3x"></i> </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="unitPage">
+                                                            <div id="iniciar_tramite_div" class="unitPage-i"
+                                                                 style="cursor: not-allowed">
+                                                                <input id="atendiendo" type="hidden" value="0" /> <a
+                                                                    class="module btn-is-disabled " id="iniciar_tramite"
+                                                                    title="Iniciar tramite">Iniciar Tramite<br/><i class="fa fa-play fa-3x"></i></a>
+                                                                <a
+                                                                    class="module btn-is-disabled " id="detener_tramite"
+                                                                    title="Iniciar tramite" style="display: none;">Iniciar Tramite<br/><i class="fa fa-play fa-3x"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="unitPage">
+                                                            <div id="pausa_div" class="unitPage-i">
+                                                                <input id="pausado" type="hidden" value="0" /> <a
+                                                                    id="pausa" title="Pausa" data-toggle="modal"
+                                                                    data-target="#modalPausa" >Tomar Pausa o Receso<br/><i class="fa fa-bell-o fa-4x"></i></a>
+                                                                <a
+                                                                    id="detener_pausa" title="Pausa" data-toggle="modal"
+                                                                    data-target="#modalPausa" style="display: none;">Tomar Pausa o Receso<br/><i class="fa fa-bell-o fa-4x"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="unitPage">
+                                                            <div id="escalamiento_div" class="unitPage-i" style="cursor: not-allowed">
+                                                                <a id="escalamiento" 
+                                                                   class="module btn-is-disabled "
+                                                                   title="Escalamiento" 
+                                                                   data-toggle="modal"
+                                                                   data-target="#modalConfirmarEscalamiento">
+                                                                    Escalamiento <br/><br/><i class="fa fa-sitemap fa-4x"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="unitPage">
+                                                            <div id="reasignar_div" class="unitPage-i" style="cursor: not-allowed">
+                                                                <a id="reasignar_" 
+                                                                   class="module btn-is-disabled "
+                                                                   title="Reasignamiento" 
+                                                                   data-toggle="modal"
+                                                                   data-target="#modalConfirmarReasignamiento">
+                                                                    Reasignar <br/><br/><i class="fa fa-circle-o-notch fa-3x"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="unitPage">
+                                                            <div id="salir_div" class="unitPage-i">
+                                                                <a id="salir" title="Regresar a la pagina de inicio"
+                                                                   href=".." >Salir<br/><br/><i class="fa fa-home fa-4x"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="unitPage">
+                                                            <div id="reasignacion_div" class="unitPage-i" style="cursor: not-allowed">
+                                                                <a id="reasignacion"
+                                                                   class="module btn-is-disabled"
+                                                                   title="Reasignar cliente" 
+                                                                   data-toggle="modal"
+                                                                   data-target="#modalConfirmarReasignacion">
+                                                                    Reasignación<br/><br/><i class="fa fa-circle-o-notch fa-3x"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 										<div class="col-md-3"></div> -->
+                                            </div>
+                                            <br />
+                                            <div class="row" id="infotramite">
+                                                <div class="col-md-2" />
+                                                <div class="col-md-7">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="ui-widget-header" colspan="7">Información del turno</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tr>
+                                                            <td>Atendiendo a tiquete:</td>
+                                                            <td><span id="tiquete" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hora de inicio:</td>
+                                                            <td><span id="inicio" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tiempo Transcurrido:</td>
+                                                            <td>
+                                                                <!-- 												<span id="tiempoproceso" /> -->
+                                                                <div id="txt"></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tramite:</td>
+                                                            <td><span id="tramite" /></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="dashboardPages" style="display:none;">
+                                                        <div class="unitPage">
+                                                            <div id="evaluacion_div" class="unitPage-i">
+                                                                <a id="evaluacion" title="Realizar Evaluación"
+                                                                   data-toggle="modal" data-target="#modalEvaluacion">Realizar
+                                                                    Evaluación<br/><i class="fa fa-pencil-square-o fa-4x"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" id="tiempo_fin_tramite"
+                                                 style="display: block;">
+                                                <div class="col-md-9"></div>
+                                                <div class="col-md-3 font">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="ui-widget-header" colspan="7">Duracion del ultimo tramite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tr>
+                                                            <td><div class="text-center" id="txt2">0:01:04</div></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 				<div class="clr"></div> -->
+                </div>
+                <!-- 			<div class="clr"></div> -->
+                <div th:include="/layout/footer :: footer" />
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalConfirmarReasignacion">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¿Esta seguro que desea realizar la reasignacion?
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8">
+                            <button id="ConfirmacionReasignar" type="button" class="btn btn-warning" data-dismiss="modal" data-backdrop='static' data-keyboard='false' data-toggle="modal" data-target="#modalReasignacion">Reasignar</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar">Cancelar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalReasignacion">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button id="cerrarModalReasignacion" type="button" class="close cancelar" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title text-center">
+                            <div>Reasignación de Tiquetes</div>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 					<div class="table-responsive"> -->
+                        <!-- 						<div id="divCbTramites" class="form-group"> -->
+                        <!-- 							<select id="cbTramites" class="selectpicker" -->
+                        <!-- 								data-style="btn-primary" style="display: none;"></select> -->
+                        <!-- 						</div> -->
+                        <!-- 					</div>	 -->
+                        <!-- 					<h4 class="modal-title text-center"> -->
+                        <!-- 					<div>Tramites disponibles para Reasignación</div> -->
+                        <!-- 					</h4> -->
+
+                        <!-- 					Metodo antiguo de tabla con tramites no agrupados -->
+                        <!-- 					<div class="container-fluid"> -->
+                        <!-- 	    				<div class="row"> -->
+                        <!-- 	   						 <div class="col-md-1"></div> -->
+                        <!-- 	       					<div class="col-md-10"> -->
+                        <!-- 		       					<form action="#"> -->
+                        <!-- 		       						<br/> -->
+                        <!-- 		       					<div id="tableReasignacion" class="table-responsive" > -->
+                        <!-- 								<table id="table-javascript" style="height: 200px; padding-bottom: 37px;" class="table table-striped table-bordered hover table-condensed"></table> -->
+                        <!-- 								</div> -->
+                        <!-- 								<a id="cerrarError" style="display:none;" th:href="@{/}"/> -->
+                        <!-- 								</form>  -->
+                        <!-- 	       					</div> -->
+                        <!-- 	       					<div class="col-md-1"></div> -->
+                        <!-- 	    				 </div> -->
+                        <!-- 					</div> -->
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-6">
+                                <div class="bs-secciones text-center">
+                                    <div class="panel-group" id="accordion" style="width: 450px;">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"> 
+                        <input type="button" id="reasignacion_exitosa" style="display: none;" data-toggle="modal" data-target="#modalReasignacionExitosa"/>
+                        <input type="button" id="reasignacion_elegiruno" style="display: none;" data-toggle="modal" data-target="#ModalReasignacionElegirUno"/>
+                        <button type="button" class="btn btn-warning cancelar" data-dismiss="modal" data-es="Cancelar">Cancelar</button>
+                        <!-- 					<button id="reasignar_exitosa" type="button"  data-dismiss="modal" data-toggle="modal" data-target="#modalReasignacionExitosa">Reasignar</button> -->
+                        <!-- 					<button id="reasignar" type="button" class="btn btn-warning" >Reasignar</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="btnJerarquia" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalJerarquia' ></button>
+        <div class="modal fade" id="modalJerarquia">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" id="modal-tramites-cerrar" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title text-center">Tramites disponibles para Reasignación</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="tableTramites">
+
+                        </div>
+                        <!--                        <label>Nivel</label> -->
+                        <!--                         <div id="divCbNivel"> -->
+
+                        <!--                         </div> -->
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning cancelar" data-dismiss="modal" data-es="Cancelar">Cancelar</button>
+                        <button id="reasignar" type="button" class="btn btn-warning" >Reasignar</button>
+                        <!--                        <button id="btnEscalar" type="button" class="btn btn-primary" >Escalar e imprimir</button> -->
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="modalReasignacionExitosa">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¡Reasignacion Exitosa!
+                        </h4>
+                    </div>
+                    <script>
+                        function reload() {
+                            location.reload();
+                        }
+                    </script>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <!-- 					<button id="ConfirmacionReasignar" type="button" class="btn btn-warn<ing" data-dismiss="modal"  data-toggle="modal" data-target="#modalReasignacion">Reasignar</button> -->
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="reload()" >Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalReasignacionElegirUno">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¡Seleccione un tramite para continuar!
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <!-- 					<button id="ConfirmacionReasignar" type="button" class="btn btn-warning" data-dismiss="modal"  data-toggle="modal" data-target="#modalReasignacion">Reasignar</button> -->
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar">Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script>
+            $(function () {
+                $(".modal-dialog").css("width", "450px");
+                $(".modal-dialog").css("height", "200px");
+
+                $("#modalReasignacion .modal-dialog").css("width", "550px");
+                $("#modalReasignacion .modal-dialog").css("height", "auto");
+            });
+        </script>
+
+        <!-- Modal para Confirmar Escalamiento -->
+        <div class="modal fade" id="modalConfirmarEscalamiento">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- Botón de cierre del modal (opcional) -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¿Está seguro que desea realizar el escalamiento?
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8">
+                            <!-- Modificado: Escalar ya no abre otro modal -->
+                            <button id="ConfirmacionEscalar" type="button" class="btn btn-warning" data-dismiss="modal">Escalar</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para Confirmar Reasignamiento -->
+        <div class="modal fade" id="modalConfirmarReasignamiento">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- Botón de cierre del modal (opcional) -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¿Está seguro que desea realizar la reasignacion?
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-8">
+                            <!-- Modificado: Escalar ya no abre otro modal -->
+                            <button id="ConfirmacionReasginar" type="button" class="btn btn-warning" data-dismiss="modal">Reasignar</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+
+        <div class="modal fade" id="modalEscalamiento">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close cancelar" data-dismiss="modal"
+                                aria-hidden="true">×</button>
+                        <h4 class="modal-title text-center">Jefes y supervisores disponibles para Escalamiento</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 					<div class="table-responsive"> -->
+                        <!-- 						<div id="divCbTramitesEscalamiento" class="form-group"> -->
+                        <!-- 							<select id="cbTramitesEscalamiento" class="selectpicker" -->
+                        <!-- 								data-style="btn-primary" style="display: none;"></select> -->
+                        <!-- 						</div> -->
+                        <!-- 					</div> -->
+                        <!-- 		<h4 class="modal-title text-center"></h4> -->
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <form action="#">
+                                        <br/>
+                                        <div id="tableEscalamiento" class="table-responsive">
+                                            <table id="table-Escalamiento" class="table table-striped table-bordered hover table-condensed"></table>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- 					<input type="button" id="idTrigger"	onclick="loadDataTable();" style="display: none;" /> -->
+                        <button type="button" class="btn btn-warning cancelar" data-dismiss="modal" data-es="Cancelar">Cancelar</button>
+                        <!-- 					<button id="escalar" type="button" class="btn btn-warning" data-dismiss="modal" data-toggle="modal" data-target="#modalEscalamientoExitoso">Escalar</button> -->
+                        <button id="escalar" type="button" class="btn btn-warning" >Escalar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalEscalamientoExitoso">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¡Escalamiento Exitoso!
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <!-- 					<button id="ConfirmacionReasignar" type="button" class="btn btn-warning" data-dismiss="modal"  data-toggle="modal" data-target="#modalReasignacion">Reasignar</button> -->
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar" onclick="reload()">Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="modalEscalamientoSeleccioneUno">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¡Debe seleccionar un jefe o supervisor para continuar!
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar">Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalPausa" role="dialog">
+            <div class="modal-dialog modal-lg receso">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">×</button>
+                        <h4 class="modal-title text-center">Seleccione Tipo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="dashboardPages">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="unitPage">
+                                        <div id="tomar_receso_div" class="unitPage-i">
+                                            <a id="tomar_receso" title="" data-dismiss="modal" data-toggle="modal" data-target="#Confirmacion_pausa" >TOMAR RECESO<br/><i class="fa fa-clock-o fa-3x"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="unitPage">
+                                        <div id="tomar_pausa_div" class="unitPage-i">
+                                            <a id="tomar_pausa" title="" data-dismiss="modal" data-toggle="modal" data-target="#Confirmacion_pausa" >TOMAR PAUSA<br/><i class="fa fa-pause fa-3x"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="unitPage">
+                                        <div id="tomar_almuerzo_div" class="unitPage-i">
+                                            <a id="tomar_almuerzo" title="" data-dismiss="modal" data-toggle="modal" data-target="#Confirmacion_almuerzo" >TOMAR TIEMPO DE ALMUERZO<br/><i class="fa fa-cutlery fa-3x" ></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 									    <div class="modal-footer"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="Confirmacion_pausa">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¡Usted se encuentra en pausa o receso!
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <!-- 					<button id="ConfirmacionReasignar" type="button" class="btn btn-warning" data-dismiss="modal"  data-toggle="modal" data-target="#modalReasignacion">Reasignar</button> -->
+                            <input type="button" id="Confirmacion_fin_pausa" style="display: none;" data-toggle="modal" data-target="#Modal_confirmacion_fin_pausa"/>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar">Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div><div class="modal fade" id="Confirmacion_almuerzo">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">
+                            ¡Usted se encuentra en tiempo de almuerzo!
+                        </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <!-- 					<button id="ConfirmacionReasignar" type="button" class="btn btn-warning" data-dismiss="modal"  data-toggle="modal" data-target="#modalReasignacion">Reasignar</button> -->
+                            <input type="button" id="Confirmacion_fin_pausa" style="display: none;" data-toggle="modal" data-target="#Modal_confirmacion_fin_pausa"/>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar">Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="Modal_confirmacion_fin_pausa">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">¡Usted a finalizado correctamente su pausa o receso!</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar">Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="Modal_confirmacion_fin_almuerzo">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">¡Usted a finalizado correctamente su tiempo de almuerzo!</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-7">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-es="Cancelar">Aceptar</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="modalEvaluacion" role="dialog">
+            <div class="modal-dialog modal-lg receso">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> 
+                        <h4 id="Pregunta" class="modal-title text-center" />
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div id="respuestas" class="col-md-8"></div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- 						<ul class="pagination"> -->
+                            <!-- 																	  <li class="disabled"> -->
+                            <!-- 																	    <span>&laquo;</span> -->
+                            <!-- 																	  </li> -->
+                            <!-- 							<li class="active"><span>1 <span class="sr-only">(página actual)</span></span></li> -->
+                            <!-- 							<li><span>2 </span></li> -->
+                            <!-- 							<li class="disabled"><span>3 <span class="sr-only">(página actual)</span></span></li> -->
+                            <!-- 						</ul> -->
+                            <button id="closeButon" class="close" type="button"
+                                    style="display: none;" data-dismiss="modal" aria-hidden="true"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div th:include="/layout/message :: message"></div> -->
+    </body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Centros de Servicios</title>
+       	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+       	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/llamado.css" th:href="@{/css/centrodeservicio.css}" />
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" href="../js/jquery.min.js" th:href="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" href="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" href="../js/jquery.gvChart-0.1.min.js" th:href="@{/js/jquery.gvChart-0.1.min.js}"></script>
+        <script type="text/javascript" href="../js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/raphael.js" th:src="@{/js/raphael.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}"></script>
+        <script type="text/javascript" src="../js/list.js" th:src="@{/js/list.js}"></script>
+        <script type="text/javascript" src="../js/jquery.enumerable.js" th:src="@{/js/jquery.enumerable.js}"></script>
+        <script type="text/javascript" src="../js/jquery.tufte-graph.js" th:src="@{/js/jquery.tufte-graph.js}"></script>
+        <script type="text/javascript" src="../js/ir.js" th:src="@{/js/ir.js}"></script>
+        <script type="text/javascript" src="../js/highcharts.js" th:src="@{/js/highcharts.js}"></script>
+        <script type="text/javascript" src="../js/exporting.js" th:src="@{/js/exporting.js}"></script>
+        <script type="text/javascript">
+            $(document).ajaxSend(function (event, request, settings) {
+                $('#loading-indicator').show();
+                $('#reffrescar').hide();
+            });
+
+            $(document).ajaxComplete(function (event, request, settings) {
+                $('#loading-indicator').hide();
+                $('#reffrescar').show();
+            });
+
+        </script>
+    </head>
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout" style="height:500px;">
+                <!-- Header -->
+                <div th:include="/layout/header :: header"></div>
+
+                <!-- Contenido principal -->
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="container">
+                            <a id="anclaTop"></a>
+                            <div class="mainPanel">
+                                <!-- Menú -->
+                                <div th:include="/layout/menu :: menu"></div>
+
+                                <!-- Título y formulario -->
+                                <div class="welcomeContainerAlarma noBrowser-hide">
+                                    <div class="col-sm-9" style="text-align: left;">
+                                        <span class="titulo">Monitoreo de Tr&aacute;mites y Tiquetes</span>
+                                        <br /><br />
+                                    </div>
+
+
+                                    <form id="formuser" class="form-horizontal d-flex justify-content-center" th:action="@{/admin/}" th:object="${monitoreoTramitePojo}" method="post">
+                                        <div class="form-group d-flex align-items-center">
+                                            <div>
+                                                <h3 style="margin-right: 10px;">Centro de Servicio</h3>
+                                            </div>
+                                            <div class="form-control-wrapper">
+                                                <!-- Select box -->
+                                                <select id="cunidadRecepId" th:field="*{cunidadRecepId}" class="form-control">
+                                                    <option th:each="type : ${unidadesList}" th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}"></option>
+                                                </select>
+                                            </div>
+                                            <!-- Botón a la par del select -->
+                                            <a id="reffrescar" title="Refrescar" onclick="llenar();" class="btn btn-default btn-sm titulo_n ml-2">
+                                                <i class="fa fa-refresh"></i>
+                                            </a>
+                                        </div>
+                                    </form>
+
+                                    <!-- Contenedor para gráfico y cuadros -->
+                                    <div class="content-container">
+                                        <!-- Gráfico -->
+                                        <div id="grafoC" class="chart"></div>
+
+                                        <!-- Cuadros -->
+                                        <div class="info-box">
+                                            <div class="card" style="background-color: #0a3cff;">
+                                                <div class="content">
+                                                    <p class="heading">Tiquetes en Cola</p>
+                                                    <p id="tiq_espera" class="tiq-count"></p>
+                                                </div>
+                                            </div>
+                                            <div class="card" style="background-color: #d32f2f;">
+                                                <div class="content">
+                                                    <p class="heading">Tiquetes Atendidos</p>
+                                                    <p id="atendidos" class="tiq-count"></p>
+                                                </div>
+                                            </div>
+                                            <div class="card" style="background-color: #43a047;">
+                                                <div class="content">
+                                                    <p class="heading">Promedio de Espera</p>
+                                                    <p id="promedio" class="tiq-count"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Nuevo contenedor con dos secciones alineadas en fila -->
+                                    <div class="extra-notifications-container">
+                                        <div class="custom-card">
+                                            <div class="custom-card-header">Tramites mas Frecuentes</div>
+                                            <div class="custom-card-body">
+                                                <div class="custom-skill">
+                                                    <div id="name_tra1" class="custom-skill-name">Sin datos</div>
+                                                    <div id="cant_tra1" class="custom-skill-percent-number">-</div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-card-body">
+                                                <div class="custom-skill">
+                                                    <div id="name_tra2" class="custom-skill-name">Sin datos</div>
+                                                    <div id="cant_tra2" class="custom-skill-percent-number">-</div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-card-body">
+                                                <div class="custom-skill">
+                                                    <div id="name_tra3" class="custom-skill-name">Sin datos</div>
+                                                    <div id="cant_tra3" class="custom-skill-percent-number">7-</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="custom-card">
+                                            <div class="custom-card-header">Ultimos Tramites</div>
+                                            <div class="custom-card-body custom-card-body-ultimos">
+                                                <div class="custom-skill custom-skill-ultimos">
+                                                    <div id="name_tra_1" class="custom-skill-name-ultimos">-</div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-card-body custom-card-body-ultimos">
+                                                <div class="custom-skill custom-skill-ultimos">
+                                                    <div id="name_tra_2" class="custom-skill-name-ultimos">-</div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-card-body custom-card-body-ultimos">
+                                                <div class="custom-skill custom-skill-ultimos">
+                                                    <div id="name_tra_3" class="custom-skill-name-ultimos">-</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden inputs -->
+            <input id="divtam" type="hidden" value="0" />
+            <input id="divsecci" type="hidden" value="" />
+        </div>
+    </body>
+
+</html>

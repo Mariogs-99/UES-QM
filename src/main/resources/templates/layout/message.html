@@ -1,0 +1,96 @@
+<div th:fragment="message">
+    <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-dialog.min.css" th:href="@{/css/bootstrap-dialog.min.css}"/>
+    <script type="text/javascript" src="../js/sockjs-0.3.4.js" th:src="@{/js/sockjs-0.3.4.js}"></script>
+    <script type="text/javascript" src="../js/stomp.js" th:src="@{/js/stomp.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap-dialog.min.js" th:src="@{/js/bootstrap-dialog.min.js}"></script>
+    <script th:inline="javascript" type="text/javascript">
+        var F;
+        var T=0;
+        jQuery(document).ready(function () {
+            var user;
+            
+            jQuery.get(/*[[@{/alerta/getusuario}]]*/, function (data) {
+                user = data;
+            });
+            connect();
+            setTimeout(function () {
+                //console.log('-- connected --');
+                stompClient.send("/app/hello", {}, JSON.stringify(user));
+            }, 2000);
+            F=setTimeout(function () {
+                (function Forever() {
+                    //console.log('Every 3s');
+                    stompClient.send("/app/list", {});
+                    stompClient.send("/app/clear", {});
+                    //setTimeout(Forever, 120000); // One second 1000, One minut 60000
+                })();
+            }, 120000);
+            T=1;
+        });
+        var stompClient = null;
+        function connect() {
+            var socket = new SockJS('/colas/list');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                //console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/stocks', function (greeting) {
+                    clearTimeout(F);
+                    T=0;
+                    showAlert(JSON.parse(greeting.body));
+                });
+            });
+        }
+        function disconnect() {
+            if (stompClient !== null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            //console.log("Disconnected");
+        }
+        var types = [BootstrapDialog.TYPE_SUCCESS, BootstrapDialog.TYPE_WARNING, BootstrapDialog.TYPE_DANGER];
+        var typesStr = ["Aviso", "Advertencia", "Alerta"];
+        function showAlert(message) {
+            jQuery.each(message, function (i, item) {
+                BootstrapDialog.show({
+                    type: types[item.tipo],
+                    title: typesStr[item.tipo],
+                    message: item.mensaje,
+                    buttons: [{
+                            label: 'Leido',
+                            cssClass: 'btn-primary',
+                            action: function(dialog) {
+                                stompClient.send("/app/read", {}, 
+                                    JSON.stringify({'id': item.id, 'usuario': item.usuario}));
+                                dialog.close();
+                                if (T==0){
+                                 F=setTimeout(function () {
+                                    (function Forever() {
+                                        //console.log('Every 3s');
+                                    stompClient.send("/app/list", {});
+                                    stompClient.send("/app/clear", {});
+                                    //setTimeout(Forever, 120000); // One second 1000, One minut 60000
+                                })();
+                                }, 120000);
+                                T=1;
+                            }
+                            }
+                    }],
+                    onhide: function(dialogRef){
+                       if (T==0){ 
+                       F=setTimeout(function () {
+                                    (function Forever() {
+                                        //console.log('Every 3s');
+                                    stompClient.send("/app/list", {});
+                                    stompClient.send("/app/clear", {});
+                                    //setTimeout(Forever, 120000); // One second 1000, One minut 60000
+                                })();
+                                }, 120000);
+                                T=1;
+                            }
+                    }
+		});
+            });
+        }
+    </script>
+</div>

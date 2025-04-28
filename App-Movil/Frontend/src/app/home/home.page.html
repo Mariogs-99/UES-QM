@@ -1,0 +1,76 @@
+<ion-content>
+  <div class="dashrow">
+    <!-- Sección del encabezado -->
+    <div class="header">
+      <ion-img class="logoimg" color="primary" src="../../assets/imgs/logo.png"></ion-img>
+      <div class="header-text">
+        <h1 class="university-title">UES</h1>
+        <p class="system-title">Sistema de Citas</p>
+      </div>
+    </div>
+
+    <!-- Contenedor para el botón de retroceso y el título -->
+    <div class="header-controls">
+      <ion-buttons *ngIf="ctrlhome.view != 'cards'" class="back-button">
+        <ion-button (click)="ctrlhome.mngNav()">
+          <ion-icon style="color: white;" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <h1 *ngIf="ctrlhome.view != 'cards'" class="page-title">{{ctrlhome.title}}</h1>
+    </div>
+
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <div *ngIf="ctrlhome.view == 'cards'" class="containermain">
+        <div (click)="doAction(1)" class="imgdiv">
+          <ion-img class="iconhome" src="../../assets/imgs/user1.png"></ion-img>
+          <br>
+          Usuario con Carnet
+        </div>
+
+        <div (click)="doAction(2)" class="imgdiv">
+          <ion-img class="iconhome" src="../../assets/imgs/user2.png" ></ion-img>
+          <br>
+          Usuario SIN Carnet
+        </div>
+
+        <ion-item *ngIf="ctrlhome.citasStorage.length > 0" (click)="ctrlhome.mngcitasmodal(1)" color="none" lines="none" class="citas-item">
+          ¿Tienes citas pendientes, haz click para consultar?
+        </ion-item>
+      </div>
+
+      <div *ngIf="ctrlhome.view == 'cita'">
+        <app-cardopts></app-cardopts>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+
+<ion-modal [isOpen]="ctrlhome.modalcitas">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Citas</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="ctrlhome.mngcitasmodal(2)">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item *ngFor="let cita of ctrlhome.citasStorage; let i = index">
+        <ion-label>
+          <h4>Codigo: {{cita.NReservaCitaId}}</h4>
+          <h4>Fecha: {{cita.fhReservacion}}</h4>
+          <h4>Tramite: {{ctrlhome.getUnidadyTramite(cita.nTramiteId,1)}}</h4>
+          <h4>Unidad: {{ctrlhome.getUnidadyTramite(cita.cunidadRecep,2)}}</h4>
+        </ion-label>
+        <ion-icon name="trash" color="danger" (click)="ctrlhome.removeCitas(i)"></ion-icon>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-alert [isOpen]="ctrlhome.modalctrl" header="Ingrese su carnet, para guardarlo como predeterminado" [buttons]="alertButtons" [inputs]="alertInputs"></ion-alert>

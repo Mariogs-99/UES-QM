@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Admon Configuración de Llamado</title>
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+            body {
+                overflow-y: auto; /* Habilita desplazamiento vertical en la página */
+                height: 100%;
+            }
+            div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+                background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+                border-bottom: 5px solid #DFD8CC;
+                position: relative;
+                bottom: 0;
+                width: 100%;
+                border-radius: 5px 5px 0px 0px;
+                overflow: hidden;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/confrepro.css" th:href="@{/css/confrepro.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css" th:href="@{/css/template-style.css}" /> 
+        <link rel="stylesheet" type="text/css" media="all" href="../css/build.css" th:href="@{/css/build.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+
+        <script type="text/javascript" src="../js/confrepro.js" th:src="@{/js/confrepro.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+
+        <!--        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>-->
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script> 
+
+        <style>
+            #tabmar {
+                list-style-type: none;
+                margin: 0;
+                float: left;
+                font-size: 1.2em;
+                margin-right: 10px;
+                background: #ffffff;
+                padding: 5px;
+                width: 600px;
+            }
+            #sortable1 li {
+                margin: 5px;
+                padding: 5px;
+                font-size: 1.2em;
+                width: 550px;
+                color: #000000
+            }
+        </style>
+
+    </head>
+    <body onload="load()">
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header" ></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+
+                    <div id="ssc-body-render">
+
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+
+
+                                <div >
+                                    <div th:include="/layout/menu :: menu"></div>
+                                    <div style="margin-bottom: 150px;">
+                                        <div class="col-sm-11">
+                                            <br />
+                                            <span class="titulo">Mantenimiento de Lista de Reproducci&oacute;n - Cat&aacute;logo</span>
+                                        </div>
+                                        <br /><br />
+                                        <center>
+                                            <table id="tabrot" style="width:600px" >
+                                                <tr>
+                                                    <td>Centro de Servicio: <select id="fmunidades" class="form-control" onchange="chango()"></select></td>
+                                                </tr>
+                                            </table>  
+                                            <table id="contenido"></table>
+                                        </center> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer" />
+
+            </div>
+        </div>
+
+    </body>
+</html>

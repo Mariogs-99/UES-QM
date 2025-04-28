@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--  <meta name="_csrf" value="dummy" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" value="dummy" th:content="${_csrf.headerName}"/>
+        <meta name="_csrf_param_name" value="dummy" th:content="${_csrf.parameterName}"/> -->
+        <title>Universidad de El Salvador</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <script type="text/javascript" src="../js/wds.js" 
+        th:src="@{/js/wds.js}"></script>
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+                background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+                border-bottom: 5px solid #DFD8CC;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                border-radius: 5px 5px 0px 0px;
+                overflow: hidden;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+        <script th:inline="javascript" type="text/javascript">
+            var AdminConfig = function (responseTxt, statusTxt, xhr) {
+                console.log("ENTRA AQUI");
+                console.log("ResponseTxt: " + responseTxt + " status: " + statusTxt);
+                //configureButtons();
+            };
+            function addTramite() {
+                var user = document.getElementById("usuario").value;
+                var lista = "";
+                jQuery('#disponible :selected').each(function (i, selected) {
+                    lista += "," + jQuery(selected).val();
+                    console.log("LISTA: " + lista);
+                });
+                if (lista)
+                    lista = lista.substring(1);
+                var div = "configTramite";
+                console.log(lista);
+                var params = 'lista=' + lista;
+                        var requestMapping = /*[[@{/admin/addTramite}]]*/;
+                var url = requestMapping + "?" + params;
+                var func = 'AdminConfig';
+                doLoad(null, url, div, func);
+            }
+            function delTramite() {
+                var lista = "";
+                jQuery('#asignado :selected').each(function (i, selected) {
+                    lista += "," + jQuery(selected).val();
+                });
+                if (lista)
+                    lista = lista.substring(1);
+                var div = "configTramite";
+                console.log(lista);
+                var params = 'lista=' + lista;
+                        var requestMapping = /*[[@{/admin/delTramite}]]*/;
+                var url = requestMapping + "?" + params;
+                var func = 'AdminConfig';
+                doLoad(null, url, div, func);
+            }
+
+            function verificarUsuario() {
+                jQuery("#helpBlock").html("");
+                //var usuarioConsulta= jQuery('#usuario').val().replace(/\x2E/g, '-');
+                var usuarioConsulta = jQuery('#usuario').val();
+                jQuery.ajax({
+                    url: "/colas/admin/getuserldap?usuarioConsulta=" + usuarioConsulta,
+                    type: "GET",
+                    success: function (resp) {
+                        //var res = resp.split(",");
+                        console.log("RESP: ", resp);
+                        //jQuery("#nombreLdap").val(resp[0]);
+                        var valor = 0;
+                        console.log("Res: ", resp);
+                        if (resp[0].length === 0) {
+                            //jQuery('#helpBlock').text("Usuario no validado.");
+                            $("#helpBlock").addClass("has-error");
+                            jQuery("#nombreLdap").val("");
+                            jQuery("#helpBlock").append('<span id="inputError2Status" class="help-block has-error">Usuario no valido debe existir en equema de se seguridad.</span>');
+                            valor = 1;
+                        
+                        }else {
+                           jQuery("#nombreLdap").val(resp[2]); 
+                        }
+                        if (resp[3] === "update") {
+                            //jQuery('#helpBlock').text("Usuario ya ingresado.");
+                            $("#helpBlock").addClass("has-error");                          
+                            jQuery("#helpBlock").append('<span id="inputError2Status" class="help-block has-error">Usuario ya ingresado.</span>');
+                            valor = 1;
+                        }
+                  
+                      /*  if (resp[1] === "ErrorRole") {
+                            //jQuery('#helpBlock').text("Error: El usuario a ingresar no posee ubicación física (unidad receptora), favor verificarlo");
+                            $("#helpBlock").addClass("has-error");
+                            jQuery("#nombreLdap").val("");
+                            jQuery("#helpBlock").append('<span id="inputError2Status" class="help-block has-error">Error: El usuario ' + jQuery('#usuario').val() + ', no pertenece a ' + res[2] + '</span>');
+                            valor = 1;
+                        }
+                       */
+                        if (valor === 0) {
+                            console.log("Lo que viene en resp js: ", resp);
+                            getEscritorios(resp[1]);
+                        }
+                    },
+                    error: function (resp) {
+                        jQuery('#helpBlock').text("Ingrese el nombre de usuario.");
+                    }
+                });
+            }
+            
+            jQuery(document).ready(function () {
+                jQuery("form#formuser").submit(function (event) {
+                    console.log("ENTRO A LDAP");
+                    console.log("Usuario LDAP: ", jQuery("#nombreLdap").val());
+                    if (jQuery("#nombreLdap").val() !== '') {
+                        jQuery('#helpBlock').text("Usuario no existe.");
+                        $("#divusuario").removeClass("has-error");
+                        jQuery('#helpnTramiteId').text("");
+                    } else {
+                        //jQuery('#helpBlock').text("Debe validar el usuario.");
+                        jQuery('#helpnTramiteId').text("Debe validar el usuario.");
+                        $("#divusuario").addClass("has-error");
+                        event.preventDefault();
+                    }
+                    var count = $('#asignado > option').length;
+                    console.log("Seleccionados " + count);
+                    if (count === 0) {
+                        jQuery('#helptraAsignados').text("Debe seleccionar al menos un tramite.");
+                        $("#divtraAsignados").addClass("has-error");
+                        event.preventDefault();
+                    } else {
+                        $("#divtraAsignados").removeClass("has-error");
+                        jQuery('#helptraAsignados').text("");
+                    }
+                    if (jQuery("#escritorio").val() === "") {
+                        jQuery('#helpEscritoriosid').text("Debe seleccionar un escritorio");
+                        $("#divEscritoriosid").addClass("has-error");
+                        event.preventDefault();
+                    } else {
+                        $("#divEscritoriosid").removeClass("has-error");
+                        jQuery('#helpEscritoriosid').text("");
+                    }
+
+                });
+
+
+
+
+            });
+            /*<![CDATA[*/
+            function getEscritorios(unidad) {
+                console.log("Llamando a obtener escritorios.");
+                var div = "divEscritorios";
+                var params = 'cunidadRecepId=' + unidad;
+                console.log("params: ", params);
+                        var requestMapping = [[@{/admin/getEscritorios}
+                        ]];
+                var url = requestMapping + "?" + params;
+                var func = 'AdminConfig';
+                doLoad(null, url, div, func);
+            }
+            /*]]>*/
+        </script>
+
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form">
+                                        <div class="welcomeContainer noBrowser-hide"> 
+                                            <form id="formuser" class="form-horizontal" th:action="@{/admin/}" th:object="${usuariopojo}" method="post">
+                                                <div class="form-group">
+                                                    <div class="col-sm-8">
+                                                        <span class="titulo">Ingreso de Nueva Configuración de Usuario</span>
+                                                    </div>
+                                                    <div class="col-sm-4 right">
+                                                        <button type="submit" title="Guardar" class="btn btn-default">
+                                                            <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                                            <span style="padding-left: 5px;">Guardar</span>
+                                                        </button>
+                                                        <a th:href="@{/admin/}" title="Regresar" class="btn btn-default">
+                                                            <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                                            <span style="padding-left: 5px;">Regresar</span>
+                                                        </a>
+                                                    </div>
+                                                </div>                                                
+                                                <div class="form-group"  id="divusuario">
+                                                    <label for="usuario" class="col-sm-2 control-label">Usuario</label>
+                                                    <div class="col-sm-5" th:if="${#strings.isEmpty(usuariopojo.dUsuario)}">
+                                                        <input id="usuario" autofocus="" type="text" th:field="*{cUsuario}" class="form-control" placeholder="usuario"/>
+                                                        <span id="helpnTramiteId" class="help-block has-error"></span>
+                                                    </div>
+                                                    <div class="col-sm-5" th:if="${not #strings.isEmpty(usuariopojo.dUsuario)}">
+                                                        <input id="usuario" type="text" th:field="*{cUsuario}" class="form-control" placeholder="usuario"/>
+                                                        <span id="helpnTramiteId" class="help-block has-error"></span>
+                                                    </div>
+                                                    <div class="col-sm-1" th:if="${#strings.isEmpty(usuariopojo.dUsuario)}">
+                                                        <button id="findUser" type="button" title="Validar Usuario" class="btn btn-default" aria-label="Left Align" onclick="verificarUsuario();">
+                                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="nombreLdap" class="col-sm-2 control-label">Nombre Usuario</label>
+                                                    <div class="col-sm-6">
+                                                        <input id="nombreLdap" type="text" th:field="*{dUsuario}" class="form-control" placeholder="Nombre de usuario" readonly="readonly" />
+                                                        <span id="helpBlock" class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                                <div id="divEscritorios">
+                                                    <div class="form-group" id="divEscritoriosid">
+                                                        <label for="escritorio" class="col-sm-2 control-label">Escritorio</label>
+                                                        <div th:if="${#lists.isEmpty(usuariopojo.listadoEscritorio)}">
+                                                            <p class="text-danger">No se encontraron escritorios disponibles.</p>
+                                                        </div>
+                                                        <div class="col-sm-6" th:unless="${#lists.isEmpty(usuariopojo.listadoEscritorio)}">
+                                                            <select id="escritorio" th:field="*{escritorio.nEscritorioId}" class="form-control">
+                                                                <option value="">Seleccione un Escritorio</option>
+                                                                <option th:each="type : ${usuariopojo.listadoEscritorio}" th:value="${type.nEscritorioId}" th:text="|${type.cUnidadRecep.dunidadRecep} - ${type.cIdentificador} ${type.nNumEscritorio}|"></option>
+                                                            </select>
+                                                            <span id="helpEscritoriosid" class="help-block"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="col-sm-3 control-label">Tramites Disponibles</label>
+                                                    <div class="col-sm-9">
+                                                        <label class="col-sm-8 control-label">Tramites Asignados</label>
+                                                    </div>
+                                                </div>
+                                                <div id="configTramite" class="form-group">
+                                                    <label class="col-sm-1 control-label">&nbsp;</label>
+                                                    <div class="col-sm-5">
+                                                        <select multiple="multiple" id="disponible" class="form-control">
+                                                            <option th:each="type : ${usuariopojo.listradoTramite}" th:value="${type.nTramiteId}" th:text="${type.sNombre}"></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <button id="addTram" type="button" onClick="addTramite();" class="btn btn-default" aria-label="Left Align">
+                                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                        </button>
+                                                        <button id="delTram" type="button" onclick="delTramite();" class="btn btn-default" aria-label="Left Align">
+                                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-5" id="divtraAsignados">
+                                                        <select multiple="multiple" id="asignado" class="form-control">
+                                                            <option th:each="type : ${usuariopojo.addTramite}" th:value="${type.nTramiteId}" th:text="${type.sNombre}"></option>
+                                                        </select>
+                                                        <span id="helptraAsignados" class="help-block has-error"></span>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

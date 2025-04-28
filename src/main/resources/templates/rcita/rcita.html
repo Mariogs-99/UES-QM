@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-datetimepicker.css" th:href="@{/css/bootstrap-datetimepicker.css}" />
+        <!--
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.step.css" th:href="@{/css/jquery.step.css}" />
+        -->
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/moment.js" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-datetimepicker.js" th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+        <script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+        <script type="text/javascript" src="../js/rcita.js" th:src="@{/js/rcita.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/me_utils.js" th:src="@{/js/me_utils.js}" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/jquery.steps.min.js" th:src="@{/js/jquery.steps.min.js}"></script>
+
+
+        <script src="../js/script.js" th:src="@{/js/script.js}"></script>
+        <style>
+            html, body {
+                height: 100%; /* Hace que tanto el HTML como el body ocupen el 100% de la altura de la pantalla */
+            }
+
+
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; /* Distribuye el contenido con espacio entre el header, el contenido y el footer */
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+                background-color: #bcbec3;
+                padding: 20px 0;
+                text-align: center;
+            }
+
+            .header-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .logo {
+                height: 80px;
+                margin-right: 20px;
+            }
+
+            .header-texts {
+                color: white;
+                text-align: left;
+            }
+
+            .header-title {
+                margin: 0;
+                font-size: 2rem;
+                font-weight: bold;
+            }
+
+            .sub-title {
+                margin: 0;
+                font-size: 1.4rem;
+            }
+
+            footer {
+                background-color: #bcbec3;
+                color: white;
+                padding: 2px 0;
+                text-align: center;
+                position: relative;
+                bottom: 0;
+                width: 100%;
+            }
+
+            .container {
+                margin-top: 20px; /* Espacio superior para el contenedor */
+                margin-bottom: 20px; /* Espacio inferior para el contenedor */
+                flex-grow: 1; /* El contenido principal puede crecer y ocupar el espacio restante */
+            }
+
+            .card-body {
+                width: 100%;
+                max-width: 800px; /* Ajusta el tamaño máximo según tus necesidades */
+                margin: 0 auto; /* Centra la card horizontalmente */
+                padding: 20px; /* Espaciado interno */
+                border: 1px solid #ddd; /* Borde de la card */
+                border-radius: 8px; /* Bordes redondeados */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra de la card */
+                background-color: #fff; /* Fondo blanco para la card */
+            }
+
+            .error-message {
+                color: red;
+                font-size: 0.875em;
+                display: none;
+            }
+
+            /* From Uiverse.io by Gaurav-WebDev */ 
+            /* From Uiverse.io by Gaurav-WebDev */
+            .button {
+                height: 50px;
+                width: 200px;
+                position: relative;
+                background-color: transparent;
+                cursor: pointer;
+                border: 2px solid #252525;
+                overflow: hidden;
+                border-radius: 30px;
+                color: #333;
+                transition: all 0.5s ease-in-out;
+            }
+
+            .btn-txt {
+                z-index: 1;
+                font-weight: 800;
+                letter-spacing: 4px;
+            }
+
+            .type1::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                transition: all 0.5s ease-in-out;
+                background-color: #333;
+                border-radius: 30px;
+                visibility: hidden;
+                height: 10px;
+                width: 10px;
+                z-index: -1;
+            }
+
+            .button:hover {
+                background-color: #bcbec3; /* Cambiar color de fondo al hover */
+                color: #fff;
+                border: none;
+                box-shadow: none; /* Quitar las sombras */
+            }
+
+            .type1:hover::after {
+                visibility: visible;
+                background-color: #bcbec3; /* Cambiar color de la animación al hover */
+                transform: scale(100) translateX(2px);
+            }
+
+
+
+            .button-container {
+                text-align: right; /* Alinea el contenido a la derecha */
+                margin-top: 20px; /* Espacio superior opcional para separación */
+            }
+        </style>
+
+        <script>
+            $(document).ready(function () {
+                $("#wizard").steps({
+                    headerTag: "h3",
+                    bodyTag: "section",
+                    transitionEffect: "slideLeft",
+                    autoFocus: true
+                });
+            })
+        </script>
+    </head>
+    <body>
+
+        <header>
+            <div class="header-container">
+                <img src="/colas/images/ues-logo.png" alt="Logo UES" class="logo"/>
+                <div class="header-texts">
+                    <h1 class="header-title">UNIVERSIDAD NACIONAL DE EL SALVADOR</h1>
+                    <h2 class="sub-title">Sistema de Citas para Trámites Académicos</h2>
+                </div>
+            </div>
+        </header>
+
+        <div class="container" id="wizard">
+            <div class="mb-3 mt-3">
+                <div class="card-body">
+                    <form for="#">
+                        <h3>Datos de la Cita</h3>
+                        <section>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="fecha">Fecha y Hora</label>
+                                    <input type="datetime-local" id="fecha" name="fechahora" step="600" min="2024-01-01T00:00" max="2036-12-31T23:59" class="form-control"/>
+                                    <div class="error-message">La fecha y hora es requerida.</div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="sucursales">Facultad</label>
+                                    <select class="form-control" id="sucursales" required="true"></select>
+                                    <div class="error-message">Seleccione una facultad.</div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="tramites">Trámite</label>
+                                    <select class="form-control" id="tramites" required="true"></select>
+                                    <div class="error-message">Seleccione un trámite.</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <h3>Datos Personales</h3>
+                        <section>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="carnet">Número de carnet</label>
+                                    <input type="text" class="form-control" id="carnet" placeholder="Número de carnet"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="InputName">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="InputName" placeholder="Nombre completo"/>
+                                    <div class="error-message">El nombre es requerido.</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Contenedor para el botón alineado a la derecha -->
+                        <div class="button-container">
+                            <button id="btn_conmit" type="button" class="button type1">
+                                <span class="btn-txt">Enviar</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <button id="btnShowMensaje" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalparaMensaje' ></button>
+        <div class="modal fade" id="modalparaMensaje">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Confirmación de Cita</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal-text">¡Su cita ha sido agendada exitosamente!</p>
+                        <p class="modal-text"><strong>Fecha:</strong> <span id="dia"></span></p>
+                        <p class="modal-text"><strong>Oficina:</strong> <span id="oficina"></span></p>
+                        <p class="modal-text">Por favor, conserve este número de cita y preséntese en la oficina indicada para generar su ticket.</p>
+                        <p class="modal-text"><strong>Número de cita:</strong> <span id="cita" style="font-size: 24px; font-weight: bold; color: #d9534f;"></span></p>
+                        <p class="modal-text"><strong>Nota:</strong> La cita será válida únicamente desde 10 minutos antes hasta 10 minutos después de la hora programada. Por favor, asegúrese de llegar dentro de este periodo.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnExit" type="button" class="btn btn-danger" data-dismiss="modal" onclick="location.href = 'https://www.ues.edu.sv/';">Salir</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+
+        <footer>
+            <div class="container">
+                <p>Derechos de autor © 2024 - Reserva de citas</p>
+            </div>
+        </footer>
+    </body>
+</html>
+

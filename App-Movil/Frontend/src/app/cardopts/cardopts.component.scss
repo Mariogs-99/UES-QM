@@ -1,0 +1,151 @@
+/* Contenedor principal */
+.containermain2 {
+  background: #bcbec3
+;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Alinea el contenido en el centro verticalmente si es necesario */
+}
+
+/* Contenedor de tarjetas */
+.card-container {
+  width: 100%;
+  height: 80vh; /* Usa vh para ajustar la altura del contenedor */
+  background-color: #bcbec3
+;
+  overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura */
+  padding: 10px; /* Agrega padding para el contenido interno */
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+/* Elementos dentro de las tarjetas */
+.card-item {
+  width: 80%;
+  height: 12%; /* Ajusta según el diseño deseado */
+  margin-bottom: 10px; /* Espacio entre elementos */
+}
+
+/* Barra de herramientas dentro de la tarjeta */
+.card-toolbar {
+  color: white;
+  font-weight: bolder;
+  background: transparent; /* Asegúrate de que el fondo sea transparente */
+}
+
+/* Estilo de etiqueta de retroceso */
+.labelback {
+  color: white;
+  text-align: justify;
+}
+
+/* Contenedor para citas */
+.cardcita {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 0 auto; /* Centra el card y elimina márgenes no deseados */
+  padding: 20px; /* Ajusta el padding según sea necesario */
+  box-sizing: border-box; /* Asegura que padding y border se incluyan en el tamaño total */
+}
+
+/* Divisor con clase */
+.dividerClass {
+  text-align: center; /* Centra el texto */
+  font-size: large;
+  border-bottom-style: groove;
+  margin: 20px 0; /* Ajusta el margen */
+}
+
+/* Estilo para imágenes */
+.imgfield {
+  width: 100px;
+}
+
+/* Contenedor relativo para posición absoluta */
+.container {
+  position: relative;
+}
+
+/* Imágenes dentro del contenedor */
+.container ion-img {
+  display: block;
+}
+
+/* Icono de descarga en posición absoluta */
+.container .fa-download {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Clase personalizada para el botón */
+.custom-button {
+  --background: #bcbec3
+; /* Color de fondo */
+  --color: white; /* Margen superior */
+  --background-focused: #bcbec3
+; /* Color de fondo cuando está enfocado */
+  --background-hover: #bcbec3
+; /* Color de fondo cuando se pasa el ratón por encima */
+  --background-active: #bcbec3
+; /* Color de fondo cuando está activo (click) */
+  --background-disabled: #bcbec3
+; /* Color de fondo cuando está deshabilitado */
+  margin-top: 20px;
+}
+
+/* Estilo para el overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Color negro con opacidad del 50% */
+  z-index: 1000; /* Asegúrate de que esté sobre el contenido */
+}
+
+
+/* Estilos específicos para el modal de confirmación */
+.custom-confirmation-modal {
+  --height: 35em; /* Aumenta la altura del modal */
+  --max-height: 90vh; /* Asegúrate de que el modal no se extienda más allá del viewport */
+  --width: 90vw; /* Ajusta el ancho del modal */
+  --max-width: 90vw; /* Asegúrate de que el modal no se extienda más allá del viewport */
+  --border-radius: 12px; /* Añade bordes redondeados si lo deseas */
+  --margin: 0 auto; /* Centra el modal horizontalmente */
+  --padding: 0;
+}
+
+/* Estilo para el contenido del modal específico */
+.custom-confirmation-modal ion-content {
+  padding: 16px; /* Añade padding interno para el contenido */
+  
+}
+
+/* Estilo para el título y el contenido del modal */
+.custom-confirmation-modal ion-label h2 {
+  margin-bottom: 16px;
+  color: #333; 
+}
+
+.custom-confirmation-modal ion-label p {
+  margin-bottom: 16px; 
+  color: #666; 
+}
+
+.custom-confirmation-modal ion-label h3 {
+  color: red; /* Color para el número de cita */
+}
+
+/* Estilo personalizado para el botón de aceptar */
+.custom-accept-button {
+  --background: #bcbec3
+; /* Color de fondo del botón */
+  --color: white; /* Color del texto del botón */
+  --border-radius: 8px; /* Bordes redondeados del botón */
+  --border: 2px solid black; /* Borde negro alrededor del botón */
+  margin-top: 20px; /* Espacio superior para el botón */
+}

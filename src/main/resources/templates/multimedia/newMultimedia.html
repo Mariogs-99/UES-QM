@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+        </style>
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+  
+
+       
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <script type="text/javascript" src="../js/moment.min.js" th:src="@{/js/moment.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.datetimepicker.js" th:src="@{/js/jquery.datetimepicker.js}"></script>
+   <!--     <script th:inline="javascript" type="text/javascript">
+            jQuery(document).ready(function() {
+               // jQuery("form#formServicio").submit(function(event) {                    
+               // });
+                
+                $("#fiVigenciaDiv").on("dp.change", function (e) {
+                    $('#ffVigenciaDiv').data("DateTimePicker").minDate(e.date);
+                });
+                $("#ffVigenciaDiv").on("dp.change", function (e) {
+                    $('#fiVigenciaDiv').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+        </script>
+   AN
+   -->
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form">
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <form id="formServicio" class="form-horizontal" th:action="@{/multimedia/save}" th:object="${gcmultimedia}" method="POST"  enctype="multipart/form-data" >
+                                            <input id="nMultimediaId" type="hidden" th:field="*{nMultimediaId}" />
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <span class="titulo" th:text="*{nMultimediaId == null}? 'Ingreso de Nuevo Archivo Multimedia' : 'Edicion de Archivo Multimedia'">Ingreso de Nuevo Archivo Multimedia</span>
+                                                </div>
+                                                <div class="col-sm-4">                                                    
+                                                    <button type="submit"  class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Guardar</span>
+                                                    </button>
+                                                    <a th:href="@{/multimedia/}" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Regresar</span>
+                                                    </a>
+                                                </div>
+                                            </div>    
+                                             <div class="form-group" id="divtipo">
+                                                <label for="stipo" class="col-sm-2 control-label">Tipo</label>
+                                                <div class="col-sm-5">
+                                                  <select id="stipo" th:field="*{sTipo}" class="form-control" required="required" >
+                                                      <option value="0" selected="selected" >Seleccione un Tipo...</option>
+                                                      <option value="imagen">Imagen</option>
+                                                      <option value="video">Video</option>
+                                                  </select>
+                                                    <span id="helpBlockEstado" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                              <div class="form-group" id="divContenido">                                                
+                                                  <label for="contenido" class="col-sm-2 control-label">Contenido</label>
+                                                  <div class="col-sm-5">
+                                                  <input id="contenido" type='file' onchange="readURL(this);" name="contenido" class="form-control" />
+                                                  <span id="helpcontenido" class="help-block has-error"></span>
+                                                </div>
+                                              </div>
+<!--                                             <div class="form-group">
+                                                <div class="col-sm-5" id="reproductor">
+                                                   <video id="thevideo" width="250" height="200" controls="true">
+                                                    El Browser no soporta el componente video.
+                                                   </video>
+                                                </div>  
+                                            </div>                                    
+                                              <div class="form-group" id="idduracion">
+                                                <label for="nDuracion" class="col-sm-2 control-label">Duraci&oacute;n(HH:MM:SS)</label>
+                                                <div class="col-sm-5">
+                                                    <input type="number" id="Hdur" style="width:50px" value="0" /><input type="number" id="Mdur" style="width:50px" value="0" /><input type="number" id="Sdur" style="width:50px" value="0" />  
+                                                   <input id="nDuracion" type="hidden" th:field="*{nDuracion}" class="form-control" placeholder="Duraci&oacute;n" />
+                                                  <span id="helpBlockDuracion" class="help-block has-error"></span>
+                                                </div>
+                                            </div>   
+                                            <div class="form-group" id="fechas">
+                                                <label for="fimultimedia" class="col-sm-2 control-label">Fecha de Vigencia</label>
+                                                <div class="col-sm-3">
+                                                    <div class="input-group date" id="fiVigenciaDiv">
+                                                        <input id="fimultimedia" th:field="*{fiMultimedia}" class="form-control" type="datetime" 
+                                                               value="2023-01-01"/>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>                                                        
+                                                        </span>                                                        
+                                                    </div>
+                                                    <span id="helpBlockfivigencia" class="help-block has-error"></span>
+                                                </div>
+                                                <label for="ffmultimedia" class="col-sm-1 control-label">Hasta</label>
+                                                <div class="col-sm-3">
+                                                    <div class="input-group date" id="ffVigenciaDiv">
+                                                        <input id="ffmultimedia" th:field="*{ffMultimedia}" class="form-control" type="datetime" 
+                                                               value="2023-01-10"/>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>                                                        
+                                                        </span>                                                        
+                                                    </div>
+                                                    <span id="helpBlockffvigencia" class="help-block has-error"></span>
+                                                </div>
+                                                <span id="helpBlockfecha" class="help-block has-error"></span>
+                                             </div>                  
+ -->
+                                             <div class="form-group" id="divEstado">
+                                                <label for="bActiva" class="col-sm-2 control-label">Activo SI/NO</label>
+                                                <div class="col-sm-5">
+                                                  <select id="bActiva" th:field="*{bActiva}" class="form-control" required="required">
+                                                      <option value="0" selected="selected">Seleccione un Estado...</option>
+                                                      <option value="1">SI</option>
+                                                      <option value="2">NO</option>
+                                                  </select>
+                                                    <span id="helpBlockActiva" class="help-block has-error"></span>
+                                                </div>
+                                             </div>  
+                                           <!-- 
+                                             <div class="form-group">
+                                                <label for="sRuta" class="col-sm-2 control-label">Ruta</label>
+                                                <div class="col-sm-5" id="idruta">
+                                                  <input id="sRuta" type="text" th:field="*{sRuta}" class="form-control" placeholder="Ruta hacia elarchivo" />
+                                                  <span id="helpruta" class="help-block has-error"></span>
+                                                </div>
+                                            </div> 
+                                         -->
+                                            <div class="form-group" id="divdmulti">
+                                                <label for="dMultimedia" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                                                <div class="col-sm-5">
+                                                    <textarea id="dMultimedia" th:field="*{dMultimedia}" class="form-control" placeholder="Descripci&oacute;n..." ></textarea>
+                                                  <span id="helpdmulti" class="help-block has-error"></span>
+                                                </div>
+                                            </div>  
+                                     
+                                            <div>
+                                                <input id="flag" type="hidden" value="0" />
+                                                <input id="tpage" type="hidden" value="N" />
+                                            </div>
+                                        </form>
+<!--                                        <div id="esperar" style="height:75px;width:150px;border:2px solid black;position: relative">
+                                            <center> <img src="/colas/images/loading.gif" alt=""/> <h2>Guardando...asped</h2></center>
+                                        </div>-->
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

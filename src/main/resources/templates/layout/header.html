@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Header</title>
+
+    </head>
+    <body>
+        <div th:fragment="header">
+
+            <script th:inline="javascript">
+
+
+                $(function () {
+                    $.ajax({
+                        url: window.location.protocol + "//" + window.location.host + "/colas/me/getUserName",
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        mimeType: 'application/json',
+                        success: function (data) {
+                            $("#userNIT").html(data.user);
+                        },
+                        error: function (data, status, er) {
+                            alert("error: " + data + " status: " + status + " er:" + er);
+                        }
+                    });
+
+                    DisplayCurrentTime();
+
+                });
+
+                function DisplayCurrentTime() {
+
+                    var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                    var dayNames = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
+                    var dt = new Date();
+                    dt.setDate(dt.getDate());   //dt.setDate(dt.getDate() + 1); 
+                    var refresh = 1000; //Refresh rate 1000 milli sec means 1 sec
+                    /*<![CDATA[*/
+                    var cDate = (dt.getDate() < 10 ? ('0' + dt.getDate()) : dt.getDate()) + ' de ' + monthNames[dt.getMonth()] + ' ' + dt.getFullYear();
+                    /*]]>*/
+                    document.getElementById('cTime').innerHTML = cDate + ", " + timeformat(dt);
+                    window.setTimeout('DisplayCurrentTime()', refresh);
+
+                }
+
+                function timeformat(date) {
+                    /*<![CDATA[*/
+                    var h = date.getHours();
+                    var m = date.getMinutes();
+                    var x = h >= 12 ? 'pm' : 'am';
+                    h = h % 12;
+                    h = h ? h : 12;
+                    m = m < 10 ? '0' + m : m;
+                    var mytime = h + ':' + m + ' ' + x;
+                    /*]]>*/
+                    return mytime;
+                }
+
+                function addTramiteUsuario() {
+                    var lista = "";
+                    jQuery('#disponible :selected').each(function (i, selected) {
+                        lista += "," + jQuery(selected).val();
+                    });
+                    if (lista)
+                        lista = lista.substring(1);
+                    var div = "divroles";
+                    console.log(lista);
+                    var params = 'lista=' + lista;
+                    var requestMapping = /*[[@{/usuario/addRole}]]*/;
+                    var url = requestMapping + "?" + params;
+                    var func = 'AdminConfig';
+                    doLoad(null, url, div, func);
+                }
+
+                function eliminarTramiteUsuario() {
+                    var lista = "";
+                    jQuery('#divRolAsignados :selected').each(function (i, selected) {
+                        lista += "," + jQuery(selected).val();
+                    });
+                    if (lista)
+                        lista = lista.substring(1); // Elimina la coma inicial
+                    var div = "divroles";
+                    console.log(lista);
+                    var params = 'lista=' + lista;
+                    var requestMapping = /*[[@{/usuario/delRole}]]*/; // Cambia esto a la URL correcta para eliminar roles
+                    var url = requestMapping + "?" + params;
+                    var func = 'AdminConfig';
+                    doLoad(null, url, div, func);
+                }
+
+
+                function guardo(modo) {
+                    console.log("MODO: ", modo);
+                }
+            </script>
+
+            <style>
+
+                div#ssc-mh {
+                    width: 45%;
+                    height: 100px;
+                    text-align: center;
+                    float: right;
+                }
+
+                div.r {
+                    float: right;
+                    margin-left: 5px;
+                }
+
+
+                .userTool {
+                    border-radius: 0.5em;
+                    margin-top: 1px;
+                    height: 31px;
+                    text-align: center;
+                    font-size: 15px;
+                    width: 190px;
+                    padding-left: 10px;
+                }
+
+                .table {
+                    display: table;
+                    width: 100%;
+                    padding-top: 80px;
+                }
+                .table span{
+                    max-width: 100%;
+                }
+                .table-row {
+                    display: table-row;
+                    width: 100%;
+                }
+                .table-cell {
+                    display: table-cell;
+                    font-size: 12px;
+                    text-align: right;
+                }
+                @media (max-width: 879px) {
+                    .table, .table-row {
+                        display: inline-block;
+                        font-size:8px;
+                    }
+                    .table-cell {
+                        display:inline-block;
+                    }
+                    #ssc-mh img{
+                        width: 20%;
+                    }
+                }
+
+            </style>
+
+            <div id="ssc-header" class=" col-xs-6 col-md-12">
+                <div id="ssc-elsalvador" class="col-xs-12">
+                    <img th:src="@{/images/colas.PNG}" src="${ctx}/images/colas.PNG" class="img-responsive" style="width:120px; height: 120px;"/>
+                </div>
+                <div id="ssc-mh" class="col-xs-12">
+                    <!--<img th:src="@{/images/colas.PNG}" src="${ctx}/images/colas.PNG"  style="float:right; width: 185px; height: 90px; padding-top:1px;" class="img-responsive" />
+                    --> <div class="table" >
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <span id="cTime" style="color: white;"></span>
+                            </div>
+                            <div class="table-cell">
+                                <div id="userTool" class="r userTool list-inline">
+                                    <ul>
+                                        <li>
+                                            <p><span style="color: white;" >Usuario:</span>&nbsp;<span id="userNIT" ></span></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="clr"></div> !-->
+            </div>
+        </div>
+    </body>
+</html>

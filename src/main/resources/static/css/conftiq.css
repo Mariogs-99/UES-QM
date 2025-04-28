@@ -1,0 +1,60 @@
+h3 {
+font-size:14px;
+font-weight: bold;
+}
+
+.marco {
+    padding: 1px;
+    border: 2px solid black;
+    margin: 1px;
+}
+.inn {
+    padding: 1px;
+    border: 1px dashed blue; 
+    margin: 5px;
+	background-color: FFFFFF; 
+	text-align:center;
+}
+.onn {
+    padding: 1px;
+    border: 5px;
+    margin: 5px;
+	height: 30px;
+        font-size:12px;
+        font-weight: bold;
+	vertical-align:middle;
+	display: list-item;
+	background-color: b5e4f0; 
+}
+.oxx {
+    padding: 1px;
+    border: 1px dashed blue; 
+    margin: 5px;
+	background-color: AAAAAA; 
+	text-align:center;
+}
+td.eletd {
+	padding: 3px;
+    border: 2px;
+    margin: 5px;
+	height: 30px;
+	width:150px;
+        font-size:12px;
+        font-weight: bold;
+	vertical-align:middle;
+	background-color: b5e4f0; 
+        border-style: solid;
+        border-color: #ffffff;
+}
+td.tdcl  {
+    color: 00EAEA; 	
+}
+.onn span {
+	vertical-align:middle;
+	display: table-cell;
+}
+tr.border_bottom  { 
+  color: 00EAEA;  
+  border-bottom:2px solid #00EAEA;
+
+}

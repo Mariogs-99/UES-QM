@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" 
+        th:src="@{/js/bootstrap-table.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-datetimepicker.css" th:href="@{/css/bootstrap-datetimepicker.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+  
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/moment.js" th:src="@{/js/moment.js}"></script>
+        <script type="text/javascript" src="../js/jquery-ui-timepicker-addon.js" th:src="@{/js/jquery-ui-timepicker-addon.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-datetimepicker.js" th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+        <script th:inline="javascript" type="text/javascript">
+            jQuery(document).ready(function () {
+                var AlertConfig = function(responseTxt, statusTxt, xhr) {
+                };
+                jQuery("#cunidadRecepId").change(function(){
+                    var unidad = document.getElementById("cunidadRecepId").value;
+                    var div = "areaServicio";
+                    var params = 'cunidadRecepId='+unidad;
+                    var requestMapping = /*[[@{/alerta/getzonas}]]*/;
+                    var url = requestMapping + "?" + params;
+                    var func = 'AlertConfig';
+                    doLoad(null, url, div, func);
+                });
+                jQuery('#fiVigenciaDiv').datetimepicker({
+                    format: 'DD/MM/YYYY HH:mm'
+                });
+                jQuery('#ffVigenciaDiv').datetimepicker({
+                    format: 'DD/MM/YYYY HH:mm'
+                });
+                var correos = /*[[${emails}]]*/ '';
+                if(correos) {
+                    var x = 0;
+                    correos.split(",").forEach(function(correo) {
+                        if(x > 0)
+                            mailAddValue(correo);
+                        x++;
+                    });
+                }
+                jQuery( "form#formAlerta" ).submit(function( event ) {
+                    var valido = false;
+                    if (jQuery( "input#bCorreo1" ).is(':checked')) {
+                        valido = true;
+                    }
+                    if (jQuery( "input#bPantalla1" ).is(':checked')) {
+                        valido = true;
+                    }
+                    if (!valido) {
+                        jQuery("#checkError").css("visibility", "visible");
+                    }
+                    if(jQuery("#sMensaje").val() === "" || jQuery("#sMensaje").val() === null){
+                        jQuery('#helpsMensaje').text("Debe ingresar un mensaje");
+                        $("#divsMensaje").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divsMensaje").removeClass("has-error");
+                        jQuery('#helpsMensaje').text("");
+                    }
+                    if(jQuery("#sTipo").val() === "" || jQuery("#sTipo").val() === null){
+                        jQuery('#helpsTipo').text("Debe seleccionar el tipo de alerta");
+                        $("#divsTipo").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divsTipo").removeClass("has-error");
+                        jQuery('#helpsTipo').text("");
+                    }
+                    if(jQuery("#cUsuarioModi").val() === "" || jQuery("#cUsuarioModi").val() === null){
+                        jQuery('#helpcunidadRecepId').text("Debe seleccionar un Centro de Servicio");
+                        $("#divcunidadRecepId").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divcunidadRecepId").removeClass("has-error");
+                        jQuery('#helpcunidadRecepId').text("");
+                    }
+                    if(jQuery("#fiVigencia").val() === "" || jQuery("#fiVigencia").val() === null || jQuery("#ffVigencia").val() === "" || jQuery("#ffVigencia").val() === null){
+                        jQuery('#helpfiVigencia').text("Debe seleccionar un rango de fecha valido");
+                        $("#divfiVigencia").addClass("has-error");
+                        $("#divfiVigencia2").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divfiVigencia").removeClass("has-error");
+                        $("#divfiVigencia2").removeClass("has-error");
+                        jQuery('#helpfiVigencia').text("");
+                    }
+                    if(jQuery("#cUsuarioNotifica").val() === "" || jQuery("#cUsuarioNotifica").val() === null){
+                        jQuery('#helpcUsuarioNotifica').text("Debe seleccionar un tipo de usuario");
+                        $("#divcUsuarioNotifica").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divcUsuarioNotifica").removeClass("has-error");
+                        jQuery('#helpcUsuarioNotifica').text("");
+                    }
+                    //return valido;
+                    //event.preventDefault();
+                });
+            });
+            function mailAdd() {
+                jQuery('<div class="form-group divRow"><label class="col-sm-2 control-label">&nbsp;</label><div class="col-sm-6"><input type="text" class="form-control" placeholder="ejemplo@ejemplo.com" id="sCorreoNotifica" name="sCorreoNotifica" value=""/></div><div class="col-sm-1"><button type="button" class="btn btn-primary" onclick="mailDel(this)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></div></div>').appendTo("#divPadre");
+            }
+            function mailAddValue(valor) {
+                jQuery('<div class="form-group divRow"><label class="col-sm-2 control-label">&nbsp;</label><div class="col-sm-6"><input type="text" class="form-control" placeholder="ejemplo@ejemplo.com" id="sCorreoNotifica" name="sCorreoNotifica" value="'+valor+'"/></div><div class="col-sm-1"><button type="button" class="btn btn-primary" onclick="mailDel(this)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></div></div>').appendTo("#divPadre");
+            }
+            function mailDel(input) {
+                jQuery(input).parents(".divRow").remove();
+            }            
+        </script>
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form">
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <form id="formAlerta" class="form-horizontal" th:action="@{/alerta/saveAl}" th:object="${gcalerta}" method="POST">
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <span class="titulo">Ingreso de nueva Alerta</span>
+                                                </div>
+                                                <div class="col-sm-4 right">
+                                                    <button type="submit" title="Guardar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Guardar</span>
+                                                    </button>
+                                                    <a th:href="@{/alerta/}" title="Regresar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Regresar</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"  id="divsMensaje">
+                                                <label for="sMensaje" class="col-sm-2 control-label">Mensaje</label>
+                                                <div class="col-sm-7">
+                                                    <textarea autofocus="true" class="form-control" rows="3" th:field="*{sMensaje}" placeholder="Mensaje"></textarea>
+                                                    <span id="helpsMensaje" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divsTipo">
+                                                <label for="sTipo" class="col-sm-2 control-label">Tipo</label>
+                                                <div class="col-sm-7">
+                                                    <select th:field="*{sTipo}" class="form-control">
+                                                        <option value="">Seleccione un tipo</option>
+                                                        <option value="0">Aviso</option>
+                                                        <option value="1">Advertencia</option>
+                                                        <option value="2">Alerta</option>
+                                                    </select>
+                                                    <span id="helpsTipo" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divcunidadRecepId">
+                                                <label for="cUnidadRecep" class="col-sm-2 control-label">Centro de servicio</label>
+                                                <div class="col-sm-7">
+                                                    <select id="cUsuarioModi" th:field="*{cUsuarioModi}" class="form-control">
+                                                        <option value="">Seleccione un servicio</option>
+                                                        <option th:each="item : ${alertapojo.listadoUnidades}" th:value="${item.cunidadRecep}" th:text="${item.dunidadRecep}"></option>
+                                                    </select>
+                                                    <span id="helpcunidadRecepId" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="areaServicio">
+                                                <div class="form-group" id="divnServiciosId">
+                                                    <label for="nServiciosId" class="col-sm-2 control-label">Area</label>
+                                                    <div class="col-sm-7">
+                                                        <select th:field="*{nServiciosId}" class="form-control" >
+                                                            <option value="0">Seleccione una area</option>
+                                                            <option th:each="item : ${alertapojo.listadoZonas}" th:value="${item.nZonaId}" th:text="${item.sNombre}"></option>
+                                                        </select>
+                                                        <span id="helpnServiciosId" class="help-block has-error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"  id="divfiVigencia">
+                                                <label for="fiVigencia" class="col-sm-2 control-label">Fecha de Notificaci&oacute;n</label>
+                                                <div class="col-sm-3">
+                                                    <div class="input-group date" id="fiVigenciaDiv">
+                                                        <input th:field="*{fiVigencia}" type="text" class="form-control"/>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                       
+                                                    </div>
+                                                </div>
+                                                <label for="ffVigencia" class="col-sm-1 control-label">Hasta</label>
+                                                <div class="col-sm-3">
+                                                    <div class="input-group date" id="ffVigenciaDiv">
+                                                        <input th:field="*{ffVigencia}" type="text" class="form-control"/>
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" id="divfiVigencia2">
+                                                <label for="fiVigencia" class="col-sm-2 control-label"></label>
+                                                <div class="col-sm-7">
+                                                    <span id="helpfiVigencia" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="divcUsuarioNotifica">
+                                                <label for="cUsuarioNotifica" class="col-sm-2 control-label">Notificar a</label>
+                                                <div class="col-sm-7" id="div">
+                                                    <select th:field="*{cUsuarioNotifica}" class="form-control">
+                                                        <option value="">Usuarios...</option>
+                                                        <option value="GC_R3">Administrador</option>
+                                                        <option value="GC_R4">Tecnico</option>
+                                                        <option value="All">Todo Usuario</option>
+                                                    </select>
+                                                    <span id="helpcUsuarioNotifica" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="escritorio" class="col-sm-2 control-label">&nbsp;</label>
+                                                <div class="col-sm-3">
+                                                    <label>
+                                                        <input type="checkbox" th:field="*{bCorreo}" th:value="*{bCorreo}" />
+                                                        Notificar por correo
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>
+                                                        <input type="checkbox" th:field="*{bPantalla}" th:value="*{bPantalla}" />
+                                                        Notificar por pantalla
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div id="checkError" class="form-group has-error" style="visibility: hidden;">
+                                                <label for="cUsuarioNotifica" class="col-sm-2 control-label">&nbsp;</label>
+                                                <div class="col-sm-7">
+                                                    <span id="helpBlockSilla" class="help-block has-error">Debe seleccionar al menos una forma de notificación</span>
+                                                </div>
+                                            </div>
+                                            <div id="divPadre">
+                                                <div class="form-group" id="newMail">
+                                                    <label for="sCorreoNotifica" class="col-sm-2 control-label">Correos de Notificacion</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" th:field="*{sCorreoNotifica}" class="form-control" placeholder="ejemplo@ejemplo.com" />
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <button type="button" class="btn btn-default" onclick="mailAdd()">
+                                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input th:field="*{nAlertaId}" type="hidden" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

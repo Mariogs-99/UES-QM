@@ -1,0 +1,55 @@
+/*Mensajes de Servidor --Ajax--*/
+/*div#tMessage{
+    height:1px;
+    overflow:hidden; 
+    width:100%; 
+    background-image:url("../images/top-shadow.png"); 
+    background-position: center top;
+    background-repeat: no-repeat;
+    border-bottom:1px solid #ffffff; 
+    border-left:1px solid #ffffff;
+}
+div#tMessage p{padding:10px; margin:0; font-size:0.9em;}
+div.error{background:#F4D0D0; font-color:#FF0000}
+div.error p{font-color:#FF0000}
+div.notice{background:#CAE4F9; font-color:#038BFC}
+div.notice p{font-color:#038BFC}
+div.warning{background:#F9F5C7;font-color:#BAAC00}
+div.warning p{font-color:#BAAC00}*/
+
+
+
+
+
+
+div#tMessages{position:fixed; width:400px; right:0px; top:136px;  cursor:pointer;background-image:url(../images/messages-icons.png);
+				background-repeat: no-repeat;
+				background-color:transparent;
+				min-height: 50px;
+				display:none; z-index: 888888889;}
+
+
+				
+div#tMessages.failed{background-position:top left;}
+div#tMessages.notice{background-position:-112px 0px;}
+div#tMessages.warning{background-position:-54px 0px;}
+div#tMessages p{padding:5px 10px; margin:0; font-size:1.1em;}
+div#tMessages.failed .message-list{background:#d40000;}
+div#tMessages.failed .message-list p{color:#ffcccc}
+div#tMessages.notice .message-list{background:#008033;}
+div#tMessages.notice .message-list p{color:#80ffb3}
+div#tMessages.warning .message-list{background:#ffe680;}
+div#tMessages.warning .message-list p{color:#806600}
+
+
+div.message-list{width:355px;min-height: 50px;}
+div.message-list ul{width:100%; list-style: none;}
+div.message-list ul li{width:100%; padding:0; margin:0;}
+span.errorField{display:block; color:#C1272D; padding:5px; font-size:.9em;}
+div#tMessages ul li{display:block;}
+
+div.r{float:right; margin-left:5px;}
+.b-shadow {
+    box-shadow: 0px 0px 5px #333;
+    -moz-box-shadow: 0px 0px 5px #333;
+}

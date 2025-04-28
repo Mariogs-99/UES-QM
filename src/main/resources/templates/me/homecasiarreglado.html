@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html style="background-image: url('../images/abstract-1780171_960_720.png');
+      background-repeat: no-repeat;background-color: #00def6; ">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mesa de entrada</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css"
+        th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css"
+        th:href="@{/css/bootstrap-select.min.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/keyboard.css" th:href="@{/css/keyboard.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/template-style.css"
+        th:href="@{/css/template-style.css}" />
+    <!--<link rel="stylesheet" type="text/css" media="all" href="../css/me_virtualKeyBoard.css" th:href="@{/css/me_virtualKeyBoard.css}" />-->
+    <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.css"
+        th:href="@{/css/font-awesome.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/build.css" th:href="@{/css/build.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css"
+        th:href="@{/css/bootstrap-theme.min.css}" />
+
+    <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+    <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+    <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+    <script type="text/javascript" src="../js/jquery.keyboard.js" th:src="@{/js/jquery.keyboard.js}"></script>
+    <script type="text/javascript" src="../js/jquery.mousewheel.js" th:src="@{/js/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="../js/jquery.keyboard.extension-typing.js"
+        th:src="@{/js/jquery.keyboard.extension-typing.js}"></script>
+    <script type="text/javascript" src="../js/jquery.keyboard.extension-autocomplete.js"
+        th:src="@{/js/jquery.keyboard.extension-autocomplete.js}"></script>
+    <script type="text/javascript" src="../js/jquery.keyboard.extension-navigation.js"
+        th:src="@{/js/jquery.keyboard.extension-navigation.js}"></script>
+    <script type="text/javascript" src="../js/jquery.msgBox.js" th:src="@{/js/jquery.msgBox.js}"></script>
+    <script type="text/javascript" src="../js/jquerysession.js" th:src="@{/js/jquerysession.js}"></script>
+    <script type="text/javascript" src="../js/jquery.jqprint-0.3.js" th:src="@{/js/jquery.jqprint-0.3.js}"></script>
+    <script type="text/javascript" src="../js/me_opciones.js" th:src="@{/js/me_opciones.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/jquery.print.js" th:src="@{/js/jquery.print.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/me_utils.js" th:src="@{/js/me_utils.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/me_inputMask.js" th:src="@{/js/me_inputMask.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/me_virtualKeyBoard.js" th:src="@{/js/me_virtualKeyBoard.js}"
+        charset="utf-8"></script>
+    <script language="jscript">
+        function goFullscreen() {
+            // Must be called as a result of user interaction to work
+            mf = document.documentElement;
+            if (mf.requestFullscreen) {
+                mf.requestFullscreen().then(() => {
+                    console.log("fullscreen");
+                }, () => {
+                    console.warn("no fullscreen");
+                });
+            } else if (mf.webkitRequestFullscreen) {
+                mf.webkitRequestFullscreen();
+            } else if (mf.mozRequestFullscren) {
+                mf.mozRequestFullscren();
+            } else if (mf.msFullscreen) {
+                mf.msFullscreen();
+
+            }
+
+        }
+        function fullscreenChanged() {
+            if (document.webkitFullscreenElement == null) {
+                mf = document.documentElement;
+                //mf.style.display="none";
+            } else if (document.mozRequestFullscren == null) {
+                mf = document.documentElement;
+            }
+        }
+        document.onwebkitfullscreenchange = fullscreenChanged;
+        document.documentElement.onclick = goFullscreen;
+            //document.onkeydown = goFullscreen;
+    </script>
+
+</head>
+
+<body style="background-image: url('../images/abstract-1780171_960_720.png');
+          background-repeat: no-repeat;  background-color:#00def6 ;" id="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center" style="padding-top: 50px;">
+                <img class="img-responsive" src="../images/logoMh.png" style="max-width: 250px; height: auto;" />
+            </div>
+        </div>
+        <div class="row">
+            <!--<header><div th:include="/layout/me_logo :: logo"/></header>
+                <nav style="padding-bottom:25px; "><div th:include="/layout/me_nav :: nav"/></nav>-->
+            <div style="float: right;">
+                <div id="loader" style="display: none;">
+                    <div id="loader_1" class="loader"></div>
+                    <div id="loader_2" class="loader"></div>
+                    <div id="loader_3" class="loader"></div>
+                    <div id="loader_4" class="loader"></div>
+                    <div id="loader_5" class="loader"></div>
+                    <div id="loader_6" class="loader"></div>
+                    <div id="loader_7" class="loader"></div>
+                    <div id="loader_8" class="loader"></div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <img class="img-responsive" src="../images/logoMh.png"
+                    style="padding-top: 50px; position:relative; left:450px; width: 250px; height: 250px;" />
+            </div>
+        </div>
+        <section class="" >
+            <form action="#" id="form">
+                <div class=" col-xs-4 col-md-12" >
+                    <div class='panel panel-i' style='width: auto;' >
+                        <div id='1' class='panel-h' >Atención al cliente</div>
+                        <div class='panel-bodyme'><div class='container'>
+                            <table class='tablame ' >
+                                <tr>
+                                    <td class='tbm'>
+                                        <button id='20' type='button' class=' btn blueButton col-xs-4 col-md-12  ic3' value='Caja' data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalPrioridadSinNit' style='background-color:#077F29; border:2px solid; border-radius:10px;'>
+                                            Caja
+                                        </button>
+                                    </td>
+                                    <td class='tbm'>
+                                        <button id='21' type='button' class=' btn blueButton col-xs-4 col-md-12  ic4' value='Atención Cliente' data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalPrioridadSinNit' style='background-color:#7F066D; border:2px solid; border-radius:10px;'>
+                                            Atención Cliente
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class='panel panel-i' style='width: auto;' >
+                    <div id='2' class='panel-h' >
+                        Cajas
+                    </div>
+                    <div class='panel-bodyme'>
+                        <div class='container'>
+                            <table class='tablame ' align=''>
+                                <tr>
+                                    <td class='tbm'>
+                                        <button id='4' type='button' class=' btn blueButton col-xs-4 col-md-12  ic2' value='Pago de Planillas' data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalPrioridadSinNit' style='background-color:#077F29; border:2px solid; border-radius:10px;'>
+                                            Pago de Planillas
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class='panel panel-i' style='width: auto' >
+                    <div id='9' class='panel-h' >SERVICIO SQLSERVER</div>
+                    <div class='panel-bodyme'>
+                        <div class='container'>
+                            <table class='tablame ' align=''>
+                                <tr>
+                                    <td class='tbm'>
+                                        <button id='8' type='button' class=' btn blueButton col-xs-4 col-md-12  ic0' value='PRUEBA TRAMITE' data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalPrioridadSinNit' style='background-color:#077F29; border:2px solid; border-radius:10px;'>
+                                            PRUEBA TRAMITE
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </div>    
+                <input type="hidden" id="idTramite" value="" />
+                <div class="modal fade" id="modalPrioridadSinNit">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Prioridad</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <table>
+                                    <tr>
+                                        <td style="text-align: right;">
+                                            Prioridad:
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select id="prioridadOne" name="prioridadOne" class="selectpicker" data-style="btn-primary" style="display: none;"></select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;">
+                                            Tiempo de holgura:
+                                        </td>
+                                        <td>
+                                            <input id="tholguraOne" type="checkbox" data-toggle="toggle" data-on="Activo" data-off="Inactivo" />
+                                        </td>	
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --> 
+                                <button id="btnPrintOne" type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" >Generar tiquete</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+                <div class="modal fade" id="modalPrioridadConNit">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Validación de NIT</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <table>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div class="checkbox checkbox-primary">
+                                                <input id="omitirNIT" class="styled" type="checkbox" />
+                                                <label for="omitirNIT">
+                                                    Omitir NIT
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;">
+                                            NIT:
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control keyboard-num keyboard-phone simple-field-data-mask" id="txtNIT" maxlength="17" />
+                                        </td>
+                                        <td>
+                                            <button id="btnValidarNIT" type="button" class="btn btn-primary">Validar</button>
+                                        </td>	
+                                    </tr>
+                                    <tr class="informationBar" style="display: none;">
+                                        <td colspan="3">
+                                            <div class="separator" style="margin-left:-25px; width: 513px; font-size: 12px; padding-left: 10px;">Información del contribuyente</div>
+                                        </td>
+                                    </tr>
+                                    <tr class="infoNombre" style="display: none;">
+                                        <td style="text-align: right;">
+                                            Nombre:
+                                        </td>
+                                        <td>
+                                            <label id="lblNombre"></label>
+                                        </td>
+                                    </tr>
+                                    <tr class="infoNIT" style="display: none;">
+                                        <td style="text-align: right;">
+                                            NIT:
+                                        </td>
+                                        <td>
+                                            <label id="lblNIT"></label>
+                                        </td>
+                                    </tr>
+                                    <tr class="infoError" style="display: none;">
+                                        <td colspan="2">
+                                            <div class="alert alert-danger">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                NIT <span id="lblNitError"></span>, no existe.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div class="separator" style="margin-left:-25px; width: 513px; font-size: 12px; padding-left: 10px;"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; ">
+                                            Prioridad:
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select id="prioridadTwo" name="prioridadTwo" class="selectpicker" data-style="btn-primary" style="display: none;"></select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;">
+                                            Tiempo de holgura:
+                                        </td>
+                                        <td>
+                                            <input id="tholguraTwo" type="checkbox" data-toggle="toggle" data-on="Activo" data-off="Inactivo" />
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --> 
+                                <button id="btnPrintTwo" type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" >Generar tiquete</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+                <button id="btnShowTiquete" type="button" style="display: none;" data-backdrop='static' data-keyboard='false' data-toggle='modal' data-target='#modalparaImprimir' ></button>
+                <div class="modal fade" id="modalparaImprimir">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Imprimir</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="marcoTiquete">
+
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btnPrint" type="button" class="btn btn-primary" data-dismiss="modal" >Imprimir tiquete</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div>
+
+
+            </form>	
+        </section>
+    </div>
+    <div class="row">
+        <!-- <footer><div th:include="/layout/me_foot :: foot"/></footer>  -->
+    </div>
+
+
+
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#tholguraOne').bootstrapToggle();
+            $('#tholguraTwo').bootstrapToggle();
+            $("table tr td .toggle").css("width", "100px");
+            $("#prioridadOne").css("width", "225px");
+            $("#modalPrioridadConNit .modal-dialog").css("width", "515px");
+            $("#btnPrintTwo").prop("class", "btn btn-primary disabled");
+
+        });
+
+    </script>
+
+</body>
+
+</html>

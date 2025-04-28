@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js"
+        th:src="@{/js/dropdownmenu.js}"></script>
+        
+        <style>
+            div#ssc-body-render {
+                width: 100%;
+            }
+                    div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+  
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js" th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
+        <script type="text/javascript"  th:inline="javascript">
+            /*<![CDATA[*/
+
+            $(document).ready(function() {
+               $('#jerarquiastab').DataTable( {
+                    "language": {
+                        "url":"/colas/fonts/Spanish.json"
+                    }
+                } );
+                var success = /*[[${mensaje}]]*/ '';
+                var error = /*[[${mensajeError}]]*/ '';
+                var divs='';
+                if(success !== '' && success !== null && success !== 'null'){
+                    divs='<div id="tMessages" class="notice" status="c" onclick="ocultaMSJ(this)" style="display: block;"><div class="message-list r b-shadow"><ul><li><p>PROCESO EXITOSO</p></li><li><p>'+success+'</p></li></ul></div></div>';
+                }
+                if(error !== '' && error !== null && error !== 'null'){
+                    divs='<div id="tMessages" class="failed" status="c" onclick="ocultaMSJ(this)" style="display: block;"><div class="message-list r b-shadow"><ul><li><p>ERRORES ENCONTRADOS</p></li><li><p>'+error+'</p></li></ul></div></div>';
+                }
+                if(divs !==''){
+                    $('#msjs').after(divs);
+                    $("#tMessages").mouseover(function(){
+                        $(this).stop(true, true).animate({"right":"0px"}, {queue: false});
+                    }).mouseout(function(){
+                        $(this).stop(true, true).animate({ "right":"-350px"}, {queue: false});
+                    });
+                }
+            });
+            /*]]>*/
+            function ocultaMSJ(div){
+                div.remove();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form"> 
+                                    <div class="welcomeContainer noBrowser-hide"> 
+                                        
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-sm-9">
+                                                    <span class="titulo">Mantenimiento de Unidades - Cat&aacute;logo</span>
+                                                    <br /><br />
+                                                </div>
+                                                <div class="col-sm-3 text-right" sec:authorize="hasAnyRole('ROLE_GC_R1')">
+                                                    <a th:href="@{/unidad/newUnidad}" title="Nueva Unidad" class="titulo_n"> <i class="glyphicon glyphicon-file fa-2x"></i>Nueva Unidad</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <table id="jerarquiastab" class="table table-striped table-bordered table-hover table-condensed table-responsive"> 
+                                                <thead>
+                                                    <tr>
+                                                        <th class="ui-widget-header" colspan="5">Unidades</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Correlativo</th>
+                                                        <th>Codigo Unidad</th>
+                                                        <th>Nombre Unidad</th>
+                                                        <th>Estado</th>
+                                                        <th style="width: 40px;">&nbsp;</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="unidad,status : ${unidadList}">
+                                                        <td th:text="${status.count}" ></td>
+                                                        
+                                                        <td th:text="${unidad.cunidadRecep}"></td>
+                                                        <td th:text="${unidad.dunidadRecep}"></td>
+                                                        <td th:switch="${unidad.bstatus}">
+                                                            <p th:case="1">Activo</p>
+                                                            <p th:case="0">Inactivo</p>
+                                                        </td>
+                                                        <td>
+                                                            <a th:href="@{'/unidad/'+${unidad.cunidadRecep}+'/verUnidad'}" title="Ver Registro" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-search"></i>
+                                                            </a>
+                                                            <a th:href="@{'/unidad/'+${unidad.cunidadRecep}+'/editUnidad'}" sec:authorize="hasAnyRole('ROLE_GC_R1')" title="Editar Registro" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-pencil-square-o"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>  
+                                        
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                                        <div id="msjs"></div>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

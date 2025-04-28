@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>QManagement</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+        </style>
+<link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery.dataTables.css" th:href="@{/css/dataTables.bootstrap.css}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sweet-alert.css" th:href="@{/css/sweet-alert.css}" />
+        <script type="text/javascript" src="../js/sweet-alert.js" th:src="@{/js/sweet-alert.js}"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/siit/forms.css" th:href="@{/css/siit/forms.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}" />
+ 
+        <script th:inline="javascript" type="text/javascript">
+            jQuery(document).ready(function() {
+                jQuery("form#formEquipo").submit(function(event) {
+                    
+                    if(jQuery("#nTipoId").val() === "0"){
+                        jQuery('#helpnTipoId').text("Debe seleccionar tipo de Equipo");
+                        $("#divnTipoId").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divnTipoId").removeClass("has-error");
+                        jQuery('#helpnTipoId').text("");
+                    }
+                    
+                    if($("#bActiva").val() === "0"){
+                        $('#helpbActiva').text("Debe Seleccionar un estado");
+                        $("#divbActiva").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divbActiva").removeClass("has-error");
+                        $('#helpbActiva').text("");
+                    }
+                    
+                    if($("#cUsuarioModi").val() === "0"){
+                        $('#helpcUnidadRecep').text("Debe Seleccionar un Centro de Servicio");
+                        $("#divcUnidadRecep").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divcUnidadRecep").removeClass("has-error");
+                        $('#helpcUnidadRecep').text("");
+                    }
+                    
+//                    if(jQuery("#dEquipo").val() === "0"){
+//                        jQuery('#helpdEquipo').text("Debe ingresar descripción del Equipo");
+//                        $("#divdEquipo").addClass("has-error");
+//                        event.preventDefault();
+//                    }else{
+//                        $("#divdEquipo").removeClass("has-error");
+//                        jQuery('#helpdEquipo').text("");
+//                    }
+                    
+                    if(jQuery("#sNumeroInventario").val() === "" || jQuery("#sNumeroInventario").val() === null){
+                        jQuery('#helpsNumeroInventario').text("Debe ingresar número Inventario");
+                        $("#divsNumeroInventario").addClass("has-error");
+                        event.preventDefault();
+                    }else{
+                        $("#divsNumeroInventario").removeClass("has-error");
+                        jQuery('#helpsNumeroInventario').text("");
+                    }
+                    
+                });
+                
+                /*<![CDATA[*/
+                    var unidad = /*[[${unidadesSelect}]]*/;
+                    if(unidad !==null)
+                        $("#cUsuarioModi").val(unidad);
+                /*]]>*/
+            });
+        </script>
+    </head>
+    <body>
+        <div id="ssc-layout-ext" class="form">
+            <div id="ssc-layout">
+                <div th:include="/layout/header :: header"></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="form">
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <form id="formEquipo" class="form-horizontal" th:action="@{/equipo/guardar}" th:object="${gcequipo}" method="POST">
+                                            <input id="nEquipoId" type="hidden" th:field="*{nEquipoId}" />
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <span class="titulo" th:text="*{nEquipoId == null}? 'Ingreso de Nuevo Equipo' : 'Edicion de Equipo'">Ingreso de Nuevo Equipo</span>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <button type="submit" title="Guardar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Guardar</span>
+                                                    </button>
+                                                    <a th:href="@{/equipo/}" title="Regresar" class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                                        <span style="padding-left: 5px;">Regresar</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divnTipoId">
+                                                <label for="nTipoId" class="col-sm-2 control-label">Tipo</label>
+                                                <div class="col-sm-5">
+                                                  <select id="nTipoId" autofocus="true" th:field="*{nTipoId}" class="form-control" >
+                                                      <option value="0">Seleccione un Tipo...</option>
+                                                      <option th:each="type : ${gcEquiposList}" th:value="${type.nTipoId}" th:text="${type.sNombre}"></option>
+                                                  </select>
+                                                    <span id="helpnTipoId" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                            <div class="form-group" id="divbActiva">
+                                                <label for="bActiva" class="col-sm-2 control-label">Activo SI/NO</label>
+                                                <div class="col-sm-5">
+                                                  <select id="bActiva" th:field="*{bActiva}" class="form-control">
+                                                      <option value="0">Seleccione un Estado...</option>
+                                                      <option value="1">SI</option>
+                                                      <option value="2">NO</option>
+                                                  </select>
+                                                    <span id="helpbActiva" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divcUnidadRecep">
+                                                <label for="cUnidadRecep" class="col-sm-2 control-label">Centro de Servicio</label>
+                                                <div class="col-sm-5">
+                                                  <select id="cUsuarioModi" th:field="*{cUsuarioModi}" class="form-control">
+                                                      <option th:each="type : ${gcUnidadesList}" th:value="${type.cunidadRecep}" th:text="${type.dunidadRecep}"></option>
+                                                  </select>
+                                                    <span id="helpcUnidadRecep" class="help-block has-error"></span>
+                                                </div>
+                                             </div>
+                                            
+                                            <div class="form-group" id="divdEquipo">
+                                                <label for="dEquipo" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                                                <div class="col-sm-5">
+                                                  <input id="dEquipo" type="text" th:field="*{dEquipo}" class="form-control" placeholder="Descripci&oacute;n"/>
+                                                  <span id="helpdEquipo" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group" id="divsNumeroInventario">
+                                                <label for="sNumeroInventario" class="col-sm-2 control-label">N&uacute;mero Inventario</label>
+                                                <div class="col-sm-5">
+                                                    <input id="sNumeroInventario" type="text" th:field="*{sNumeroInventario}" class="form-control" placeholder="N&uacute;mero" />
+                                                  <span id="helpsNumeroInventario" class="help-block has-error"></span>
+                                                </div>
+                                            </div>
+                                            
+                                             <div class="form-group">
+                                                <label for="sMarca" class="col-sm-2 control-label">Marca</label>
+                                                <div class="col-sm-5">
+                                                  <input id="sMarca" type="text" th:field="*{sMarca}" class="form-control" placeholder="Marca" />
+                                                </div>
+                                            </div>
+                                            
+                                             <div class="form-group">
+                                                <label for="sModelo" class="col-sm-2 control-label">Modelo</label>
+                                                <div class="col-sm-5">
+                                                  <input id="sModelo" type="text" th:field="*{sModelo}" class="form-control" placeholder="Modelo" />
+                                                </div>
+                                            </div>
+                                            
+                                             <div class="form-group">
+                                                <label for="sSerie" class="col-sm-2 control-label">Serie</label>
+                                                <div class="col-sm-5">
+                                                  <input id="sSerie" type="text" th:field="*{sSerie}" class="form-control" placeholder="Serie" />
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+                <div th:include="/layout/message :: message"></div>
+                <div th:include="/layout/footer :: footer"></div>
+            </div>
+        </div>
+    </body>
+</html>

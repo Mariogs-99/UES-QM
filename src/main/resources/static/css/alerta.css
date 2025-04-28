@@ -1,0 +1,43 @@
+.lacaja{
+  //background-color: red;
+background: -webkit-linear-gradient(red,black); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(red,black); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(red,black); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(red,black);
+  color:white;
+  font-family:verdana;
+  font-size:14px;
+  padding: 3px;
+  margin: 5px;
+}
+.lacajaW{
+  //background-color: #FF9900;
+  background: -webkit-linear-gradient(#FF9900,black); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FF9900,black); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FF9900d,black); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FF9900,black);
+  color:white;
+  font-family:verdana;
+  font-size:14px;
+  padding: 3px;
+  margin: 5px;
+}
+.divP{
+    color:white;
+  font-family:verdana;
+  font-size:42px;
+    
+}
+.lacajaG{
+  //background-color: #FF9900;
+  background: -webkit-linear-gradient(green,black); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(green,black); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(green,black); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(green,black);
+  color:white;
+  font-family:verdana;
+  font-size:36px;
+  padding: 3px;
+  margin: 5px;
+}
+

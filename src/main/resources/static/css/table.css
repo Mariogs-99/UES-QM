@@ -1,0 +1,39 @@
+/*** Modificación de estilos ***/
+
+/**
+* Table scc
+* Oscar Vides
+*/
+.ui-widget-header {
+    border: 1px solid #A3A3A3;
+    background: #0071BC url("../images/siit/ui-bg_inset.png") repeat-x scroll 50% 50%;
+    color: #EEE;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+table > thead > tr > th{
+    font-weight: bold;
+    font-size: 11px;
+    padding: 0px 30px;
+}
+
+
+/**
+* Title
+* Oscar Vides
+*/
+
+.titulo {
+    width: 95%;
+    padding: 10px 0px 0px 45px;
+    color: #0071BC;
+    text-align: left;
+    font-size: 1.6em;
+    margin: 5px auto;
+    background-color: transparent;
+    background-image: url("../images/blueBullet.png");
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+}

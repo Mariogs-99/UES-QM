@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Secciones</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+                max-height: 800px;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+        </style>
+
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mousuario.css" th:href="@{/css/mousuario.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-table.css" th:href="@{/css/bootstrap-table.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+               
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" href="../js/jquery.min.js" th:href="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}"></script>
+        <script type="text/javascript" src="../js/list.js" th:src="@{/js/list.js}"></script>
+        <script type="text/javascript" href="../js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/usumon.js" th:src="@{/js/usumon.js}"></script>
+        <script th:inline="javascript">
+
+            /*<![CDATA[*/
+            var result = [[${json}]];
+                    asignar(result);
+            /*]]>*/
+            $(document).ready(function () {
+                (function ($) {
+                    $('#filter').on("keyup",function () {
+                        var rex = new RegExp($(this).val(), 'i');
+                        $('.list li div').hide();
+                        $('.list li div').filter(function () {
+                            return rex.test($(this).text());
+                        }).show();
+                    })
+                }(jQuery));
+
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="ssc-layout-ext">
+            <div id="ssc-layout" style="height:750px;">
+                <div th:include="/layout/header :: header" ></div>
+                <div id="ssc-content"></div>
+                <div id="ssc-body">
+                    <div id="ssc-body-render">
+                        <div id="ssc-layout-ext">
+                            <div id="container">
+                                <a id="anclaTop"></a>
+                                <div class="mainPanel">
+                                    <div th:include="/layout/menu :: menu" ></div>
+                                    <div class="welcomeContainer noBrowser-hide">
+                                        <div>
+                                                <span ><label class="titulo text-center" th:text="${unidadRecep}" >Centro de Servicio</label></span>
+                                            </div><br/>
+                                        <div class="ui-widget-header" colspan="7" id="ctittle" style="width: 100%;">
+                                            <label>MONITOREO DE USUARIOS</label>
+                                        </div>
+                                        <div id="cointainer">
+                                            <div id="caja1">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>USUARIOS  </b><span class="badge"><a th:href="@{/admin/}">»</a></span></h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div id="userDatailIda">
+                                                            <div id="users" style="margin-top:0px;">
+                                                                <input type="checkbox" id="checkbox1"/><b>Ocultar Seccion</b>
+                                                                <input class="search" id="filter" style="float: right;margin-top: -5px;" placeholder="Buscar Usuario"/>
+                                                                <ol class="list">
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>           
+                                            </div>
+                                            <div id="acordeonFaq">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title text-center"><b>Detalle de Actividades</b></h3>
+                                                    </div>
+                                                    <div class="panel-body" id="detalleUsuario">
+                                                    </div>
+                                                    <table class="table" style="height: 260px">
+                                                      <tbody>
+                                                        <tr id="maxim">
+                                                            <th scope="row" style="width: 35%"><h3>Procesando:</h3></th>
+                                                            <td><h3><b id="estadou"></b></h3></td>
+                                                        </tr>
+                                                        <tr id="minim">
+                                                            <th scope="row"><h3>Total Atendidos:</h3> </th>
+                                                            <td><h3><b id="toatendidou"></b></h3></td>
+                                                        </tr>
+                                                        <tr id="promm">
+                                                            <th scope=""><h3>Escritorio Asignado:</h3></th>
+                                                            <td><h3><b id="escritoriou"></b></h3></td>
+                                                        </tr>
+                                                        <tr id="tespera"><th scope=""><h3>Inicio Proceso:</h3></th>
+                                                            <td><h3><b id="inicioProceu"></b></h3></td>
+                                                        </tr>
+                                                        <tr id="modda"><th scope=""><h3>Seccion(es):</h3></th>
+                                                            <td><h3><b id="seccionesu"></b></h3></td>
+                                                        </tr>
+                                                        <tr id="modda"><th scope=""><h3>Tramites:</h3></th>
+                                                            <td><h3><b id="tramitesu"></b></h3></td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:include="/layout/alertas :: alertas"></div>
+        <div th:include="/layout/message :: message"></div>
+    </body>
+</html>

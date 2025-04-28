@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- <meta name="_csrf" value="dummy" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" value="dummy" th:content="${_csrf.headerName}"/>  -->
+<title>Ministerio de Hacienda :: Direccion General de Impuestos
+	Internos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+            }
+                
+        </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/operacion-style.css" th:href="@{/css/operacion-style.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+        
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+
+
+<style>
+    div#ssc-layout-ext div.mainPanel div.welcomeContainer div.cream{background: url("../images/report.png") no-repeat top left; padding-left:100px; font-size:1.2em; background-size: 200px 180px;}
+    div#ssc-layout-ext div.mainPanel div.welcomeContainer div.cream p{padding:10px;}
+</style>
+
+</head>
+<body>
+	<div id="ssc-layout-ext">
+		<div id="ssc-layout">
+			<div th:include="/layout/header :: header" />
+			<div id="ssc-content"></div>
+			<div id="ssc-body">
+				<div id="ssc-body-render">
+					<div id="ssc-layout-ext">
+						<div id="container">
+							<a id="anclaTop"></a>
+							<div class="mainPanel">
+								<div th:include="/layout/menu :: menu" />
+								<div class="welcomeContainer noBrowser-hide">
+								
+								<h3 id="turno" th:text="${turno}"/>
+<!-- 								<input type="button" id="test" value="Test" /> -->
+<!-- 								<span id="tes" th:text="${tes}"/> -->
+								<div align="center" class="row cream">
+	
+								<br/><br/>
+							<div class="col-md-1"></div>
+		  					<div class="col-md-11">
+								<div class="dashboardPages">
+									
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0701/}">Afluencia de Contribuyentes por Hora</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0702/}">Tiempos de Espera de Atención</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0703/}">Contribuyentes Atendidos por Trámites</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0704/}">Atencion a Fila Especial</a>
+										</div>
+									</div>
+                                    <div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0705/}">Confirmacion de Citas</a>
+										</div>
+									</div>
+                                    <div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0706/}">Tiquetes Emitidos</a>
+										</div>
+									</div>
+                                    <div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0707/}">Tiquetes Reasignados</a>
+										</div>
+									</div>
+									
+								    <div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0708/}">Evaluación del Servicio</a>
+										</div>
+									</div>
+									
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0709/}">Consolidado de Afluencia de Contribuyentes</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0710/}">Tiquetes Emitidos, Atendidos y no Atendidos</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0711/}">Comparativo de Trámites por Centro de Servicios</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0712/}">Comparativo de Tiempo de Trámites por Centros de Servicios</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0713/}">Comparativo de Tiquetes Emitidos, Atendidos y no Atendidos</a>
+										</div>
+									</div>
+									<div class="unitPage">
+										<div class="unitPage-i" >
+											
+											<a th:href="@{/0714/}">Comparativo de Afluencia por Centro Atención</a>
+										</div>
+									</div>
+<!--									<div class="unitPage">
+										<div  class="unitPage-i" >
+											<a id="salir" title="Reguresar a la paguina de inicio" href="..">Salir</a>
+										</div>
+									</div>-->
+								</div>
+									<br/>
+                                                                        
+
+								</div>
+                                                        
+                                                        <div  class="col-md-12" style="text-align:right;">
+                                                            <div>
+                                                                <a th:href="@{/reportes/}" class="btn btn-primary active" role="button">Regresar</a>
+                                                                <a th:href="@{/}" class="btn btn-primary active" role="button">Salir</a>
+                                                            </div>
+                                                        </div>
+                                                        
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- 				<div class="clr"></div> -->
+			</div>
+			
+<!-- 			<div class="clr"></div> -->
+			<div th:include="/layout/footer :: footer" />
+		</div>
+	</div>
+	
+</body>
+</html>

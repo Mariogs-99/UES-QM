@@ -1,0 +1,24 @@
+
+div#tMessage{position:fixed; width:400px; right:-350px; top:136px;  cursor:pointer;background-image:url(../../images/siit/messages-icons.png);
+				background-repeat: no-repeat;
+				background-color:transparent;
+				min-height: 50px;
+				display:none; z-index: 888888889;}
+				
+div#tMessage.failed{background-position:top left;}
+div#tMessage.notice{background-position:-112px 0px;}
+div#tMessage.warning{background-position:-54px 0px;}
+div#tMessage p{padding:5px 10px; margin:0; font-size:1.1em;}
+div#tMessage.failed .message-list{background:#d40000;}
+div#tMessage.failed .message-list p{color:#ffcccc}
+div#tMessage.notice .message-list{background:#008033;}
+div#tMessage.notice .message-list p{color:#80ffb3}
+div#tMessage.warning .message-list{background:#ffe680;}
+div#tMessage.warning .message-list p{color:#806600}
+
+
+div.message-list{width:355px;min-height: 50px;}
+div.message-list ul{width:100%; list-style: none;}
+div.message-list ul li{width:100%; padding:0; margin:0;}
+span.errorField{display:block; color:#C1272D; padding:5px; font-size:.9em;}
+div#tMessage ul li{display:block;}

@@ -1,0 +1,238 @@
+/* General layout styles */
+#ssc-layout-ext {
+    width: 100%;
+}
+
+#ssc-layout {
+    height: 500px;
+}
+
+.mainPanel {
+    margin: 0 auto;
+    padding: 20px;
+    width: 90%;
+}
+
+.welcomeContainerAlarma {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Form and select styles */
+form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-control-wrapper {
+    margin-right: 10px;
+}
+
+select.form-control {
+    width: auto; /* Ajusta el ancho del select al contenido */
+    max-width: 300px; /* Establece un ancho máximo para el select */
+}
+
+.btn {
+    margin-left: 10px;
+}
+
+/* Layout for the chart and boxes */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.chart {
+    width: 700px;
+    height: 450px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Bordes más redondeados */
+    background-color: #f1f1f1; /* Fondo claro para destacar el gráfico */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    padding: 20px; /* Espacio interno */
+    position: relative;
+    transition: transform 0.3s ease; /* Suavizado en hover */
+}
+
+.chart:hover {
+    transform: scale(1.02); /* Leve aumento al pasar el ratón */
+}
+
+.info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    margin-left: 20px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px; /* Ajustamos el tamaño para hacerlo más rectangular */
+    height: 120px; /* Altura reducida */
+    border-radius: 28px;
+    line-height: 1.6;
+    margin-bottom: 20px; /* Separación entre las tarjetas */
+    background-color: #f4f4f4;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centramos el contenido */
+    gap: 8px;
+    padding: 16px;
+    border-radius: 24px;
+    color: #ffffff;
+}
+
+/* Heading styles */
+.content .heading {
+    font-weight: 400; /* Normal (sin negrita) */
+    font-size: 15px !important; /* Tamaño más pequeño (15px) */
+    line-height: 1.2 !important;
+    margin-bottom: 0 !important; /* Sin margen inferior */
+    text-align: center; /* Centramos el heading */
+}
+
+/* Ticket count (p tag) styles */
+.tiq-count {
+    font-size: 40px !important; /* Tamaño más grande para el número */
+    font-weight: bold !important; /* Solo el número en negrita */
+    text-align: center; /* Centramos el número */
+    margin-top: 0 !important; /* Eliminar margen superior */
+}
+
+/* Footer styles */
+div#ssc-footer {
+    background: no-repeat top center #202020;
+    border-bottom: 5px solid #DFD8CC;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+}
+
+.welcomeContainerAlarma .titulo {
+    text-align: center; /* Centra el texto dentro del contenedor */
+    display: block; /* Asegura que el span ocupe toda la línea */
+    margin: 0 auto; /* Centra el span en su contenedor */
+    font-size: 24px; /* Ajusta el tamaño de la fuente según sea necesario */
+}
+/* Nuevo contenedor con estilo flex para alineación en fila */
+.extra-notifications-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Espaciado entre las dos secciones */
+    width: 100%; /* Ancho completo */
+    margin-top: 20px; /* Margen para separarlo del gráfico anterior */
+}
+
+/* Card personalizada */
+.custom-card {
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.custom-card:hover {
+    border-bottom: 5px solid violet;
+    transform: scale(1.02);
+    transition: 1s ease-in-out;
+}
+
+.custom-card-header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.custom-card-body {
+    padding: 20px;
+}
+
+.custom-skill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.custom-skill-name {
+    width: 120px;
+    font-size: 16px;
+}
+
+.custom-html:hover {
+    color: blue;
+}
+
+.custom-css:hover {
+    color: purple;
+}
+
+.custom-js:hover {
+    color: red;
+}
+
+.custom-skill-level {
+    width: 160px;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 20px;
+}
+
+.custom-skill-percent {
+    background-color: #333;
+    height: 100%;
+}
+
+.custom-skill-percent-number {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.custom-card-body-ultimos {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    height: 100px; /* Ajusta la altura según tus necesidades */
+}
+
+.custom-skill-ultimos {
+    width: 100%; /* Ocupar todo el ancho del contenedor */
+    display: flex; /* Usar flexbox para el alineamiento */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100%; /* Ocupar toda la altura del contenedor */
+}
+
+.custom-skill-name-ultimos {
+    flex-grow: 1; /* Permitir que este elemento crezca para ocupar el espacio disponible */
+    text-align: center; /* Centrar el texto */
+}
+
+

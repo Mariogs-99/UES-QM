@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+<title>Secciones</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"  th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" 
+        th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" 
+        th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-toggle.min.js" 
+        th:src="@{/js/bootstrap-toggle.min.js}"></script>
+        <script type="text/javascript" src="../js/dropdownmenu.js" 
+        th:src="@{/js/dropdownmenu.js}"></script>
+        <style>
+             div#ssc-body-render {
+                width: 100%;
+                //max-height: 800px;
+            }
+            div#ssc-footer {
+            background: /*url("../images/ph_pie-pagina.png")*/ no-repeat top center #202020;
+            border-bottom: 5px solid #DFD8CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-radius: 5px 5px 0px 0px;
+            overflow: hidden;
+                            }
+            </style>
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/monitalertas.css" th:href="@{/css/monitalertas.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/r2013.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/mnu.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/messages.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/security-main.css" th:href="@{/css/list.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/alerta.css" th:href="@{/css/alerta.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/sac.css" th:href="@{/css/sac.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
+        <link rel="stylesheet" type="text/css" media="all" href="../css/mntcservicio.css" th:href="@{/css/mntcservicio.css}"/>
+
+        <script type="text/javascript" src="../js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" src="../js/jquery.ui.js"	th:src="@{/js/jquery.ui.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+        <script type="text/javascript" href="../js/jquery.min.js" th:href="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" href="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" href="../js/jquery.gvChart-0.1.min.js" th:href="@{/js/jquery.gvChart-0.1.min.js}"></script>
+        <script type="text/javascript" href="../js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"></script>
+        <script type="text/javascript" src="../js/monitoreoalert.js" th:src="@{/js/monitoreoalert.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-table.js" th:src="@{/js/bootstrap-table.js}"></script>
+        <script type="text/javascript" src="../js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+            
+ <script type="text/javascript">
+           $(document).ajaxSend(function(event, request, settings) {                
+                $('#loading-indicator').show();
+            });
+
+            $(document).ajaxComplete(function(event, request, settings) {
+                $('#loading-indicator').hide();
+            });
+            
+        </script>
+ </head>
+
+<body>
+<div id="ssc-layout-ext">
+		<div id="ssc-layout" style="height:500px;">
+                    <div th:include="/layout/header :: header"></div>
+			<div id="ssc-content"></div>
+			<div id="ssc-body">
+				<div id="ssc-body-render">
+					<div id="ssc-layout-ext">
+						<div id="container">
+							<a id="anclaTop"></a>
+							<div class="mainPanel">
+                                                            <div th:include="/layout/menu :: menu"></div>
+								<div class="welcomeContainer noBrowser-hide">
+								
+                                                                    <h3 id="turno" th:text="${turno}"></h3>
+<!-- 								<input type="button" id="test" value="Test" /> -->
+<!-- 								<span id="tes" th:text="${tes}"/> -->
+								
+								<br/><br/>
+
+        <div id="containera">
+            <div>
+                                                <span ><label class="titulo text-center" th:text="${unidadRecep}" >Centro de Servicio</label></span>
+                                            </div><br/>
+            <nav >     
+                   <div class="form-group">  
+                       <div class="col-sm-3" align="center" style="font-size:16px;font-weight:bold">Alertas/advertencias</div>
+                       <div id="cargando" class="col-sm-6 row">
+                      <img class="text-center" src="../images/ajax-loader.gif" id="loading-indicator" style="display:none" />
+                 </div>
+                 </div>
+            </nav>
+      <div id="caja" style="overflow: auto; height: 480px;">
+          
+            </div>
+                
+         
+        </div>
+        
+  
+     					</div>
+					
+					   </div>
+						</div>
+					</div>
+				</div>
+<!-- 				<div class="clr"></div> -->
+			</div>
+			
+<!-- 			<div class="clr"></div> -->
+			
+		</div>
+	</div>
+    <div th:include="/layout/message :: message"></div>
+	
+	
+
+</body>
+</html>

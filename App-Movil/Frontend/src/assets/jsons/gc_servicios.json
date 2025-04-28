@@ -1,0 +1,86 @@
+[
+    {
+        "N_SERVICIOS_ID": "1",
+        "D_SERVICIOS": "Nuevo ingreso",
+        "C_USUARIO_CREA": "ss.administrador",
+        "C_USUARIO_MODI": "ss.administrador",
+        "FI_VIGENCIA": "2024-05-03 19:52:08",
+        "FF_VIGENCIA": null,
+        "F_MODIFICA": "2024-05-03 19:52:08",
+        "N_ORDEN": "1",
+        "B_ACTIVA": "1",
+        "S_NOMBRE": "Nuevo ingreso"
+    },
+    {
+        "N_SERVICIOS_ID": "2",
+        "D_SERVICIOS": "Acciones académicas",
+        "C_USUARIO_CREA": "ss.administrador",
+        "C_USUARIO_MODI": "ss.administrador",
+        "FI_VIGENCIA": "2024-05-03 19:52:29",
+        "FF_VIGENCIA": null,
+        "F_MODIFICA": "2024-05-03 19:52:29",
+        "N_ORDEN": "2",
+        "B_ACTIVA": "1",
+        "S_NOMBRE": "Acciones académicas"
+    },
+    {
+        "N_SERVICIOS_ID": "3",
+        "D_SERVICIOS": "Constancias y certificaciones",
+        "C_USUARIO_CREA": "ss.administrador",
+        "C_USUARIO_MODI": "ss.administrador",
+        "FI_VIGENCIA": "2024-05-03 19:53:00",
+        "FF_VIGENCIA": null,
+        "F_MODIFICA": "2024-05-03 19:53:00",
+        "N_ORDEN": "3",
+        "B_ACTIVA": "1",
+        "S_NOMBRE": "Constancias y certificaciones "
+    },
+    {
+        "N_SERVICIOS_ID": "4",
+        "D_SERVICIOS": "Graduaciones ",
+        "C_USUARIO_CREA": "ss.administrador",
+        "C_USUARIO_MODI": "ss.administrador",
+        "FI_VIGENCIA": "2024-05-03 19:54:51",
+        "FF_VIGENCIA": null,
+        "F_MODIFICA": "2024-05-03 19:54:51",
+        "N_ORDEN": "4",
+        "B_ACTIVA": "1",
+        "S_NOMBRE": "Graduaciones "
+    },
+    {
+        "N_SERVICIOS_ID": "5",
+        "D_SERVICIOS": "Graduados ",
+        "C_USUARIO_CREA": "ss.administrador",
+        "C_USUARIO_MODI": "ss.administrador",
+        "FI_VIGENCIA": "2024-05-03 19:54:58",
+        "FF_VIGENCIA": null,
+        "F_MODIFICA": "2024-05-03 19:54:58",
+        "N_ORDEN": "5",
+        "B_ACTIVA": "1",
+        "S_NOMBRE": "Graduados"
+    },
+    {
+        "N_SERVICIOS_ID": "6",
+        "D_SERVICIOS": "Soporte ",
+        "C_USUARIO_CREA": "ss.administrador",
+        "C_USUARIO_MODI": "ss.administrador",
+        "FI_VIGENCIA": "2024-05-03 19:54:42",
+        "FF_VIGENCIA": null,
+        "F_MODIFICA": "2024-05-03 19:54:42",
+        "N_ORDEN": "6",
+        "B_ACTIVA": "1",
+        "S_NOMBRE": "Soporte "
+    },
+    {
+        "N_SERVICIOS_ID": "7",
+        "D_SERVICIOS": "Otros ",
+        "C_USUARIO_CREA": "ss.administrador",
+        "C_USUARIO_MODI": "ss.administrador",
+        "FI_VIGENCIA": "2024-05-03 19:55:22",
+        "FF_VIGENCIA": null,
+        "F_MODIFICA": "2024-05-03 19:55:22",
+        "N_ORDEN": "7",
+        "B_ACTIVA": "1",
+        "S_NOMBRE": "Otros "
+    }
+]
