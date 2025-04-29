@@ -81,6 +81,170 @@
     </head>
 
     <body>
+
+
+    <style>
+        /* INPUT CARNET */
+          #carnet {
+            width: 100%;
+            padding: 30px;
+            font-size: 28px;
+            border: 2px solid #ccc;
+            border-radius: 12px;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f8f8f8;
+          }
+
+          #carnet:focus {
+            border-color: #d32f2f;
+            box-shadow: 0 0 10px rgba(211, 47, 47, 0.4);
+          }
+
+          #carnet::placeholder {
+            font-size: 18px;
+            color: #999;
+            text-align: center;
+            opacity: 1;
+          }
+
+          /* BOTÓN VALIDAR */
+          #ValidarCarnet {
+            background-color: #43a047;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 0;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 12px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          }
+
+          #ValidarCarnet:hover {
+            background-color: #2e7d32;
+            transform: scale(1.01);
+          }
+
+          #ValidarCarnet:active {
+            transform: scale(0.98);
+          }
+
+          #ValidarCarnet:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+          }
+
+          /* BOTÓN GENERAR TIQUETE */
+          #btnPrintTwo {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 0;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+          }
+
+          #btnPrintTwo:hover {
+            background-color: #b71c1c;
+            transform: scale(1.01);
+          }
+
+          #btnPrintTwo:active {
+            transform: scale(0.97);
+          }
+
+          #btnPrintTwo:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+            box-shadow: none;
+          }
+
+          /* TEXTO y LAYOUT */
+          label[for="carnetInput"] {
+            font-size: 20px;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            margin-bottom: 8px;
+          }
+
+          .form-group {
+            max-width: 360px;
+            margin: 16px auto;
+            text-align: center;
+          }
+
+          small,
+          p {
+            font-size: 16px;
+            color: #444;
+            margin-top: 8px;
+          }
+
+          /* MODAL ESTILO Y TAMAÑO */
+          @media (min-width: 768px) {
+            .modal-dialog {
+              max-width: 600px;
+              width: 95%;
+            }
+          }
+
+          @media (min-width: 992px) {
+            .modal-dialog {
+              max-width: 700px;
+            }
+          }
+
+          .modal-content {
+            padding: 20px;
+            border-radius: 12px;
+          }
+
+          /* Remueve la línea azul fantasma si es que aparece */
+          .modal-body > * {
+            border-bottom: none !important;
+          }
+
+        /*Style para Swal*/
+
+        .swal2-popup {
+          font-size: 1.8rem !important; /* Tamaño grande de todo el contenido */
+          max-width: 600px;             /* Más ancho que el default */
+          padding: 30px 20px;
+          border-radius: 16px;
+        }
+
+        .swal2-title {
+          font-size: 2.2rem !important; /* Título más grande */
+        }
+
+        .swal2-html-container {
+          font-size: 1.6rem !important; /* Texto del contenido */
+        }
+
+        .swal2-confirm,
+        .swal2-cancel {
+          font-size: 1.6rem !important; /* Botones más grandes */
+          padding: 14px 32px;
+          border-radius: 10px;
+        }
+
+
+
+    </style>
+
         <header id="header" style="position:sticky; top:0 ">
             <div class="flag">
                 <div class="container">
@@ -183,7 +347,7 @@
                                     <div class="modal-body">
                                         <!-- INICIO SECCION NUEVO TECLADO -->
                                         <div class="form-group" style="max-width: 300px; margin: 5px auto;">
-                                            <label for="carnetInput">Ingrese su Carnet:</label>
+                                            <label for="carnetInput">Ingrese su numero Carnet:</label>
                                             <input type="text" id="carnet" class="form-control" placeholder="Ingrese el número de carnet" />
                                         </div>
 
@@ -197,7 +361,7 @@
 
                                         <!-- Botón para validar el carnet -->
                                         <div style="max-width: 300px; margin: 5px auto;">
-                                            <button class="btn btn-success btn-block" id="ValidarCarnet">OK</button>
+                                            <button class="btn btn-success btn-block" id="ValidarCarnet">Validar carnet</button>
                                         </div>
 
                                         <!-- FIN SECCION NUEVO TECLADO -->
@@ -213,7 +377,7 @@
 
                                             <tr>
                                                 <td colspan="3">
-                                                    <div class="separator" style="margin-left:-25px; width: 513px; font-size: 12px; padding-left: 10px;"></div>
+                                                    <div class="separator" style="margin-left:-25px; width: 490px; font-size: 12px; padding-left: 10px;color: black;"></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -241,7 +405,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --> 
-                                        <button id="btnPrintTwo" type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" >Generar tiquete</button>
+<!--                                        <button id="btnPrintTwo" type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" >Generar tiquete</button>-->
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
@@ -344,11 +508,13 @@
             <!-- <footer><div th:include="/layout/me_foot :: foot"/></footer>  -->
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script>
 
             $(document).ready(function () {
                 // Inicializar el estado del mensaje y el input
-                $("#mensaje").text("Ingrese su codigo numero de carnet y validelo con tecla OK");
+                $("#mensaje").text("Ingrese su numero de carnet y validelo con tecla inferior");
                 $("#carnet").val(''); // Asegurarte que esté vacío
                 $("#btnPrintTwo").prop("disabled", true); // Deshabilitar el botón inicialmente
                 $("#carnet").attr("autocomplete", "off"); // Deshabilitar sugerencias en el input
@@ -371,7 +537,7 @@
                 });
 
                 $("#modalPrioridadConNit").on('hide.bs.modal', function () {
-                    $("#mensaje").text("Ingrese su codigo numero de carnet y validelo con tecla OK");
+                    $("#mensaje").text("Ingrese su numero de carnet y validelo con la tecla inferior");
                     $('#carnet').text('');
                 });
                 var output = $('#output');
@@ -424,7 +590,11 @@
                     }
 
                     // Construir la URL de manera dinámica
-                    var apiUrl = window.location.protocol + "//" + window.location.host + "/colas/proxy/carnet?carnet=" + $("#carnet").val();
+                   // var apiUrl = window.location.protocol + "//" + window.location.host + "/colas/proxy/carnet?carnet=" + $("#carnet").val();
+
+                    // URL DE PRUEBA UTILIZANDO MOCKAPI
+                    const carnetIngresado = $("#carnet").val();
+                    const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
 
                     $.ajax({
                         url: apiUrl, // Usar la URL construida
@@ -440,6 +610,31 @@
                                 $("#btnPrintTwo").prop("class", "btn btn-danger disabled");
                                 $("#mensaje").text('¡Carnet incorrecto!');
                             } else {
+
+                                // Carnet correcto,alerta rápida y generación automática
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '¡Carnet correcto!',
+                                    text: 'Generando tiquete...',
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false
+                                }).then(() => {
+
+                                    // Simula el click en el botón para generar/imprimir el tiquete
+                                    $("#btnPrintOne").click();
+
+                                    // Cierra el modal manualmente
+                                     $("#modalPrioridadConNit").modal('hide');
+
+                                   // Mostramos el menú principal
+                                     $('#content').find(".panel.panel-i").show();
+
+                                   // Limpiar campo carnet
+
+                                     $('#carnet').val('');
+                                });
                                 $("#btnPrintTwo").prop("disabled", false);
                                 $("#btnPrintTwo").prop("class", "btn btn-danger");
                                 $("#mensaje").text('¡Carnet correcto! Puede proceder a generar su tiquete.');
@@ -447,7 +642,14 @@
 
                         },
                         error: function (data, status, er) {
-                            alert("Carnet incorrecto. Por favor, inténtelo de nuevo.");
+                           // alert("Carnet incorrecto. Por favor, inténtelo de nuevo.");
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: '¡Carnet incorrecto!',
+                                text: 'El número de carnet que ingresaste no existe.',
+                                confirmButtonText: 'Aceptar'
+                            });
                         }
 
                     });
