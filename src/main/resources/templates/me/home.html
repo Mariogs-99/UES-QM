@@ -596,6 +596,23 @@
                     const carnetIngresado = $("#carnet").val();
                     const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
 
+                    //Validar si el carnet viene vacio o no
+
+                    if (carnetIngresado === "") {
+                        // El campo está vacío
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Campo vacío',
+                            text: 'Por favor, ingrese un número de carnet.',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        // También puedes marcar el input en rojo (opcional visual)
+                        $("#carnet").addClass("is-invalid");
+
+                        return; // Detiene todo
+                    }
+
                     $.ajax({
                         url: apiUrl, // Usar la URL construida
                         type: 'GET',
