@@ -597,6 +597,25 @@
                     const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
 
                     //Validar si el carnet viene vacio o no
+                    const omitirCarnet = $("#omitirNIT").is(":checked");
+
+                      //Validar si esta con check
+
+                    if (omitirCarnet) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Omitiendo carnet',
+                            text: 'Generando tiquete...',
+                            timer: 1200,
+                            showConfirmButton: false
+                        }).then(() => {
+                            $("#btnPrintOne").click();
+                            $("#modalPrioridadConNit").modal('hide');
+                            $('#content').find(".panel.panel-i").show();
+                            $('#carnet').val('');
+                        });
+                        return;
+                    }
 
                     if (carnetIngresado === "") {
                         // El campo está vacío
@@ -612,6 +631,8 @@
 
                         return; // Detiene todo
                     }
+
+
 
                     $.ajax({
                         url: apiUrl, // Usar la URL construida
