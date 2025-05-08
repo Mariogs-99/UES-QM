@@ -590,11 +590,11 @@
                     }
 
                     // Construir la URL de manera dinámica
-                   // var apiUrl = window.location.protocol + "//" + window.location.host + "/colas/proxy/carnet?carnet=" + $("#carnet").val();
+                    var apiUrl = window.location.protocol + "//" + window.location.host + "/colas/proxy/carnet?carnet=" + $("#carnet").val();
 
-                    // URL DE PRUEBA UTILIZANDO MOCKAPI
-                    const carnetIngresado = $("#carnet").val();
-                    const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
+                     // URL DE PRUEBA UTILIZANDO MOCKAPI
+                    // const carnetIngresado = $("#carnet").val();
+                    // const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
 
                     //Validar si el carnet viene vacio o no
                     const omitirCarnet = $("#omitirNIT").is(":checked");
