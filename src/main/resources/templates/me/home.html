@@ -589,11 +589,12 @@
                         return;
                     }
 
-                    // Construir la URL de manera dinámica
+                    // Construir la URL de manera dinámica -- API UES
                     var apiUrl = window.location.protocol + "//" + window.location.host + "/colas/proxy/carnet?carnet=" + $("#carnet").val();
 
                      // URL DE PRUEBA UTILIZANDO MOCKAPI
                     // const carnetIngresado = $("#carnet").val();
+
                     // const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
 
                     //Validar si el carnet viene vacio o no
@@ -626,7 +627,7 @@
                             confirmButtonText: 'Aceptar'
                         });
 
-                        // También puedes marcar el input en rojo (opcional visual)
+
                         $("#carnet").addClass("is-invalid");
 
                         return; // Detiene todo

@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -52,7 +54,7 @@ import sv.global.colas.repositories.TbListasValorRepository;
 import sv.global.colas.security.DgiiUserDetailsImpl;
 
 @Controller
-@SessionAttributes({"usuario", "tramiteform"})
+@SessionAttributes({ "usuario", "tramiteform" })
 @EnableAsync
 public class OperacionController extends MainController {
 
@@ -111,8 +113,8 @@ public class OperacionController extends MainController {
     public String operacion(ModelMap map) {
         List<GcConfLlamado> confsByCS = gcConfLlamadoRepository.getConfsByCS(getUnidad());
         if (confsByCS.isEmpty()) {
-            map.addAttribute("timer1", 30000); //15 segundos
-            map.addAttribute("timer2", 35000); //20 segundos
+            map.addAttribute("timer1", 30000); // 15 segundos
+            map.addAttribute("timer2", 35000); // 20 segundos
             map.addAttribute("nllamados", 3);
         } else {
             map.addAttribute("timer1", 30000);
@@ -124,7 +126,8 @@ public class OperacionController extends MainController {
             map.addAttribute("usrConfigurado", "false");
         } else {
             map.addAttribute("usrConfigurado", "true");
-            map.addAttribute("escritorio", gcUsuario.getNEscritorioId().getCIdentificador() + gcUsuario.getNEscritorioId().getNNumEscritorio());
+            map.addAttribute("escritorio", gcUsuario.getNEscritorioId().getCIdentificador()
+                    + gcUsuario.getNEscritorioId().getNNumEscritorio());
         }
         List<GcUserLog> enPausa = gcUserLogRepository.enPausa(getUsuario());
         if (enPausa.isEmpty()) {
@@ -153,7 +156,7 @@ public class OperacionController extends MainController {
                 if (gcTiqueteNoAtendido != null) {
                     gcTiqueteNoAtendido.setMEstado(5);
                     gcTiqueteNoAtendido.setcUsuarioAtendio(getUsuario());
-                    System.out.println("GUARDANDO USUARIO ATENDIO: " + getUsuario());
+                    System.out.println("GUARDANDO USUARIO QUE NO ATENDIO: " + getUsuario());
                     gcTiqueteRepository.save(gcTiqueteNoAtendido);
                 } else {
                     System.out.println("El GcTiquete con el ID especificado no existe en la base de datos.");
@@ -174,7 +177,9 @@ public class OperacionController extends MainController {
 
             String currentUser = getUsuario();
 
-            // Si la validación pasa, asignamos cUsuarioAtendio ahora
+            // Si la validación pasa, asignamos cUsuarioAtendio hora y estado 
+            
+            gcTiqueteEnAtencion.setFhLlamado(new Date(gcTiqueteRepository.getServerDateTime().getTime()));
             gcTiqueteEnAtencion.setcUsuarioAtendio(currentUser);
             gcTiqueteEnAtencion.setMEstado(2);
             gcTiqueteRepository.save(gcTiqueteEnAtencion);  // Guardar después de asignar el usuario
@@ -225,9 +230,11 @@ public class OperacionController extends MainController {
             GcTiquete findOne = gcTiqueteRepository.findOne(l);
 
             //findOne.setMEstado(2);  // Estado que indica que el tiquete está en atención
-            Date fhLlamado = new Date(gcTiqueteRepository.getServerDateTime().getTime());
-            findOne.setFhLlamado(fhLlamado);
-            gcTiqueteRepository.save(findOne);
+            //la actualización del estado se hace en el método principal que llama a este método
+            //Date fhLlamado = new Date(gcTiqueteRepository.getServerDateTime().getTime());
+            //findOne.setFhLlamado(fhLlamado);
+            //gcTiqueteRepository.save(findOne);
+            
             return findOne;
         }
     }
@@ -236,17 +243,16 @@ public class OperacionController extends MainController {
         return getUnidadRecep();
     }
 
-//        private String getUnidad() {
-//	        String unidad = getPrincipal().getUnidadRecep();
-//	        if (unidad == null) {
-//	            unidad = getPrincipal().getUbicacionFisica();
-//	        }
-//                unidad = gcUnidadRecepRepository.getCsCombinacion(unidad);
-//	        return unidad;
-//	}
+    // private String getUnidad() {
+    // String unidad = getPrincipal().getUnidadRecep();
+    // if (unidad == null) {
+    // unidad = getPrincipal().getUbicacionFisica();
+    // }
+    // unidad = gcUnidadRecepRepository.getCsCombinacion(unidad);
+    // return unidad;
+    // }
     @RequestMapping(value = "/iniciar_tramite", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    TiqueteDao initTram(@RequestBody Map<String, Long> map) {
+    public @ResponseBody TiqueteDao initTram(@RequestBody Map<String, Long> map) {
         TiqueteDao miTiquete = new TiqueteDao();
         try {
             GcTiquete gcTiquete = gcTiqueteRepository.findOne(map.get("gcTiqueteId"));
@@ -268,8 +274,7 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/finalizar_tramite", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    TiqueteDao finalizarTram(@RequestBody Map<String, Long> map) {
+    public @ResponseBody TiqueteDao finalizarTram(@RequestBody Map<String, Long> map) {
         TiqueteDao dao = new TiqueteDao();
         try {
             GcTiquete gcTiquete = gcTiqueteRepository.findOne(map.get("gcTiqueteId"));
@@ -283,8 +288,7 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/escalamiento", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    TiqueteDao escalamientoTram(@RequestBody Map<String, Long> map) {
+    public @ResponseBody TiqueteDao escalamientoTram(@RequestBody Map<String, Long> map) {
         TiqueteDao dao = new TiqueteDao();
         try {
             GcTiquete gcTiquete = gcTiqueteRepository.findOne(map.get("gcTiqueteId"));
@@ -299,8 +303,7 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/reasignar", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    TiqueteDao reasginarmientoTram(@RequestBody Map<String, Long> map) {
+    public @ResponseBody TiqueteDao reasginarmientoTram(@RequestBody Map<String, Long> map) {
         TiqueteDao dao = new TiqueteDao();
         try {
             GcTiquete gcTiquete = gcTiqueteRepository.findOne(map.get("gcTiqueteId"));
@@ -316,25 +319,37 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/llamarDeNuevo", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    Integer enableReservacion(@RequestBody Map<String, Long> map) {
+    public @ResponseBody Integer enableReservacion(@RequestBody Map<String, Long> map) {
         try {
             GcTiquete gcTiquete = gcTiqueteRepository.findOne(map.get("gcTiqueteId"));
-            if (gcTiquete != null || gcTiquete.getMEstado() == 5) {
-                gcTiquete.setMEstado(2);
-                Date fhLlamado = new Date(gcTiqueteRepository.getServerDateTime().getTime());
-                gcTiquete.setFhLlamado(fhLlamado);
-                gcTiqueteRepository.save(gcTiquete);
+            if (gcTiquete != null) {
+                // vifica si el tiquete ya fue llamado al menos una vez
+                if (gcTiquete.getMEstado() == 5) {
+                    gcTiquete.setMEstado(2);
+                    Date fhLlamado = new Date(gcTiqueteRepository.getServerDateTime().getTime());
+                    gcTiquete.setFhLlamado(fhLlamado);
+                    gcTiqueteRepository.save(gcTiquete);
+                } else {
+
+                    // El GcTiquete con el ID especificado no ha sido llamado
+                    Map<String, Object> error = new HashMap<>();
+                    error.put("error", "Ticket no ha sido llamado aun:" + gcTiquete.getSCorrelativo());
+                    error.put("gcTiqueteId", gcTiquete.getNTiqueteId());
+                    return -1; // Return a specific integer value to indicate an error
+                }
             }
         } catch (Exception e) {
             System.out.println("Ocurrió un error en el modulo de operación en el método de llamar de nuevo.");
+            Map<String, Object> error = new HashMap<>();
+            error.put("error", "Ticket no Existe:" + map.get("gcTiqueteId"));
+            error.put("gcTiqueteId", map.get("gcTiqueteId"));
+            return -1;
         }
-        return 0;
+        return 1;
     }
 
     @RequestMapping(value = "/tramites", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public @ResponseBody
-    List<GcTramite> tramites(ModelMap map) {
+    public @ResponseBody List<GcTramite> tramites(ModelMap map) {
         List<GcTramite> listTramites = null;
         try {
             listTramites = (List<GcTramite>) gcTramitesRepository.getTramitesEscalamiento();
@@ -352,8 +367,7 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/pausa", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    Map<String, String> pausa(@RequestBody Map<String, Long> request, ModelMap map) {
+    public @ResponseBody Map<String, String> pausa(@RequestBody Map<String, Long> request, ModelMap map) {
         Map<String, String> mapa = new HashMap<String, String>();
         try {
             GcUserLog gcUserLog = new GcUserLog();
@@ -369,8 +383,7 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/finPausa", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    Map<String, String> finPausa(@RequestBody Map<String, Long> request, ModelMap map) {
+    public @ResponseBody Map<String, String> finPausa(@RequestBody Map<String, Long> request, ModelMap map) {
         Map<String, String> mapa = new HashMap<String, String>();
         try {
             List<GcUserLog> enPausa = gcUserLogRepository.enPausa(getUsuario());
@@ -386,8 +399,7 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/getPreguntas", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public @ResponseBody
-    List<Map<String, Object>> getPreguntas(ModelMap map) {
+    public @ResponseBody List<Map<String, Object>> getPreguntas(ModelMap map) {
         List<GcPreguntas> gcPreguntasList = gcPreguntasRepository.preguntaYrespuestas(getUnidad());
         List<Map<String, Object>> preguntayRespuestasList = new ArrayList<Map<String, Object>>();
         try {
@@ -409,14 +421,15 @@ public class OperacionController extends MainController {
                 preguntayRespuestasList.add(gcPreguntas);
             }
         } catch (Exception e) {
-            System.out.println("Ocurrió un error en el modulo de operación en el método getPreguntas al tratar de obtener las preguntas.");
+            System.out.println(
+                    "Ocurrió un error en el modulo de operación en el método getPreguntas al tratar de obtener las preguntas.");
         }
         return preguntayRespuestasList;
     }
 
     @RequestMapping(value = "/setRespuestas", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    List<Map<String, Object>> setRespuestas(@RequestBody Map<String, List> respuestas, ModelMap map) {
+    public @ResponseBody List<Map<String, Object>> setRespuestas(@RequestBody Map<String, List> respuestas,
+            ModelMap map) {
         List<Map<String, Object>> preguntayRespuestasList = new ArrayList<Map<String, Object>>();
         try {
             List<Map<String, Double>> list = respuestas.get("gcRespuestasList");
@@ -430,21 +443,22 @@ public class OperacionController extends MainController {
             }
             gcPreguntasRespuestasRepository.save(respuestasList);
         } catch (Exception e) {
-            System.out.println("Ocurrió un error en el modulo de operación en el método setRespuesta al tratar guardar las respuesta en la base de datos.");
+            System.out.println(
+                    "Ocurrió un error en el modulo de operación en el método setRespuesta al tratar guardar las respuesta en la base de datos.");
         }
         return preguntayRespuestasList;
     }
 
     @RequestMapping(value = "/operacion/getTramites", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public @ResponseBody
-    List<Map<String, String>> servicios(ModelMap map) {
+    public @ResponseBody List<Map<String, String>> servicios(ModelMap map) {
         List<Map<String, String>> response = new ArrayList<Map<String, String>>();
         List<GcConfTramite> listTramites = null;
         List<String> lUnidadRecep = null;
         try {
             String cunidadRecep = getPrincipal().getUbicacionFisica();
             lUnidadRecep = new ArrayList<String>();
-            List<TbListasValor> unidadRecep = (List<TbListasValor>) tbListasValorRepository.getUnidadesReceptoras(cunidadRecep);
+            List<TbListasValor> unidadRecep = (List<TbListasValor>) tbListasValorRepository
+                    .getUnidadesReceptoras(cunidadRecep);
             if (!unidadRecep.isEmpty()) {
                 for (TbListasValor tl : unidadRecep) {
                     lUnidadRecep.add(tl.getId().getClista());
@@ -455,7 +469,8 @@ public class OperacionController extends MainController {
             listTramites = (List<GcConfTramite>) gcConfTramiteRepository.listaTramitesByCS(lUnidadRecep);
             for (GcConfTramite tramite : listTramites) {
                 Map<String, String> mapa = new HashMap<String, String>();
-                int countTr = gcTiqueteRepository.verifyIfExistsTramiteAsignado(tramite.getNTramiteId().getNTramiteId(), cunidadRecep);
+                int countTr = gcTiqueteRepository.verifyIfExistsTramiteAsignado(tramite.getNTramiteId().getNTramiteId(),
+                        cunidadRecep);
                 if (countTr != 0) {
                     mapa.put("nTramiteId", tramite.getNTramiteId().getNTramiteId().toString());
                     mapa.put("sNombre", tramite.getNTramiteId().getSNombre().toString());
@@ -469,8 +484,8 @@ public class OperacionController extends MainController {
     }
 
     @RequestMapping(value = "/operacion/getEscalamiento/{idTiquete}", method = RequestMethod.GET, headers = "Accept=application/json", produces = "application/json")
-    public @ResponseBody
-    List<Map<String, String>> escalamiento(@PathVariable(value = "idTiquete") Long idTiquete, ModelMap map) {
+    public @ResponseBody List<Map<String, String>> escalamiento(@PathVariable(value = "idTiquete") Long idTiquete,
+            ModelMap map) {
         List<Map<String, String>> response = new ArrayList<Map<String, String>>();
         if (idTiquete.equals(null)) {
             Map<String, String> mapa = new HashMap<String, String>();
@@ -488,15 +503,15 @@ public class OperacionController extends MainController {
                     response.add(mapa);
                 }
             } catch (Exception e) {
-                System.out.println("Ocurrió un error en el modulo de operación en el método getEscalamiento obtener la lista de escalamientos.");
+                System.out.println(
+                        "Ocurrió un error en el modulo de operación en el método getEscalamiento obtener la lista de escalamientos.");
             }
         }
         return response;
     }
 
     @RequestMapping(value = "/operacion/realizarEscalamiento", method = RequestMethod.POST, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    Map<String, String> realizarEscalamiento(@RequestBody Map<String, Long> escalamiento) {
+    public @ResponseBody Map<String, String> realizarEscalamiento(@RequestBody Map<String, Long> escalamiento) {
 
         GcTiquete tiqueteEscalamiento = gcTiqueteRepository.findOne(escalamiento.get("idTiquete"));
         Map<String, String> response = new HashMap<String, String>();
@@ -509,7 +524,8 @@ public class OperacionController extends MainController {
             tiqueteEscalamiento.setNTiqueteRea(2);
             tiqueteEscalamiento.setMEstado(1);
             escalamiento.get("jerarquiaId");
-            GcJerarquiaSeccion jerarquiaSeccionByTiquete = gcJerarquiaSeccionRepository.getJerarquiaSeccionByTiquete(escalamiento.get("idTiquete"), escalamiento.get("jerarquiaId"));
+            GcJerarquiaSeccion jerarquiaSeccionByTiquete = gcJerarquiaSeccionRepository
+                    .getJerarquiaSeccionByTiquete(escalamiento.get("idTiquete"), escalamiento.get("jerarquiaId"));
             tiqueteEscalamiento.setnJrqSecId(jerarquiaSeccionByTiquete.getNJrqSecId().intValue());
             gcTiqueteRepository.save(tiqueteEscalamiento);
             response.put("reponse", "OK");
