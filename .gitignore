@@ -35,3 +35,6 @@ build/
 .DS_Store
 
 .angular/cache
+
+# Ignorar archivos sensibles de configuración
+src/main/resources/application.properties

@@ -589,14 +589,14 @@
                         return;
                     }
 
-                     // URL CARNET
+                     // CAMPO CARNET
                      const carnetIngresado = $("#carnet").val();
 
                     // Construir la URL de manera dinámica -- API UES
                     var apiUrl = window.location.protocol + "//" + window.location.host + "/colas/proxy/carnet?carnet=" + carnetIngresado;
 
-                     // URL MOCKAPI
-                    // const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
+                     // Construir la URL de manera dinámica -- API MOCKAPI
+                     //  const apiUrl = 'https://680fdfa627f2fdac240faad7.mockapi.io/api/v1/carnets?carnet=' + carnetIngresado;
 
                     //Validar si el carnet viene vacio o no
                     const omitirCarnet = $("#omitirNIT").is(":checked");
@@ -649,6 +649,14 @@
                                 $("#btnPrintTwo").prop("disabled", true); // Mantener el botón deshabilitado
                                 $("#btnPrintTwo").prop("class", "btn btn-danger disabled");
                                 $("#mensaje").text('¡Carnet incorrecto!');
+
+                                // Agregar SWAL ERROR
+                                Swal.fire({
+                                icon: 'error',
+                                title: '¡Carnet incorrecto!',
+                                text: 'El número de carnet que ingresaste no existe.',
+                                confirmButtonText: 'Aceptar'
+                                });
                             } else {
 
                                 // Carnet correcto,alerta rápida y generación automática
@@ -681,16 +689,41 @@
                             }
 
                         },
-                        error: function (data, status, er) {
-                           // alert("Carnet incorrecto. Por favor, inténtelo de nuevo.");
+                      error: function (data, status, er) {
+                            console.log("Error en la consulta del carnet:", data.status);
 
-                            Swal.fire({
-                                icon: 'error',
-                                title: '¡Carnet incorrecto!',
-                                text: 'El número de carnet que ingresaste no existe.',
-                                confirmButtonText: 'Aceptar'
-                            });
+                            if (data.status === 403) {
+                                // Kiosko no autorizado
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: '¡Kiosko no autorizado!',
+                                    text: 'Este kiosko no tiene permiso para consultar carnets. Contacte a soporte.',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            } else if (data.status === 404) {
+                                // Carnet no encontrado
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: '¡Carnet no encontrado!',
+                                    text: 'El número de carnet ingresado no existe.',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            } else {
+                                // Otro error
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: '¡Error!',
+                                    text: 'Ocurrió un problema al consultar el carnet. Código: ' + data.status,
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+
+                            // Limpieza UI en caso de error
+                            $("#carnet").val('');
+                            $("#btnPrintTwo").prop("disabled", true).addClass("disabled");
+                            $("#mensaje").text('Error al consultar el carnet.');
                         }
+
 
                     });
                 });
